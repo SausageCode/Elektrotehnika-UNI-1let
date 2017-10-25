@@ -1,6 +1,6 @@
 ﻿# Zapiski FE-Uni 1. letnik
 
-Tu so zapiski iz predavanj, vaje in naloge pri predmetu Osnove programiranja 1 na fakulteti za elektrotehniko v šolskem letu 2017/2018.
+Tu so zapiski iz predavanj, vaje in naloge pri šolanju 1. letnika univerzitetnega programa na fakulteti za elektrotehniko v šolskem letu 2017/2018.
 Zapiske izdelujem sam po mojem nacinu dela.
 
 ## Warning
