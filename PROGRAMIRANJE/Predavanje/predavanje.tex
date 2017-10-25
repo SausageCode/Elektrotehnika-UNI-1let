@@ -1,0 +1,47 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{listings}
+\setlength{\parindent}{0px}
+\setlength{\parskip}{10px}
+\usepackage{listings} 
+\usepackage{enumitem}
+\usepackage{blindtext}
+\usepackage{lipsum}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\title{Zapiski iz pouka Osnove programiranja}
+\author{Matej Blagšič}
+
+
+\begin{document}
+\lstset{language=html} 
+
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+minimum height=2em]
+\tikzstyle{nothing} = [node distance =3cm]	
+\maketitle
+\thispagestyle{empty}
+\pagebreak
+\setcounter{page}{1}
+
+\tableofcontents
+\pagebreak
+
+\section*{JavaScript}
+\input{sections/javascript}
+
+\end{document}

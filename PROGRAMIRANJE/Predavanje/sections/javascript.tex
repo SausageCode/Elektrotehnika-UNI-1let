@@ -1,0 +1,245 @@
+\section{Osnovno}
+
+JavaScript je jezik, ki je integriran v neko okolje, kot je npr. HTML.
+\begin{verbatim}
+<script>
+<!-- KODA -->
+</script>
+\end{verbatim}
+
+\underline{Obmmočje delovanja js kode je:} 
+\begin{verbatim}
+<script src = "/..pot do datoteke/imedatoteke.js"><\script>
+\end{verbatim}
+
+Operator \textbf{console.log();} izpiše vneseno vrednost/spremenljivko v konzolo, ki je dostopna v brskalniku z ukazom Ctrl + Shift + J
+\section{PRAVILA}
+\begin{itemize}
+	\item angleške črke
+	\item desetiška števila
+	\item podčrtaj (\_) ločuje besede
+	\item začetek stavka ne sme biti število
+	\item loči velike in male črke(je case-sensitive) 
+	\item nedovoljena uporaba razerviranih izrazov/funkcij(\&, = ...)
+	\item "navednice" označujejo dobesedno navajanje/znak
+	\item primer:
+\end{itemize}
+
+\begin{verbatim}
+console.log(a); <!-- Izpiše vrednost spremenljivke -->
+console.log("a"); <!-- Izpiše znak a -->
+\end{verbatim}
+\section{Spremenljivke}
+
+\begin{verbatim}
+var = a;
+\end{verbatim}
+Z enačajem se definira vrednost ali izraz spremenljivki na desni strani(var). Definicija se \textbf{VEDNO} konča s podpičjem.\\
+
+Operator "=" definira spremenljivko in ji priredi neko vrednost ali izraz.
+
+\texttt{a = 31;}
+
+Spremenljivki a priredimo vrednost 31.\\
+
+\subsection{Tipi spremenljivk}\
+\newline
+Operator \textbf{typeof()} vrne tip spremenljivke/vrednosti.\
+
+
+\subsection*{Številski(number)}
+VREDNOSTI: 41, 2.15, Nan, infinity\\
+primer:
+\begin{verbatim}
+console.log(typeof (13)) <!-- v konzoli se nam izpiše "number"-->
+\end{verbatim}
+
+\subsection*{Boolov(boolean)}
+VREDNOSTI: TRUE, FALSE
+primer:
+\begin{verbatim}
+console.log(typeof TRUE) <-- v konzoli se nam izpiše "boolean"-->
+\end{verbatim}
+
+\subsection*{Znakovni niz(string)}
+VREDNOST: "jabolko"\ --> string
+primer:
+\begin{verbatim}
+console.log(typeof ("jabolko")) <!-- v konzoli nam izpiše "string"-->
+\end{verbatim}
+
+\subsection*{Dedoločen tip(undefined)}
+VREDNOST: undefined
+
+\section{Izrazi}
+Izraz je del kode, ki razreši vrednost. Lahko vrednost dodeli spremenljivki ali pa jo ima sam.\
+
+Na primer: Izraz \texttt{x = 7} dodeli vrednost 7 spremenljivki x.\
+
+\underline{Pomembna lastnost izrazov je} PREDNOST ali \textit{precedence} operatorjev med seboj. To pomeni, da program bere operatorje glede na njihovo prioriteto  oz. prednost.\
+
+Na primer: V izrazu \texttt{a + b * c} ima operator \textbf{*} prednost pred operatorjem $+$, zato program najprej zmnoži števili b in c in nato sešteje vsoto s številom~a.\
+
+Operatorji istega tipa/prednosti se pa izvajajo v vrstnem redu iz leve proti desni(\textit{associativity}).
+
+\section{Operatorji}
+
+\subsection*{Aritmetični}
+
+\begin{description}[align=left,labelwidth=3cm]
+	\item[$+, -$] Unarni/Binarni
+	\item[$\times, \div$]
+	\item[$\%$] Ostanek pri deljenju
+\end{description}
+
+\subsection*{Primerjalni}
+Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
+
+\begin{description}[align=left,labelwidth=3cm]
+	\item [$>, >=$]	Večje, večje ali enako(pomembno je zaporedje znakov!!)
+	\item [$<, <=$]	Manjše, manjše ali enako
+	\item [$==$] Je enako	
+	\item [$!=$] Ni enako
+\end{description} 
+
+Prav tako velja tudi: \texttt{"5"~==~5 --> $TRUE$}
+
+\subsection*{Logični}
+
+Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
+
+\begin{description}[align=left,labelwidth=3cm]
+	\item [$\&\&$] Logični IN
+	\item [$||$] Logični ALI
+	\item [$!$] Negacija
+	\item [$=$] Priredilni operator --> spremenljivki na levi strani priredi vrednost na desni strani.
+\end{description}
+
+\underline{Prednost in red izvajanja:}\
+
+\begin{description}[align=left,labelwidth=3cm]
+	\item [Aritmetični] --> 
+	\item [Primerjalni] -->
+	\item [Logični] -->
+	\item [Priredilni] <--
+\end{description}
+
+\underline{Bljižnice(shorthands):}\
+
+\begin{labeling}{\texttt{x $=$ x $+$ izraz}}
+	\item [\texttt{x $=$ x $+$ izraz}] => v spremenljivko x shranimo vsoto spremenljivke asdasdasdsadasdasdasdasd
+	\item [\texttt{x $+=$ izraz}] => okrajšan zgornji stavek
+	\item[\texttt{x $-+$ izraz}] spremenljivki x odštejemo vrednost izraza
+	\item [\texttt{x$++$}] => spremenljivki x se vrednost poveča za 1
+	\item[\texttt{x$--$}] spremenljivki x zmanjšamo vrednost za 1
+\end{labeling}
+
+\subsection*{Vejični}
+
+Ima še nižjo prioriteto, kot priredilni operator
+
+\subsubsection*{Pogojni}
+\texttt{pogoj ? ce\_je\_true : ce\_je\_false}
+
+V prvi del pred vprašajem se vnese pogoj in nato izraz, ki se prebere, če je pogoj izpolnjen, po dvopičjem pa sledi izraz, če pogoj ni izpolnjen.
+
+Primer:\begin{verbatim}
+var x = 3;
+var y = 0;
+x > 2 ? y = 1 : y = 2;
+console.log(y);			--> konzola v tem primeru izpiše 1
+\end{verbatim}
+
+\subsection*{Primerjalni}
+\underline{Črke:}
+Črke primerja po abecedi, velike črke so pred malimi. Primerja se od prve do zadnje.
+
+
+\section{Diagram poteka}
+
+\begin{tikzpicture}[node distance = 2cm, auto]
+% Place nodes
+\node [block] (init) {stavek};
+\node [decision, right of=init] (decide) {izraz};
+\path [line] (init) -- (decide);
+
+\end{tikzpicture}
+
+Obstaja prazen stavek, ki vsebuje le podpičje. Podpičja so neobvezna v Javascriptu, a jih je vseeno dobro uporabljati.\
+\newpage
+Primer stavka:
+\begin{verbatim}
+{
+	stavek1;
+	stavek2;
+	...
+	stavekN;	
+}
+\end{verbatim}
+\subsection*{Stavek if/else}\
+\begin{verbatim}
+if (pogoj) stavek1 else stavek2
+\end{verbatim}
+Po pogoju, sledi glede na rezultat pogoja \textbf{LE EN STAVEK!!} Za več kot en stavek, se uporabi zaviti oklepaj.\
+
+\begin{tikzpicture}
+\node[cloud, node distance = 2cm](vnos){vnos};
+
+\node [decision, below of=vnos] (pogoj) {pogoj};
+\node[block, left of=pogoj, node distance = 3cm](stavek2){stavek2};
+\node[block, right of=pogoj, node distance = 3cm](stavek1){stavek1};
+\node[cloud, below of=pogoj](izhod){rezultat};
+\path [line] (pogoj) -- node {true}(stavek1);
+\path [line] (pogoj) -- node {false}(stavek2);
+\path[line](vnos) --(pogoj);
+\path [line](stavek2)|-(izhod);
+\path [line](stavek1)|-(izhod);
+\end{tikzpicture}
+\newpage
+\underline{Primer stavkov:}
+Računanje idealne teže s podanim podatkom o spolu in višini. Izvozi podatek idealne teže.
+\begin{verbatim}
+<script>
+
+    var teza;
+    var visina;
+    var spol;
+
+    spol = prompt("Vnesi spol (m/z)");
+
+    if(spol == "m"){
+        teza = 48 + (visina - 150) * 0.9;
+    }
+    else{
+        teza = 43 + (visina - 150) * 0.7;    
+    }
+    console.log("Tvoja idealna teža je" + teza + "kg");
+    
+</script>
+\end{verbatim}
+
+\subsection*{Stavek for}
+
+\texttt{for (start; pogoj; korak) stavek}
+
+For stavek izvaja določen stavek, dokler je pogoj uresničen. V for stavek se vnese štartni parameter. Ta se preveri v pogoju in se spreminja po koraku.
+
+\begin{tikzpicture}
+\node[cloud](start){start};
+\node[decision, below of=start, node distance = 3cm](pogoj){pogoj};
+\node[block, below of=pogoj, node distance = 3cm](stavek){stavek};
+\node[nothing,left of=pogoj](vmes);
+\node[block, below of=stavek, node distance = 3cm](korak){korak};
+\path[line](start)--(pogoj);
+\path[line](pogoj)--(stavek);
+\path[line](stavek)--(korak);
+\path[line](korak) -| (vmes);
+\path[line](vmes) -- (pogoj);
+
+\end{tikzpicture}
+
+Npr: začnemo s številom i, katerega vrednost je 0. Če hočemo stavek ponoviti 4-krat, potem bomo povečevali naš i do števila 3(štetje se začne s številom 0) s korakom i(i++).
+
+\begin{verbatim}
+for(var i = 0; i<4; i++) console.log("Zdaj se izvajam v " + i +"-tem krogu")
+\end{verbatim}

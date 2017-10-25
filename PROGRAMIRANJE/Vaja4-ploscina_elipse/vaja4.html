@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vaja4-ploscina_elipse</title>
+</head>
+<body>
+    <script>
+        var a = prompt("Vnesi vrednost a") * 1, b = prompt("Vnesi vrednost b") * 1, fi = prompt("Vnesi vrednost fi[kot]") * 1;<!-- uporabnik vnese podatke o elipsi -->
+        console.log("Ploščina elipse:" + Math.PI*a*b); <!-- Izvozimo niz + število. Ker "zlepimo" niz in število, javascript spremeni število v niz -->
+        fi = Math.tan(fi * Math.PI / 180); <!-- spremenimo fi v tangens fi in ga shranimo v isto spremenljivko -->
+
+        a = a * b /Math.sqrt(b*b+a*a+fi*fi);<!-- izračunamo x0 in ga shranimo kar v a spremenljivko -->
+        b = a * b /Math.sqrt(b*b+a*a+fi*fi)*fi;<!-- izračunamo y0 in ga shranimo kar v b spremenljivko -->
+        console.log("Koordinati točke: ("+a+","+b+")");
+    </script>
+
+</body>
+</html>
