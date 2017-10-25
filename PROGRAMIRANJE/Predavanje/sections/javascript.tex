@@ -155,7 +155,9 @@ console.log(y);			--> konzola v tem primeru izpiše 1
 Črke primerja po abecedi, velike črke so pred malimi. Primerja se od prve do zadnje.
 
 
-\section{Diagram poteka}
+\section{Stavki}
+
+\subsection{Diagram poteka}
 
 \begin{tikzpicture}[node distance = 2cm, auto]
 % Place nodes
@@ -228,18 +230,17 @@ For stavek izvaja določen stavek, dokler je pogoj uresničen. V for stavek se v
 \node[cloud](start){start};
 \node[decision, below of=start, node distance = 3cm](pogoj){pogoj};
 \node[block, below of=pogoj, node distance = 3cm](stavek){stavek};
-\node[nothing,left of=pogoj](vmes);
 \node[block, below of=stavek, node distance = 3cm](korak){korak};
+\node[nothing, left of=stavek](nic){korak spremeni pogoj};
 \path[line](start)--(pogoj);
 \path[line](pogoj)--(stavek);
 \path[line](stavek)--(korak);
-\path[line](korak) -| (vmes);
-\path[line](vmes) -- (pogoj);
-
+\path[line](korak) -| (nic);
+\path[line](nic) |- (pogoj);
 \end{tikzpicture}
 
-Npr: začnemo s številom i, katerega vrednost je 0. Če hočemo stavek ponoviti 4-krat, potem bomo povečevali naš i do števila 3(štetje se začne s številom 0) s korakom i(i++).
+Npr: začnemo s številom i, katerega vrednost je 0. Če hočemo stavek ponoviti 4-krat, potem bomo povečevali naš i do števila 3(štetje se začne s številom 0) s korakom i(i++). To pomeni, da vsakič ko se bo izvedel stavek(več stavkov z $\{\}$) v for stavku, se po glede na nastavljen korak spremenil pogoj za 1 več(i++). Torej je v drugem(1-tem) krogu pogoj i = 1 in tako naprej.
 
 \begin{verbatim}
-for(var i = 0; i<4; i++) console.log("Zdaj se izvajam v " + i +"-tem krogu")
+for(var i = 0; i < 4; i++) console.log("Zdaj se izvajam v " + i +"-tem krogu");
 \end{verbatim}
