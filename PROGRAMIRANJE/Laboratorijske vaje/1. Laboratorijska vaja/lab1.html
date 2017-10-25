@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorijska vaja 1</title>
+</head>
+<body>
+    <h1>Laboratorijska vaja 1</h1>
+    <p>V tej laboratorijski vaji program vpraša uporabnika po podatkih za izračun ploščine trikotnika. Program nato glede na podatke izbere način reševanja ter hkrati preveri pravilnost podatkov, če lahko ti sploh predstavljajo trikotnik</p>
+    <script>
+        var a = prompt("Vnesi dolžino daljice a")*1, b = prompt("Vnesi dolžino daljice b")*1, c = prompt("Vnesi dolžino daljice c")*1, fi = prompt("Vnesi velikost kota fi")*1, pl = 0;
+
+        if(0<fi<180 && a>0 && b>0 && c==0){                           <!-- Prvi način s stranicama in kotom med njima podan v stopinjah. + Preveri pravilnost podatkov za ta način računanja. c stranica se zato ne vnese in je po difoltu 0 -->
+            pl = 0.5 * a * b * Math.sin(fi*Math.PI/180);                      <!-- Izračuna se ploščina po formuli. Vnešen kot je potrebno še pretvoriti v radiane, s tem da se pomnoži s pi/180 oz Math.PI /180 -->
+            console.log("Ploščina trikotnika je:" + pl);
+        }
+        else{                                                          <!-- Če pogoji ne ustrezajo prvemu načinu računanja ploščine, potem gre v naslednji if/else stevka, ki preverita če je na voljo za izračunat druga formula. Če ne, potem so podatki neveljavni za trikotnik -->
+            if(fi==0 && a>0 && b>0 && c>0 && a+b>c && a+c>b && b+c > a){                           <!-- Drugin način z vsemi stranicami -->
+                var s = (a + b + c)/2;                                  <!-- Izračun s parametra v heronovi formuli -->
+                pl = Math.sqrt(s * (s - a) * (s - b) * (s - c));        <!-- Izračun ploščine s heronovo formulo -->
+                console.log("Ploščina trikotnika je:" + pl);
+            }
+            else console.log(" S podanimi podatki trikotnik ne more obstajati!!");           <!-- Če prva dva if stavka ne moreta izračunati ploščine glede na obvezne pogoje, potem so podatki napačni. -->
+        }
+    </script>
+</body>
+</html>
