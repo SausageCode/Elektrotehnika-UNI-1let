@@ -1,9 +1,0 @@
-\select@language {slovene}
-\contentsline {section}{\numberline {1}Osnovno}{2}{section.1}
-\contentsline {section}{\numberline {2}PRAVILA}{2}{section.2}
-\contentsline {section}{\numberline {3}Spremenljivke}{3}{section.3}
-\contentsline {subsection}{\numberline {3.1}Tipi spremenljivk}{3}{subsection.3.1}
-\contentsline {section}{\numberline {4}Izrazi}{4}{section.4}
-\contentsline {section}{\numberline {5}Operatorji}{4}{section.5}
-\contentsline {section}{\numberline {6}Stavki}{6}{section.6}
-\contentsline {subsection}{\numberline {6.1}Diagram poteka}{6}{subsection.6.1}
