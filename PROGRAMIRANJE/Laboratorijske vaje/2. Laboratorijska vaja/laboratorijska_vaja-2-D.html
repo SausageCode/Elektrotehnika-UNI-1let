@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorijska vaja 2-Dodatek</title>
+</head>
+<body>
+<p>To je dodatek z dodatkom(lastna prijateljska števila), ki najde prijsateljska števila od 100 do 10000. Od kje do kje se nastavi s parametrom a(min) in parametrom aM(max).</p>
+    <script>
+        var a=100, aM=10000;<!-- Nastavi se začetni del in končni del iskanja prijateljskih števil -->
+        var b=0,c=0,i=0,h=0;<!-- Nastavitev vsote deljiteljev števila a = b ter vsota deljitevljev števila b = c. i je korak pri for zankah. h je števec samo-prijateljskih števil -->
+        var e = [];<!-- Array samo-prijateljskih števil = spremenljivka, ki vsebuje "več spremenljivk" oz. v tem primeru več števil, ki so vsa samo-prijateljska. -->
+
+        console.log("Območje iskanja prijateljskih števil je od "+a+" do "+aM);
+
+        for(a;a<aM;a++){<!-- Glavni for loop, ki preveri prijateljsko število za število od a do aM -->
+            b=0;<!-- Vsakič se ponastavita vsota deljiteljev števila a oz. število b, ki se testira za prijateljskega številu a ter c, ki je vsota deljiteljev št. b, ki mora biti enak a -->
+            c=0;
+            for(i=1;i<a;i++){<!-- prva zanka, ki izračuna vsoto deljiteljev števila a, postane število b, ki se potem testira za potencialnega prijateljskega a-ju. -->
+                if(a%i==0) {
+                    b += i;
+                }
+            }
+            for(i=1;i<b;i++){<!-- druga zanka, ki izračuna vsoto deljiteljev števila b, postane število c, ki se mora ujemati s številom a -->
+                if(b%i==0){
+                    c += i;
+                }
+            }
+            if(a==c){<!-- primerja se vsota deljitevljev drugega števila(b) in število a, ki morata biti enaka, po definiciji, da sta števili a in b prijateljska. -->
+                console.log("Števili "+a+" in "+b+" sta prijateljski.")
+                if(a==b){<!-- DODATEK: preveri, če sta števili a in b enaki, torej je vsota deljiteljev števila a enaka samemu sebi -->
+                    e[h] = a;<!-- shrani se število, ki je prijateljski samemu sebi v array e v mesto h, ki se začne pri 0 -->
+                    h++;<!-- ko se najde samo-prijateljsko število, se poveča števec h, da se nasljednji najden zapiše v naslednjo mesto v array-u -->
+                }
+            }
+        }
+        console.log("------------------------------------------");
+        console.log("Števila, ki so prijateljska sama sebi:");
+        for(i=0;i<h;i++){<!-- Zanka izpiše člene "e" array-a enega za drugim. Šteje se od 0-tega člena in se izpiše enega za drugim. To se naredi, ko se najdejo vsa prijateljska števila v danem območju in so tudi vsa samo-prijateljska že shranjena. -->
+            console.log(e[i]);<!-- Izpiše se i-ti člen array-a "e" -->
+        }
+        </script>
+</body>
+</html>
