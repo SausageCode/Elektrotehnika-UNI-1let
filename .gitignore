@@ -222,7 +222,7 @@ TSWLatexianTemp*
 build/*
 lib/*
 bin/*
-.idea/*
+PROGRAMIRANJE/.idea/*
 cmake-build-debug/*
 docs/html/*
 docs/latex/*
