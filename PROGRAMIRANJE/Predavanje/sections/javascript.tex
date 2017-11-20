@@ -13,6 +13,8 @@ JavaScript je jezik, ki je integriran v neko okolje, kot je npr. HTML.
 \end{verbatim}
 
 Operator \textbf{console.log();} izpiše vneseno vrednost/spremenljivko v konzolo, ki je dostopna v brskalniku z ukazom Ctrl + Shift + J
+
+
 \section{PRAVILA}
 \begin{itemize}
 	\item angleške črke
@@ -29,6 +31,11 @@ Operator \textbf{console.log();} izpiše vneseno vrednost/spremenljivko v konzol
 console.log(a); <!-- Izpiše vrednost spremenljivke -->
 console.log("a"); <!-- Izpiše znak a -->
 \end{verbatim}
+
+\section{Razhroščevanje}
+
+V konzoli brskalnika lahko najdemo tudi orodje za razhroščevanje(debugging). V temu orodju se označi vrstica kode, ki jo želimo opazovati, kako se izvaja. Ob strani imamo tudi predalčnik "watch", kjer lahko nastavimo, katero spremenljivko želimo opazovati("add expression"). Nato osvežimo stran in se nam program ustavi na izbrani vrstici. Lahko najdemo ikone za ustavitev programa("\textbf{||}"), zraven pa "step" ikono. Ta nam izvede program en korak naprej. Tako lahko opazujemo, kako program deluje in kako se naše spremenljivke spreminjajo.
+
 \section{Spremenljivke}
 
 \begin{verbatim}
@@ -47,29 +54,53 @@ Spremenljivki a priredimo vrednost 31.\\
 Operator \textbf{typeof()} vrne tip spremenljivke/vrednosti.\
 
 
-\subsection*{Številski(number)}
+\subsubsection*{Številski(number)}
 VREDNOSTI: 41, 2.15, Nan, infinity\\
 primer:
 \begin{verbatim}
 console.log(typeof (13)) <!-- v konzoli se nam izpiše "number"-->
 \end{verbatim}
 
-\subsection*{Boolov(boolean)}
+\subsubsection*{Boolov(boolean)}
 VREDNOSTI: TRUE, FALSE
 primer:
 \begin{verbatim}
 console.log(typeof TRUE) <-- v konzoli se nam izpiše "boolean"-->
 \end{verbatim}
 
-\subsection*{Znakovni niz(string)}
+\subsubsection*{Znakovni niz(string)}
 VREDNOST: "jabolko"\ --> string
 primer:
 \begin{verbatim}
 console.log(typeof ("jabolko")) <!-- v konzoli nam izpiše "string"-->
 \end{verbatim}
 
-\subsection*{Dedoločen tip(undefined)}
+\subsubsection*{Dedoločen tip(undefined)}
 VREDNOST: undefined
+
+\subsection{Pretvorbe tipov}
+
+\begin{verbatim}
+	Number(); --> pretvori v številko
+	Boolean(); --> pretvori v boolean
+	String(); --> pretvori v znakovni niz
+\end{verbatim}
+\subsubsection*{Boolean -> number}
+\begin{itemize}[align=right,labelwidth=3cm]
+	\item[\texttt{FALSE}] --> 0
+	\item[\texttt{TRUE}] --> 1
+\end{itemize}
+\subsubsection*{String -> number}
+\begin{description}[align=left]
+	\item["42"] --> \textbf{42} če uporabljamo operatorje $\times$ ali $\div$ ali $-$	
+	\item["5x"] --> \textbf{NaN} ni število, ker se pretvori tudi string x, ki ni število
+	\item["5"+5] --> \textbf{"55"} če uporabljamo operator $+$
+	\item Operator $+$ pričakuje enak tip spremenljivke na obeh straneh, zato pretvori number v string in ju zlepi kot dva stringa.
+\end{description}
+\subsubsection*{Number -> string}
+\begin{description}
+	\item[42] --> "42"
+\end{description}
 
 \section{Izrazi}
 Izraz je del kode, ki razreši vrednost. Lahko vrednost dodeli spremenljivki ali pa jo ima sam.\
@@ -84,7 +115,7 @@ Operatorji istega tipa/prednosti se pa izvajajo v vrstnem redu iz leve proti des
 
 \section{Operatorji}
 
-\subsection*{Aritmetični}
+\subsection{Aritmetični}
 
 \begin{description}[align=left,labelwidth=3cm]
 	\item[$+, -$] Unarni/Binarni
@@ -92,7 +123,7 @@ Operatorji istega tipa/prednosti se pa izvajajo v vrstnem redu iz leve proti des
 	\item[$\%$] Ostanek pri deljenju
 \end{description}
 
-\subsection*{Primerjalni}
+\subsection{Primerjalni}
 Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
 
 \begin{description}[align=left,labelwidth=3cm]
@@ -104,7 +135,7 @@ Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
 
 Prav tako velja tudi: \texttt{"5"~==~5 --> $TRUE$}
 
-\subsection*{Logični}
+\subsection{Logični}
 
 Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
 
@@ -134,11 +165,11 @@ Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
 	\item[\texttt{x$--$}] spremenljivki x zmanjšamo vrednost za 1
 \end{labeling}
 
-\subsection*{Vejični}
+\subsection{Vejični}
 
 Ima še nižjo prioriteto, kot priredilni operator
 
-\subsubsection*{Pogojni}
+\subsection{Pogojni}
 \texttt{pogoj ? ce\_je\_true : ce\_je\_false}
 
 V prvi del pred vprašajem se vnese pogoj in nato izraz, ki se prebere, če je pogoj izpolnjen, po dvopičjem pa sledi izraz, če pogoj ni izpolnjen.
@@ -150,14 +181,14 @@ x > 2 ? y = 1 : y = 2;
 console.log(y);			--> konzola v tem primeru izpiše 1
 \end{verbatim}
 
-\subsection*{Primerjalni}
+\subsection{Primerjalni}
 \underline{Črke:}
 Črke primerja po abecedi, velike črke so pred malimi. Primerja se od prve do zadnje.
 
 
 \section{Stavki}
 
-\subsection{Diagram poteka}
+\subsection*{Diagram poteka}
 
 \begin{tikzpicture}[node distance = 2cm, auto]
 % Place nodes
@@ -178,7 +209,7 @@ Primer stavka:
 	stavekN;	
 }
 \end{verbatim}
-\subsection*{Stavek if/else}\
+\subsection{Stavek if/else}\
 \begin{verbatim}
 if (pogoj) stavek1 else stavek2
 \end{verbatim}
@@ -220,7 +251,7 @@ Računanje idealne teže s podanim podatkom o spolu in višini. Izvozi podatek i
 </script>
 \end{verbatim}
 
-\subsection*{Stavek for}
+\subsection{Stavek for}
 
 \texttt{for (start; pogoj; korak) stavek}
 
@@ -244,3 +275,49 @@ Npr: začnemo s številom i, katerega vrednost je 0. Če hočemo stavek ponoviti
 \begin{verbatim}
 for(var i = 0; i < 4; i++) console.log("Zdaj se izvajam v " + i +"-tem krogu");
 \end{verbatim}
+
+\subsection{Stavek while}
+
+\texttt{while (pogoj) stavek;}
+\newpage
+
+\section{Objekti}
+
+\texttt{Math.PI}
+V tem primeru, je Math objekt, ki ga mi vstavljamo v kodo. In "PI" je njegova lastnost/postopek oz. kateri del objekta Math želimo. V tem primeru nam objekt Math.PI vstavi število $\pi$
+
+\subsection{Postopki(methods)}
+To so deli Math objekta, npr: Math.abs();
+\begin{description}[align=left, labelwidth=2cm]
+	\item[abs()] absolutna vrednost
+	\item[max()] največji od vnesenih(array) npr: \texttt{Math.max(array[ ])}
+	\item[pow()] potenca, npr: \texttt{Math.pow(3,2) = $3^2$ = 9}
+	
+	\item[random()] naključno število od \texttt{[0, 1)}
+	\item[sqrt()] kvadratni koren
+	\item[round()] klasično zaokroževanje
+	\item[ceil()] zaokroževane navzgor
+	\item[floor()] zaokroževanje navzdol
+	\item[sin(), cos(), tan()] kotne funkcije
+\end{description}
+
+\subsection{Objektni tipi}
+
+\texttt{spr = new $[$tip-objekta$]$(parameter)}
+spr je nov objekt z imenom "spr". Z ukazom new deklariramo vrsto oz. tip objekta. Tako dobimo:\\
+\texttt{spr.lastonst() ali spr.postopek()}
+
+\subsubsection*{Array}
+
+\texttt{var a = new Array(); ali var a[ ];}
+V oglatem oklepaju so elementi v "zbirki", katere indeks se začne z 0. Torej podatek a[0] je prvi oz. nič-ti člen v zbirki.
+V našem primeru, je Array konstruktor, saj konstruira nov objekt.
+
+\texttt{a[i] = i-ti člen array-a "a[ ]"}
+
+\underline{Postopek}\\
+\textbf{indexOf()} nam izpiše želeni člen array-a. indexOf je postopek oz. lastnost of objekta array.\\
+Primer:
+\texttt{var a = new Array(1,25,25,6,d,64); a.indexOf(4) = "d"}
+
+Če postopek indexOf() ne najde želenega člena, bo izpisal -1.
