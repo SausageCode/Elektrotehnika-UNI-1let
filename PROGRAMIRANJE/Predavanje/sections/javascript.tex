@@ -286,6 +286,7 @@ for(var i = 0; i < 4; i++) console.log("Zdaj se izvajam v " + i +"-tem krogu");
 \texttt{Math.PI}
 V tem primeru, je Math objekt, ki ga mi vstavljamo v kodo. In "PI" je njegova lastnost/postopek oz. kateri del objekta Math želimo. V tem primeru nam objekt Math.PI vstavi število $\pi$
 
+
 \subsection{Postopki(methods)}
 To so deli Math objekta, npr: Math.abs();
 \begin{description}[align=left, labelwidth=2cm]
@@ -321,3 +322,58 @@ Primer:
 \texttt{var a = new Array(1,25,25,6,d,64); a.indexOf(4) = "d"}
 
 Če postopek indexOf() ne najde želenega člena, bo izpisal -1.
+
+\section{Funkcije}
+
+\begin{verbatim}
+function myFunnction(par1, par2, ...)
+{
+    //koda
+    return vrednost;
+}
+\end{verbatim}
+v \texttt{function(par1, par2, ...)} so par1, par2 formalni parametri(spremenlljikve)
+ 
+Vhodni podatki so določeni podatki, ki jih funkcija potrebuje, da se izvede in da "izpljune" ven vrednost.\\
+
+Funkcijo se kliče: \texttt{myFunction(par1, par2, ..., parN)} , kjer so par1, par2,... dejanski parametri.
+
+Primer funkcije:
+\begin{verbatim}
+<head>
+    <script>
+    function crta(dolzina){
+        var i;
+        var c = "";
+        for (i = 0; i < dolzina; i++){
+            c += "-";
+        }
+        console.log(c);
+    }
+    </script>
+</head>
+\end{verbatim}
+\newpage
+\begin{verbatim}
+<body>
+    <script>
+        crta(7);
+        crta(12);
+    </script>
+</body>
+\end{verbatim}
+
+Najprej se izvede funkcija \texttt{crta(7);} z vnešenim parametrom, ki je definiran v glavi strani. Nato pa se izvede \texttt{crta(12);}, ki pa kliče isto funkcijo, le da je vhodni parameter drugečen.
+
+Lahko dodamo  \texttt{return vrednost} je funkcija, ki vrne vrednost želene premenljivke.
+Tako lahko shranjujemo vrednosti funkcije v spremenljivko, da ne rabimo vstavljati dolge kode v našo glavno kodo.
+
+\begin{verbatim}
+ var spr;
+ spr = myFunction(dejanski parametri);
+\end{verbatim}
+v zgornjem primeru, nam funkcija \texttt{myFuntion()} vrne neko vrednost, ki jo vstavimo v spremenljivko.
+
+Primer:\\
+\texttt{myFunction()} vzame na primer neka števila, in vrne vrednost največjega.
+\texttt{console.log(myFunction(var1, var2, var3, var4, var5,...));} v konzolo izpišemo vrednost, ki jo izpljune funkcija \texttt{myFunction} z vnešenimi podatki var1, var2, var3 ...

@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
+	<script>
+		function poravnajDesno(st, mest){
+			var i;
+			st = String(st);
+			while (st.lenght < mest){
+				st = " "+ st;
+			}
+			return st;
+		}
+	</script>
 </head>
+
 <body>
+<!-- Program, ki šteje igralne kocke za n vsote in jih prikaže kot palicni diagram.-->
     <script>
 
-        console.log(true+true);
-
+	console.log(poravnajDesno(3, 5));        
+	console.log(poravnajDesno(125, 5));
     </script>
 </body>
 </html>
