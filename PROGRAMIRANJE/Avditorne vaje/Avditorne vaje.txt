@@ -421,3 +421,52 @@ Napiši funkcijo, ki kot parameter sprejme celoštevilsko vrednost med vkljucno 30
    console.log(zBesedo(66));
   </script>
  </body></html>
+
+------------------------------------------------------------------------------------------------
+Napiši funkcijo, ki napravi kopijo zbirke celih števil, pri cemer naj odstrani vse duplikate.
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <title></title>
+  <meta charset="utf-8">
+  <script>
+   function odstraniDuplikate(zb) {
+    var i, kopija = [];
+    for(i = 0; i < zb.length; i++) if(zb.indexOf(zb[i]) == i) kopija.push(zb[i]);
+    return kopija;
+   }
+  </script>
+ </head>
+ <body>
+  <script>
+   var zbirka = [4, 7, 4, 2, -3, 7, -3, 4, 1, 7];
+   console.log(odstraniDuplikate(zbirka));
+  </script>
+ </body></html>
+
+--------------------------------------------------------------------------------------
+Napiši program, ki z uporabo HTML elementa <canvas> izriše zeleno pušcico v desno.
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <title></title>
+  <meta charset="utf-8"></head>
+ <body>
+  <canvas id="puscica" width="150" height="150"></canvas>
+  <script>
+   var platno = document.getElementById("puscica"), k = platno.getContext("2d");
+   k.beginPath();
+   k.lineWidth = 20;
+   k.strokeStyle = "green";
+   k.lineCap = "round";
+   k.moveTo(20, 75);
+   k.lineTo(130, 75);
+   k.moveTo(130, 75);
+   k.lineTo(75, 20);
+   k.moveTo(130, 75);
+   k.lineTo(75, 130);
+   k.stroke();
+  </script>
+ </body></html>

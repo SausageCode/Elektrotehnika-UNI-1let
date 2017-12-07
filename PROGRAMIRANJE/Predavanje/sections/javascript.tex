@@ -281,6 +281,11 @@ for(var i = 0; i < 4; i++) console.log("Zdaj se izvajam v " + i +"-tem krogu");
 \texttt{while (pogoj) stavek;}
 \newpage
 
+\subsection{Stavek do/while}
+
+\underline{\texttt{do stavek while (pogoj);}}
+
+Stavek se izvaja, ki je vnesen za operatorjem $do$, dokler je nek pogoj izpolnjen. Potem ko je pogoj v while zanki izpolnjen, se $do$ zanka zaključi.
 \section{Objekti}
 
 \texttt{Math.PI}
@@ -323,6 +328,30 @@ Primer:
 
 Če postopek indexOf() ne najde želenega člena, bo izpisal -1.
 
+\subsubsection*{Date}
+
+\texttt{var danes = new Date();} S tem je spremenljivka \underline{danes} datumski objekt
+
+V konstruktor Date() lahko kot parameter vnesemo milisekunde. Tako nam izpiše ven datum in čas po vnešenih milisekundah po \underline{1. Januar 1970}, ko se je začel šteti \textbf{UNIX} čas računalnikov.
+
+Primer: Če vnesemo v Date(milisekunde) 1000, potem nam izpiše 1. Jan. 1970 00:00:01, saj je to ena sekunda po začetku štetja. Ker pa ta program poženemo na računalnikih na različnih delih sveta, nam Javascript upošteva drugačen čas, tako da v sloveniji nam prišteje 1 uro.
+
+\underline{Konstruktorji}:
+\begin{description}}
+	\item[Date()] izpiše datum in uro v določenem časovnem območju
+	\item[Date(milisekunda)] izpiše datum kot milisekunde po začetku štetja 
+	\item[Date(leto, mesec, dan)] nastavi se datum
+\end{description}
+\newpage
+\underline{Postopki:}
+\begin{description}
+	\item[getFullYear()] izpiše leto = 2017
+	\item[getMonth] izpiše mesec = 0(jan), 1(feb), 2(mar) ...
+	\item[getDate()] vrne datum = 1-31
+	\item[getHours(), getMinutes(), getSeconds()] izpiše uro, minuto, sekundo
+	\item[setFullYear(), setHours()] nastavi se ura, leto ...
+\end{description}
+
 \section{Funkcije}
 
 \begin{verbatim}
@@ -337,12 +366,12 @@ v \texttt{function(par1, par2, ...)} so par1, par2 formalni parametri(spremenllj
 Vhodni podatki so določeni podatki, ki jih funkcija potrebuje, da se izvede in da "izpljune" ven vrednost.\\
 
 Funkcijo se kliče: \texttt{myFunction(par1, par2, ..., parN)} , kjer so par1, par2,... dejanski parametri.
-
+\newpage
 Primer funkcije:
 \begin{verbatim}
 <head>
     <script>
-    function crta(dolzina){
+    var crta = function(dolzina){
         var i;
         var c = "";
         for (i = 0; i < dolzina; i++){
@@ -353,7 +382,6 @@ Primer funkcije:
     </script>
 </head>
 \end{verbatim}
-\newpage
 \begin{verbatim}
 <body>
     <script>
@@ -376,4 +404,11 @@ v zgornjem primeru, nam funkcija \texttt{myFuntion()} vrne neko vrednost, ki jo 
 
 Primer:\\
 \texttt{myFunction()} vzame na primer neka števila, in vrne vrednost največjega.
+
 \texttt{console.log(myFunction(var1, var2, var3, var4, var5,...));} v konzolo izpišemo vrednost, ki jo izpljune funkcija \texttt{myFunction} z vnešenimi podatki var1, var2, var3 ...
+
+\subsection*{Območja}
+
+\underline{\textbf{Globalno območje (Global scope)}} je območje, kjer definiramo določene spremenljivke in veljajo za celoten \textbf{body} kode. Torej če je spremenljivka $x$ definirana v \textbf{body} kode, potem velja povsod v kodi.
+
+\textbf{\underline{Lokalno območje (Local scope)}} je območje, kot funkcija, kjer delujejo \textbf{lokalne spremenljivke}, ki delujejo le na temu območju in nikjer drugje. Torej, če je spremenljivka $x$ definirana v funkciji, potem njena vrednost ni enaka enaki spremenljivki $x$ v celotni kodi izven funkcije.
