@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorijska vaja 3</title>
+    <script>
+        function sestevanje(a,b){
+            var i=0, rez = [], naprej=0, rezultat ="", k;
+            var a_dolzina = a.length, b_dolzina = b.length, najdalsi = 0;
+//            console.log(a_dolzina, b_dolzina);
+            a = a.split("");
+            b = b.split("");
+//            console.log(a,b);
+            a.reverse();
+            b.reverse();
+//            console.log(a,b);
+            if(a_dolzina < b_dolzina){
+                najdalsi = b_dolzina;
+                for(i=(a_dolzina); i < b_dolzina;i++){
+                    a[i] = "0";
+                }
+//                console.log(a);
+//                console.log("A je krajši od B");
+            }
+            else {
+                if(b_dolzina < a_dolzina){
+                    najdalsi = a_dolzina;
+                    for (i = (b_dolzina); i < a_dolzina; i++) {
+                        b[i] = "0";
+                    }
+//                    console.log(b);
+//                    console.log("B je krajši od A");
+                }
+                else{
+                    najdalsi = a_dolzina; /* a ali b dolzina, ker sta oba enako dolga*/
+                }
+            }
+//            console.log("najdalsi je " + najdalsi);
+//            console.log(a,b);
+            for(i = 0; i < (najdalsi);i++){
+                if((a[i]*1 + b[i]*1 + naprej) > 9){
+                    rez[i] = (a[i]*1+b[i]*1 + naprej) - 10;
+                    naprej = 1;
+                    rez[i+1] = 1;
+                }
+                else{
+                    rez[i] = a[i]*1 + b[i]*1 + naprej;
+                    naprej = 0;
+                }
+            }
+            rez.reverse();
+//            console.log("dolzina rezultata je " + rez.length);
+//            console.log(rez);
+
+            for(i = rez.length-1, k =1; i >= 0; i--, k++){
+                rezultat = rez[i] + rezultat;
+                if((k % 3 == 0) && (k != rez.length)){
+                    rezultat = "." + rezultat;
+                }
+            }
+            return(rezultat);
+        }
+    </script>
+</head>
+<body>
+    <script>
+        var x = prompt("Prvo stevilo?"),  y = prompt("Drugo stevilo");
+        console.log("Vsota števil " + x + " in " +y + " je " +sestevanje(x, y));
+
+    </script>
+</body>
+</html>
