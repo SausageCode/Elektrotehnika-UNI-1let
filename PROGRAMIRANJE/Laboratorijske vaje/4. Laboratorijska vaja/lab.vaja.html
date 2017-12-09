@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4. Laboratorijska vaja</title>
+    <script>
+
+        window.onload = zacetek;
+
+        function zacetek(){
+            var platno = document.getElementById("puscica");
+            var kontekst = platno.getContext("2d");
+            setInterval(ura, 10, kontekst);
+            setInterval(digi, 1000);
+        }
+
+        function ura(kontekst){
+            var cas = new Date();
+            var slika = new Image();
+            slika.src = "ura.jpg";
+            kontekst.drawImage(slika, 0, 0);
+            kazalec(kontekst, 4, 0.95, cas.getSeconds() + cas.getMilliseconds()/1000, "red");
+            kazalec(kontekst, 7, 0.825, cas.getMinutes() + cas.getSeconds()/60, "black");
+            kazalec(kontekst, 9, 0.55, cas.getHours()*5 + cas.getMinutes()/12, "black");
+        }
+
+        function kazalec(k, debelina, dolzina, cas, barva){
+            var sirina = k.canvas.width, visina = k.canvas.height;
+            dolzina = dolzina * Math.min(sirina, visina)/2;
+            kot = cas / 60 * Math.PI * 2;
+            var a = Math.sin(kot) * dolzina, b = Math.cos(kot) * dolzina;
+            var center = [sirina/2, visina/2];
+
+            k.beginPath();
+            k.lineWidth = debelina;
+            k.strokeStyle = barva;
+            k.lineCap = "round";
+
+            k.moveTo(center[0],center[1]);
+            k.lineTo(center[0] + a, center[0] - b);
+            k.stroke();
+        }
+
+        function digi() {
+            var klok = "", ure, minute, sekunde;
+            var cas = new Date();
+            ure = cas.getHours();
+            minute = cas.getMinutes();
+            sekunde = cas.getSeconds();
+            if(cas.getSeconds() < 10){
+                sekunde = "0" + cas.getSeconds();
+            }
+            if(cas.getMinutes() < 10){
+                minute = "0" + cas.getMinutes();
+            }
+            if(cas.getHours() < 10){
+                ure = "0" + cas.getHours();
+            }
+
+            klok = ure + ":" + minute + ":" + sekunde;
+            document.getElementById("digital").innerHTML = klok;
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="puscica" width="410" height="410">Kanvas ni podprt!</canvas>
+    <p id="digital"></p>
+</body>
+</html>
