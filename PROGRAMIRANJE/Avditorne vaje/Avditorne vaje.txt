@@ -469,4 +469,65 @@ Napiši program, ki z uporabo HTML elementa <canvas> izriše zeleno pušcico v desn
    k.lineTo(75, 130);
    k.stroke();
   </script>
+ </body>
+</html>
+
+-------------------------------------------------------------------------------------
+Napiši funkcijo, ki v podani zbirki poišce podzbirko ter vrne indeks najdene podzbirke. Ce je ne najde, naj vrne -1.
+Npr:
+isci([1, 3, 5, 7, 9, 1, 3], [5, 7]) 		vrne 2
+isci([1, 3, 5, 7, 9, 1, 3], [3, 5, 5]) 		vrne -1
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <title></title>
+  <meta charset="utf-8">
+  <script>
+   function isci(zb1, zb2) {
+    var i, j, k;
+    for(i = 0; i <= zb1.length - zb2.length; i++) {
+     for(j = i, k = 0; k < zb2.length; j++, k++) if(zb1[j] != zb2[k]) break;
+     if(k == zb2.length) break;
+    }
+    if(i > zb1.length - zb2.length) i = -1;
+    return i;
+   }
+  </script>
+ </head>
+ <body>
+  <script>
+   console.log(isci([1, 3, 5, 7, 9, 1, 3], [5, 7]));
+   console.log(isci([1, 3, 5, 7, 9, 1, 3], [3, 5, 5]));
+  </script>
+ </body>
+</html>
+
+------------------------------------------------------------------------------------
+Napiši funkcijo, ki zaokroži podani parameter na n decimalnih mest. Ce je število mest manjše od n, naj na koncu doda ustrezno število nicel.
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <title></title>
+  <meta charset="utf-8">
+  <script>
+   function zaokrozi(vr, n) {
+    vr *= Math.pow(10, n);
+    vr = Math.round(vr);
+    vr /= Math.pow(10, n);
+    vr = String(vr);
+    if(n > 0) {
+     if(vr.indexOf(".") == -1) vr += ".";
+     while(vr.length - vr.indexOf(".") <= n) vr += "0";
+    }
+    return vr;
+   }
+  </script>
+ </head>
+ <body>
+  <script>
+   console.log(zaokrozi(2.6527, 3));
+   console.log(zaokrozi(2, 5));
+  </script>
  </body></html>

@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <title>Test</title>
 	<script>
-        function hrenovka(){
-            if(prompt("dej") == "1")  {
-                console.log("Dobrodošli!");
-            }
-            else {
-                hrenovka();
-            }
-        }
+  function isci(zbirka, podzbirka){
+    var dolz1 = zbirka.length;
+    var dolz2 = podzbirka.length;
+    var i;
+    for(i = 0; i <= (dolz1 - dolz2);i++){
+      for(var j = i, var k = 0; , k < dolz2;j++, k++){
+        if(zbirka[j] != podzbirka[k]) break;
+      }
+      if(k == dolz2) break;
+    if(i > dolz1 - dolz2) i = -1;
+  }
+  return i;
+  }
 	</script>
 </head>
 
 <body>
     <script>
-
-      hrenovka();
+    console.log(isci([1, 6, 3, 5, 3, 3, 8], [5, 3]));
 
     </script>
 </body>

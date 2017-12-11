@@ -286,6 +286,24 @@ for(var i = 0; i < 4; i++) console.log("Zdaj se izvajam v " + i +"-tem krogu");
 \underline{\texttt{do stavek while (pogoj);}}
 
 Stavek se izvaja, ki je vnesen za operatorjem $do$, dokler je nek pogoj izpolnjen. Potem ko je pogoj v while zanki izpolnjen, se $do$ zanka zaključi.
+
+\subsection{Switch}
+Switch stavek vzame določen izraz in ga primerja drugim vrednostim. S katerokoli se strinja, potem izvrši stavke, ki so asociirani s to vrednostjo.
+\begin{verbatim}
+switch (izraz){
+    case vred1: stavki1 <-- če je pravilen, se vsi izvrsijo od kle naprej
+    case vred2: stavki2
+    
+    case vredN: stavkiN
+    default: privzetiStavki <-- stavek, ki se izvrsi ce se nobeden ne
+}
+\end{verbatim}
+Primer:\\
+\texttt{izraz === vred1 --> true --> stavki1}\\
+\texttt{izraz === vred1 --> false --> izraz === vred2 ...}
+
+Če je vrednost $vre1$ enaka izrazu, potem se izvršjo vsi stavki naprej, vključno default. To je problem, ker če želimo, da je pogoj le en pravilni in da se izvrši le stavek zanj, potem moramo vnesti $break$ po stavku pogoja.
+
 \section{Objekti}
 
 \texttt{Math.PI}
@@ -315,9 +333,11 @@ spr je nov objekt z imenom "spr". Z ukazom new deklariramo vrsto oz. tip objekta
 
 \subsubsection*{Array}
 
-\texttt{var a = new Array(); ali var a[ ];}
+\texttt{var a = new Array();}
 V oglatem oklepaju so elementi v "zbirki", katere indeks se začne z 0. Torej podatek a[0] je prvi oz. nič-ti člen v zbirki.
 V našem primeru, je Array konstruktor, saj konstruira nov objekt.
+
+\texttt{ali var a = [ ];} je samo definicija nove spremenljivke, ki postane array. To ni objekt.
 
 \texttt{a[i] = i-ti člen array-a "a[ ]"}
 
@@ -350,6 +370,27 @@ Primer: Če vnesemo v Date(milisekunde) 1000, potem nam izpiše 1. Jan. 1970 00:
 	\item[getDate()] vrne datum = 1-31
 	\item[getHours(), getMinutes(), getSeconds()] izpiše uro, minuto, sekundo
 	\item[setFullYear(), setHours()] nastavi se ura, leto ...
+\end{description}
+
+\subsubsection*{String}
+
+\texttt{var besedilo = " "} To generira spremenljivko string\\
+\texttt{var besedilo = new String(" ")} To pa generira objekt String
+
+\underline{Konstruktorji:}
+\begin{description}
+	\item[String] (besedilo)
+\end{description}
+
+\underline{Postopki:}
+
+\begin{description}
+	\item[indeksOf()] isce clen v stringu, clen je lahko tudi string
+	\item[length] vrne dolzino stringa
+	\item[charAt(i)] vrne znak na i-tem mestu
+	\item[substring(prvi, zadnji)] izlušči podstring med znaki prvi in  \textbf{DO} zadnji
+	\item[toUpperCase()]
+	\item[toLowerCase()]
 \end{description}
 
 \section{Funkcije}
