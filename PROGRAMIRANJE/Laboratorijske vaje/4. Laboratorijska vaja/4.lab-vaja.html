@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4. Laboratorijska vaja</title>
+    <script>
+        function kazalec(k, debelina, dolzina, kot){ //funkcija za risanje kazalca
+            var podrocje = document.getElementById("kanvas"), k = podrocje.getContext("2d");
+            var sirina = k.canvas.width, visina = k.canvas.height; //definiramo visino in sirino kanvasa
+            dolzina = dolzina * Math.min(sirina, visina)/2; // dolzina maksimalna kazalca je lahko največ polmer kroga, ki je manjsi ali enak razpolovisca manjse stranice
+            kot = kot * Math.PI / 180 * (-1); // kot v radianih je razmerje koliko je stopinj za cas od 0-60 in to pomnozimo z 2*PI
+            var a = Math.cos(kot) * dolzina, b = Math.sin(kot) * dolzina; //stranici sta obrnjeni, ker se koordinatni sistem zacne v levem zgornjem kotu, in ne v levem spodnjem kotu, kot smo navajeni
+            var center = [sirina/2, visina/2]; //definiramo center, ki je na sredini kanvasa oz. razpolovicih obeh stranic kanvasa
+
+            k.beginPath();              //definiramo barvo, debelino, vrsto crte, zacnemo risanje
+            k.lineWidth = debelina;
+            k.strokeStyle = "black";
+            k.lineCap = "round";
+
+            k.moveTo(center[0],center[1]);      //premaknemo se na center
+            k.lineTo(center[0] + a, center[0] + b);//definiramo koncno tocko crte do zelene tocke na kroznici
+            k.stroke(); //narisemo crto
+        }
+    </script>
+</head>
+<body>
+    <canvas id="kanvas" height="400" width="400">Kanvas ni podprt</canvas>
+    <script>
+        kazalec("k", 2, 1, 90);
+    </script>
+
+</body>
+</html>
