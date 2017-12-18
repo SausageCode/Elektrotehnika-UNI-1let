@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>16. Domača naloga</title>
+    <script>
+        function razlika(a, b){
+            return a-b;
+        }
+
+        function summul(a, b, c){
+            var vecA = new Array(), vecB = new Array(), oba = new Array();
+            a *= 1;
+            var i = Math.ceil(c/a -1);
+            b *= 1;
+            var k = Math.ceil(c/b -1);
+            for(var s = 1; s <= i;s++){
+                vecA[s-1] = a*s;
+            }
+            for(var s = 1; s <= k;s++) {
+                vecB[s - 1] = b * s;
+            }
+            for(var p = 0; p < (k+i);p++) {
+                if (vecA[p] === undefined) {
+                    oba[p] = vecB[p - i];
+                }
+                else {
+                    oba[p] = vecA[p];
+                }
+            }
+            var h, kopija = [], rez =0;
+            for(h = 0; h < oba.length; h++) if(oba.indexOf(oba[h]) == h) kopija.push(oba[h]);
+            for(var g = 0; g < kopija.length; g++){
+                rez += kopija[g];
+            }
+            return rez;
+        }
+    </script>
+</head>
+<body>
+    <script>
+        console.log(summul(4, 2, 12));
+    </script>
+</body>
+</html>
