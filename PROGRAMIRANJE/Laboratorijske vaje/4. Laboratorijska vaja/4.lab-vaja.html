@@ -5,7 +5,6 @@
     <title>4. Laboratorijska vaja</title>
     <script>
         function kazalec(k, debelina, dolzina, kot){ //funkcija za risanje kazalca
-            var podrocje = document.getElementById("kanvas"), k = podrocje.getContext("2d");
             var sirina = k.canvas.width, visina = k.canvas.height; //definiramo visino in sirino kanvasa
             dolzina = dolzina * Math.min(sirina, visina)/2; // dolzina maksimalna kazalca je lahko največ polmer kroga, ki je manjsi ali enak razpolovisca manjse stranice
             kot = kot * Math.PI / 180 * (-1); // kot v radianih je razmerje koliko je stopinj za cas od 0-60 in to pomnozimo z 2*PI
@@ -26,7 +25,8 @@
 <body>
     <canvas id="kanvas" height="400" width="400">Kanvas ni podprt</canvas>
     <script>
-        kazalec("k", 2, 1, 90);
+        var podrocje = document.getElementById("kanvas"), k = podrocje.getContext("2d");
+        kazalec("k", 2, 0.5, 180);
     </script>
 
 </body>

@@ -14,7 +14,7 @@ JavaScript je jezik, ki je integriran v neko okolje, kot je npr. HTML.
 
 Operator \textbf{console.log();} izpiše vneseno vrednost/spremenljivko v konzolo, ki je dostopna v brskalniku z ukazom Ctrl + Shift + J
 
-
+\newpage
 \section{PRAVILA}
 \begin{itemize}
 	\item angleške črke
@@ -35,7 +35,7 @@ console.log("a"); <!-- Izpiše znak a -->
 \section{Razhroščevanje}
 
 V konzoli brskalnika lahko najdemo tudi orodje za razhroščevanje(debugging). V temu orodju se označi vrstica kode, ki jo želimo opazovati, kako se izvaja. Ob strani imamo tudi predalčnik "watch", kjer lahko nastavimo, katero spremenljivko želimo opazovati("add expression"). Nato osvežimo stran in se nam program ustavi na izbrani vrstici. Lahko najdemo ikone za ustavitev programa("\textbf{||}"), zraven pa "step" ikono. Ta nam izvede program en korak naprej. Tako lahko opazujemo, kako program deluje in kako se naše spremenljivke spreminjajo.
-
+\newpage
 \section{Spremenljivke}
 
 \begin{verbatim}
@@ -112,7 +112,7 @@ Na primer: Izraz \texttt{x = 7} dodeli vrednost 7 spremenljivki x.\
 Na primer: V izrazu \texttt{a + b * c} ima operator \textbf{*} prednost pred operatorjem $+$, zato program najprej zmnoži števili b in c in nato sešteje vsoto s številom~a.\
 
 Operatorji istega tipa/prednosti se pa izvajajo v vrstnem redu iz leve proti desni(\textit{associativity}).
-
+\newpage
 \section{Operatorji}
 
 \subsection{Aritmetični}
@@ -185,7 +185,7 @@ console.log(y);			--> konzola v tem primeru izpiše 1
 \underline{Črke:}
 Črke primerja po abecedi, velike črke so pred malimi. Primerja se od prve do zadnje.
 
-
+\newpage
 \section{Stavki}
 
 \subsection*{Diagram poteka}
@@ -199,7 +199,7 @@ console.log(y);			--> konzola v tem primeru izpiše 1
 \end{tikzpicture}
 
 Obstaja prazen stavek, ki vsebuje le podpičje. Podpičja so neobvezna v Javascriptu, a jih je vseeno dobro uporabljati.\
-\newpage
+
 Primer stavka:
 \begin{verbatim}
 {
@@ -303,7 +303,7 @@ Primer:\\
 \texttt{izraz === vred1 --> false --> izraz === vred2 ...}
 
 Če je vrednost $vre1$ enaka izrazu, potem se izvršjo vsi stavki naprej, vključno default. To je problem, ker če želimo, da je pogoj le en pravilni in da se izvrši le stavek zanj, potem moramo vnesti $break$ po stavku pogoja.
-
+\newpage
 \section{Objekti}
 
 \texttt{Math.PI}
@@ -392,7 +392,7 @@ Primer: Če vnesemo v Date(milisekunde) 1000, potem nam izpiše 1. Jan. 1970 00:
 	\item[toUpperCase()]
 	\item[toLowerCase()]
 \end{description}
-
+\newpage
 \section{Funkcije}
 
 \begin{verbatim}
@@ -458,3 +458,12 @@ Primer:\\
 
 \textbf{\underline{Lokalno območje (Local scope)}} je območje, kot funkcija, kjer delujejo \textbf{lokalne spremenljivke}, ki delujejo le na temu območju in nikjer drugje. Torej, če je spremenljivka $x$ definirana v funkciji, potem njena vrednost ni enaka enaki spremenljivki $x$ v celotni kodi izven funkcije.
 
+\section{Klient}
+
+Uporabniški del Javascripta. So načini, s katerimi lahko združimo uporabniški del HTML in Javascript.\\
+
+Funkcija \texttt{document.getElementById("ime");} lahko vnesemo objekt iz HTML v Javascript. Tako lahko ureamo HTML datoteke tako, da nam ni treba spreminjati HTML datoteke.
+
+Prav tako lahko spremnijamo in pregledujemo lastnosti HTML objektov.
+
+S funkcijo \texttt{<id\_objekta>.innerHTML} dobimo vrednost html objekta.

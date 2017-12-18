@@ -4,16 +4,6 @@
     <meta charset="UTF-8">
     <title>4. Laboratorijska vaja</title>
     <script>
-
-        window.onload = zacetek;
-
-        function zacetek(){
-            var platno = document.getElementById("puscica");
-            var kontekst = platno.getContext("2d");
-            setInterval(ura, 10, kontekst); // na vsake 10ms se aktivira funkcija ura z dodatnim parametrom  kontekst
-            setInterval(digi, 1000); // na vsake 1s se aktivira funkcija digi
-        }
-
         function ura(kontekst){ //funkcja ura je zadolžena za aktiviranje drugih funkcij, ki rišejo, čas ipd ...
             var cas = new Date(); //definiramo spremenljivko s casom
             var slika = new Image(); // definiramo spremenljivko za sliko
@@ -64,7 +54,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="puscica" width="410" height="410">Kanvas ni podprt!</canvas>
+    <canvas id="puscica" width="415" height="415">Kanvas ni podprt!</canvas>
     <p id="digital"></p>
+<script>
+    var platno = document.getElementById("puscica");
+    var kontekst = platno.getContext("2d");
+    setInterval(digi, 10); // na vsake 1s se aktivira funkcija digi
+    setInterval(ura, 10, kontekst); // na vsake 10ms se aktivira funkcija ura z dodatnim parametrom  kontekst
+</script>
 </body>
 </html>

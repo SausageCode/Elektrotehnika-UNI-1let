@@ -531,3 +531,46 @@ Napiši funkcijo, ki zaokroži podani parameter na n decimalnih mest. Ce je števil
    console.log(zaokrozi(2, 5));
   </script>
  </body></html>
+------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+	<script>
+        function randInt(n) {
+            return Math.floor(Math.random()*n);
+        }
+        function nakljucniRacun(maxA, maxB, operator) {
+            var rez = [];
+            var A = randInt(maxA)+1, B = randInt(maxB)+1;
+            var op = operator[randInt(operator.length)];
+            switch (op){
+                case "+":
+                    rez[0] = A + " + " + B + " = ";
+                    rez[1] = A + B;
+                    break;
+                case "-":
+                    rez[0] = A + " - " + B + " = ";
+                    rez[1] = A - B;
+                    break;
+                case "*":
+                    rez[0] = A + " * " + B + " = ";
+                    rez[1] = A * B;
+                    break;
+                case "/":
+                    rez[0] = A*B + " / " + B + " = ";
+                    rez[1] = A;
+                    break;
+            }
+            return rez;
+        }
+    </script>
+</head>
+<body>
+    <pre id="naslov"> </pre>
+    <script>
+        console.log(nakljucniRacun(100,10,"*/"));
+    </script>
+</body>
+</html>
