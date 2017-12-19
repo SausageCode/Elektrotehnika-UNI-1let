@@ -48,23 +48,22 @@
            }
            return c;
        }
-        
-        function MaxDelitelj(a, b, c) {
-            var skD =0;
-            var i = c[0], k=0;
-            while(i <= c[1]){
-                if(a%i == 0 && b%i == 0){
-                    skD = i;
-                    a /= i;
-                    b /= i;
-                    k++;
-                }
-                else {
-                    i++;
-                }
-            }
-            return skD;
-        }
+
+       function MaxDelitelj(a, b, c) {
+           var skD=0;
+           var i = c[0], k=0;
+           while(i <= c[1]){
+               if(a%i == 0 && b%i == 0){
+                   skD = i;
+                   a /= i;
+                   b /= i;
+               }
+               else {
+                   i++;
+               }
+           }
+           if(skD != 0) return skD; else return NaN;
+       }
     </script>
 </head>
 <body>
