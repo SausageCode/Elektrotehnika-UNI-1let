@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Risanje bitnih slik</title>
+	
+		<script>		
+			var gMreza;
+			var gShrMreza;
+			var gDimX, gDimY; //x in y os matrike. X je vertikalna in Y je horizontalna!!
+			var gVelikostCel;
+			var gKont;
+			var shran;
+			var stan=0;
+
+			function start(){
+				gKont = document.getElementById("mreza").getContext("2d");
+				gKont.fillStyle = "blue";
+				gKont.strokeStyle = "gray";
+				gKont.lineWidth = 1;
+				
+				gVelikostCel = 50;
+				gDimX = Math.floor(gKont.canvas.width / gVelikostCel);
+				gDimY = Math.floor(gKont.canvas.height / gVelikostCel);
+		
+				document.getElementById("mreza").onmousemove = edit;
+				document.getElementById("mreza").ondblclick = hre;
+				document.getElementById("brisi").onclick = izbrisi;
+				document.getElementById("ponastavi").onclick = reset;
+				document.getElementById("shrani").onclick = save;
+
+				ustvariMrezo();
+				izbrisi();
+
+			}
+			
+			function ustvariMrezo(){
+				var x, y;
+				gMreza = [];
+				gShrMreza = [];
+
+				for(x=0; x<gDimX; x++){
+					gMreza.push(new Array(gDimY));
+					gShrMreza.push(new Array(gDimY));
+				}
+			}
+
+			function izbrisi(){
+				var x, y;
+				for (x = 0; x < gDimX; x++){
+					for(y = 0; y < gDimY; y++){
+						gMreza[x][y] = 0;
+					}
+				}
+				pokazi();
+			}
+
+			function pokazi(){
+				var x, y;
+				gKont.clearRect(0, 0, gKont.canvas.width, gKont.canvas.height);
+
+				gKont.beginPath();
+				
+				for(x=0; x<=gDimX; x++){
+					gKont.moveTo(x*gVelikostCel, 0);
+					gKont.lineTo(x*gVelikostCel, gKont.canvas.height);
+				}
+				
+				for(y = 0; y<=gDimY; y++){
+					gKont.moveTo(0, y*gVelikostCel);
+					gKont.lineTo(gKont.canvas.width, y * gVelikostCel);
+				}
+
+				gKont.stroke();
+
+				for(x = 0; x < gDimX; x++){
+					for(y = 0; y < gDimY; y++){
+						if(gMreza[x][y] == 1){
+							kvadratek(x, y);
+						}
+					}
+				}
+			}
+
+			function kvadratek(x,y ){
+					gKont.fillRect(x*gVelikostCel, y * gVelikostCel, gVelikostCel, gVelikostCel);
+			}
+
+			function edit(e){
+				var x, y;
+				x = Math.floor((e.x - this.offsetLeft) / gVelikostCel);// pogledamo kje smo kliknili, this se nanasa na objekt, kanvas, in nam vrne offset s katerim je kanvas zamaknjen
+				y = Math.floor((e.y - this.offsetTop) / gVelikostCel);
+				if(gMreza[x][y] != 1 && stan == false){
+					gMreza[x][y] = 1 - gMreza[x][y]; //negacija
+				}
+				else if(gMreza[x][y] == 1 && stan == true){gMreza[x][y] = 1 - gMreza[x][y]}
+				pokazi();
+					
+			}
+
+			function save(){
+				var x,y;
+				for(x=0; x<gDimX;x++){
+					for(y=0;y<gDimY;y++){
+						gShrMreza[x][y] = gMreza[x][y];
+					}
+				}
+			}
+
+			function reset(){
+				var x, y;
+				for(x=0; x<gDimX;x++){
+					for(y=0;y<gDimY;y++){
+						gMreza[x][y] = gShrMreza[x][y];
+					}
+				}
+				pokazi();
+			}
+
+			function hre(){
+				stan = !stan;
+				console.log(stan);
+			}
+
+		</script>
+
+	</head>
+	<body>
+	
+		<script>
+			window.onload = start; //lokacija funkcije za 
+		</script>
+
+		<canvas id="mreza" width="500" height="500	"></canvas>
+		<button id="brisi">Briši</button>
+		<button id="shrani">Shrani</button>
+		<button id="ponastavi">Ponastavi</button>
+	
+	</body>
+<html>

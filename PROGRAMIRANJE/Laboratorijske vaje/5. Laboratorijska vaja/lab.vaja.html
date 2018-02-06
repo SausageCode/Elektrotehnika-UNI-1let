@@ -7,9 +7,9 @@
         function ura(kontekst){ //funkcja ura je zadolžena za aktiviranje drugih funkcij, ki rišejo, čas ipd ...
             var cas = new Date(); //definiramo spremenljivko s casom
             var slika = new Image(); // definiramo spremenljivko za sliko
-            slika.src = "ura.jpg"; //lociramo sliko ure
+            slika.src = "ura.png"; //lociramo sliko ure
             kontekst.drawImage(slika, 0, 0); // narišemo sliko na kontekst v izhodišče sistema canvas
-            kazalec(kontekst, 4, 0.95, cas.getSeconds() + cas.getMilliseconds()/1000, "red"); // narisemo kazalce s tem da sprozimo funkcije kazalec s paramteri kontekst, debelina, dolzina, kot, barva
+            kazalec(kontekst, 4, 0.95, cas.getSeconds(), "red"); // narisemo kazalce s tem da sprozimo funkcije kazalec s paramteri kontekst, debelina, dolzina, kot, barva
             kazalec(kontekst, 7, 0.825, cas.getMinutes() + cas.getSeconds()/60, "black");
             kazalec(kontekst, 9, 0.55, cas.getHours()*5 + cas.getMinutes()/12, "black");
         }
@@ -54,13 +54,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="puscica" width="415" height="415">Kanvas ni podprt!</canvas>
+    <canvas id="puscica" width="600" height="600">Kanvas ni podprt!</canvas>
     <p id="digital"></p>
 <script>
     var platno = document.getElementById("puscica");
     var kontekst = platno.getContext("2d");
-    setInterval(digi, 10); // na vsake 1s se aktivira funkcija digi
-    setInterval(ura, 10, kontekst); // na vsake 10ms se aktivira funkcija ura z dodatnim parametrom  kontekst
+    setInterval(digi, 1000); // na vsake 1s se aktivira funkcija digi
+    setInterval(ura, 1000, kontekst); // na vsake 10ms se aktivira funkcija ura z dodatnim parametrom  kontekst
 </script>
 </body>
 </html>

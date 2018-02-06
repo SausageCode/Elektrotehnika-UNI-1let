@@ -5,44 +5,44 @@
     <title>16. Domača naloga</title>
     <script>
        function razlika(a, b){
-           return a-b;
+           return a-b; //razlika a in b
        }
 
        function summul(a, b, c){
-           var vecA = new Array(), vecB = new Array(), oba = new Array();
+           var vecA = new Array(), vecB = new Array(), oba = new Array(); // definiramo arraya za veckratnike stevil A in B ter array za oba
            a *= 1;
-           var i = Math.ceil(c/a -1);
+           var i = Math.ceil(c/a -1);//definiramo koliko veckratnikov ima stevilo A, to je kolikokrat se delji meja s stevilom A v celem
            b *= 1;
-           var k = Math.ceil(c/b -1);
+           var k = Math.ceil(c/b -1);//definiramo koliko veckratnikov ima stevilo A, to je kolikokrat se delji meja s stevilom A v celem
            for(var s = 1; s <= i;s++){
-               vecA[s-1] = a*s;
+               vecA[s-1] = a*s; //array za veckratnike stevila A nafilas z veckratniki za A. Vpisuje se v array mesto s-1 ker se s zacne pri 1 in konca pri i vkljucno
            }
            for(var s = 1; s <= k;s++) {
-               vecB[s - 1] = b * s;
+               vecB[s - 1] = b * s;//array za veckratnike stevila B nafilas z veckratniki za B. Vpisuje se v array meyto s-1 ker se s zacne pri 1 in konca pri k vkljucno 
            }
-           for(var p = 0; p < (k+i);p++) {
-               if (vecA[p] === undefined) {
-                   oba[p] = vecB[p - i];
+           for(var p = 0; p < (k+i);p++) { // naredili bomo skupen array obeh veckratnikov stevil A in B tako, da bomo for zakno pognali do vsote obeh veckratnikov
+               if (vecA[p] === undefined) { // najprej bomo v ta skupen array vnesli vekratnike od A, in ko jih zmanjka, potem je vsako mesto vekratnikov A, ki je prazno je undefined
+                   oba[p] = vecB[p - i]; // zato zacnemo filati vekratnike stevil B, ki se zacnejo pri MESTO_FILANJA-ST.VECKRATNIKOV A. Tako se zacne to filanje B pri 0 v p-te mesto
                }
                else {
-                   oba[p] = vecA[p];
+                   oba[p] = vecA[p]; //filanje najprej veckratnikov stevila A
                }
            }
-           var h, kopija = [], rez =0;
+           var h, kopija = [], rez =0; //vse to je zadolzeno, da iz skupnega arraya da ven duplikate, ki so skupni veckratniki
            for(h = 0; h < oba.length; h++) if(oba.indexOf(oba[h]) == h) kopija.push(oba[h]);
-           for(var g = 0; g < kopija.length; g++){
+           for(var g = 0; g < kopija.length; g++){//sesteje vse veckratnike
                rez += kopija[g];
            }
            return rez;
        }
 
        function vektorSkalar(a, b){
-           var c = "";
+           var c = ""; //koncni string
            for(var i = 0; i < a.length;i++) {
-               if (i < a.length - 1) {
+               if (i < a.length - 1) { // ce je i-ti del vektorja največ predzadnji, potem bo spremenjeno komponentno vektorja dal v rezultat in nato narisal vejico.
                    c += a[i] * b + ",";
                }
-               else {
+               else { // ce je vektor komponenta zadnja, ne narise vejice
                    c += a[i] * b;
                }
            }
@@ -50,19 +50,19 @@
        }
 
        function MaxDelitelj(a, b, c) {
-           var skD=0;
-           var i = c[0], k=0;
-           while(i <= c[1]){
-               if(a%i == 0 && b%i == 0){
+           var skD=0; // skupni delamojitelj
+           var i = c[0]; // i definiramo kot korak, ki se bo začel na začetku
+           while(i <= c[1]){ // delamo, dokler ni i manjsi od druge meje c arraya
+               if(a%i == 0 && b%i == 0){ // ce se deljenje stevila a in i in b in i izzide, potem je skupni deljitelj enak temu i stevilu.
                    skD = i;
-                   a /= i;
+                   a /= i; // stevili a in b deljimo z i da ju zmanjsamo in ob naslednjem poskusu najdemo morda nov najvecji deljitelj, saj smo zaceli na spodnji meji
                    b /= i;
-               } 
+               }
                else {
-                   i++;
+                   i++;//ce se deljenje pogoj ne izzide, potem poveca i za 1
                }
            }
-           if(skD != 0) return skD; else return NaN;
+           if(skD != 0) return skD; else return NaN; // ce je deljitelj razlicen od 0, potem smo ga najdli, drugace pa program vrne NaN
        }
     </script>
 </head>

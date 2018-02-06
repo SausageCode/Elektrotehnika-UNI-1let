@@ -14,7 +14,6 @@ JavaScript je jezik, ki je integriran v neko okolje, kot je npr. HTML.
 
 Operator \textbf{console.log();} izpiše vneseno vrednost/spremenljivko v konzolo, ki je dostopna v brskalniku z ukazom Ctrl + Shift + J
 
-\newpage
 \section{PRAVILA}
 \begin{itemize}
 	\item angleške črke
@@ -26,16 +25,18 @@ Operator \textbf{console.log();} izpiše vneseno vrednost/spremenljivko v konzol
 	\item "navednice" označujejo dobesedno navajanje/znak
 	\item primer:
 \end{itemize}
-
+\underline{UPORABNO:} Konzolo se uporablja veš čas za razhroščevanje kode in pregledovanje njenega poteka. Uporaba:
 \begin{verbatim}
 console.log(a); <!-- Izpiše vrednost spremenljivke -->
 console.log("a"); <!-- Izpiše znak a -->
 \end{verbatim}
 
+\pagebreak
+
 \section{Razhroščevanje}
 
 V konzoli brskalnika lahko najdemo tudi orodje za razhroščevanje(debugging). V temu orodju se označi vrstica kode, ki jo želimo opazovati, kako se izvaja. Ob strani imamo tudi predalčnik "watch", kjer lahko nastavimo, katero spremenljivko želimo opazovati("add expression"). Nato osvežimo stran in se nam program ustavi na izbrani vrstici. Lahko najdemo ikone za ustavitev programa("\textbf{||}"), zraven pa "step" ikono. Ta nam izvede program en korak naprej. Tako lahko opazujemo, kako program deluje in kako se naše spremenljivke spreminjajo.
-\newpage
+
 \section{Spremenljivke}
 
 \begin{verbatim}
@@ -81,26 +82,28 @@ VREDNOST: undefined
 \subsection{Pretvorbe tipov}
 
 \begin{verbatim}
-	Number(); --> pretvori v številko
+	Number();  --> pretvori v številko
 	Boolean(); --> pretvori v boolean
-	String(); --> pretvori v znakovni niz
+	String();  --> pretvori v znakovni niz
 \end{verbatim}
 \subsubsection*{Boolean -> number}
-\begin{itemize}[align=right,labelwidth=3cm]
+\begin{description}[align=left]
 	\item[\texttt{FALSE}] --> 0
-	\item[\texttt{TRUE}] --> 1
-\end{itemize}
+	\item[\texttt{TRUE}]  --> 1
+\end{description}
 \subsubsection*{String -> number}
 \begin{description}[align=left]
 	\item["42"] --> \textbf{42} če uporabljamo operatorje $\times$ ali $\div$ ali $-$	
 	\item["5x"] --> \textbf{NaN} ni število, ker se pretvori tudi string x, ki ni število
 	\item["5"+5] --> \textbf{"55"} če uporabljamo operator $+$
-	\item Operator $+$ pričakuje enak tip spremenljivke na obeh straneh, zato pretvori number v string in ju zlepi kot dva stringa.
 \end{description}
+Operator $+$ pričakuje enak tip spremenljivke na obeh straneh, zato pretvori number v string in ju zlepi kot dva stringa.
 \subsubsection*{Number -> string}
 \begin{description}
 	\item[42] --> "42"
 \end{description}
+
+\pagebreak
 
 \section{Izrazi}
 Izraz je del kode, ki razreši vrednost. Lahko vrednost dodeli spremenljivki ali pa jo ima sam.\
@@ -112,8 +115,10 @@ Na primer: Izraz \texttt{x = 7} dodeli vrednost 7 spremenljivki x.\
 Na primer: V izrazu \texttt{a + b * c} ima operator \textbf{*} prednost pred operatorjem $+$, zato program najprej zmnoži števili b in c in nato sešteje vsoto s številom~a.\
 
 Operatorji istega tipa/prednosti se pa izvajajo v vrstnem redu iz leve proti desni(\textit{associativity}).
-\newpage
+
 \section{Operatorji}
+
+Operator v programskem jeziku je simbol, ki prevajalcu ali tolmaču pove, da izvede specifično matematično, relacijsko ali logično delovanje in ustvari končni rezultat. Obstaja 6 tipov operatorjev:
 
 \subsection{Aritmetični}
 
@@ -135,16 +140,19 @@ Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
 
 Prav tako velja tudi: \texttt{"5"~==~5 --> $TRUE$}
 
+\pagebreak
+
 \subsection{Logični}
 
 Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
 
-\begin{description}[align=left,labelwidth=3cm]
+\begin{labeling}{alligator}
 	\item [$\&\&$] Logični IN
 	\item [$||$] Logični ALI
 	\item [$!$] Negacija
 	\item [$=$] Priredilni operator --> spremenljivki na levi strani priredi vrednost na desni strani.
-\end{description}
+\end{labeling}
+
 
 \underline{Prednost in red izvajanja:}\
 
@@ -174,7 +182,8 @@ Ima še nižjo prioriteto, kot priredilni operator
 
 V prvi del pred vprašajem se vnese pogoj in nato izraz, ki se prebere, če je pogoj izpolnjen, po dvopičjem pa sledi izraz, če pogoj ni izpolnjen.
 
-Primer:\begin{verbatim}
+Primer:
+\begin{verbatim}
 var x = 3;
 var y = 0;
 x > 2 ? y = 1 : y = 2;
@@ -185,7 +194,6 @@ console.log(y);			--> konzola v tem primeru izpiše 1
 \underline{Črke:}
 Črke primerja po abecedi, velike črke so pred malimi. Primerja se od prve do zadnje.
 
-\newpage
 \section{Stavki}
 
 \subsection*{Diagram poteka}
@@ -209,6 +217,9 @@ Primer stavka:
 	stavekN;	
 }
 \end{verbatim}
+
+\pagebreak
+
 \subsection{Stavek if/else}\
 \begin{verbatim}
 if (pogoj) stavek1 else stavek2
@@ -228,7 +239,7 @@ Po pogoju, sledi glede na rezultat pogoja \textbf{LE EN STAVEK!!} Za več kot en
 \path [line](stavek2)|-(izhod);
 \path [line](stavek1)|-(izhod);
 \end{tikzpicture}
-\newpage
+
 \underline{Primer stavkov:}
 Računanje idealne teže s podanim podatkom o spolu in višini. Izvozi podatek idealne teže.
 \begin{verbatim}
@@ -250,6 +261,8 @@ Računanje idealne teže s podanim podatkom o spolu in višini. Izvozi podatek i
     
 </script>
 \end{verbatim}
+
+\pagebreak
 
 \subsection{Stavek for}
 
@@ -331,6 +344,8 @@ To so deli Math objekta, npr: Math.abs();
 spr je nov objekt z imenom "spr". Z ukazom new deklariramo vrsto oz. tip objekta. Tako dobimo:\\
 \texttt{spr.lastonst() ali spr.postopek()}
 
+\pagebreak
+
 \subsubsection*{Array}
 
 \texttt{var a = new Array();}
@@ -410,7 +425,6 @@ Vhodni podatki so določeni podatki, ki jih funkcija potrebuje, da se izvede in 
 
 Funkcijo se kliče: \texttt{myFunction(par1, par2, ..., parN)} , kjer so par1, par2,... dejanski parametri.
 
-\newpage
 Primer funkcije:
 
 \begin{verbatim}
@@ -465,6 +479,7 @@ Uporabniški del Javascripta. So načini, s katerimi lahko združimo uporabnišk
 Funkcija \texttt{document.getElementById("ime");} lahko vnesemo objekt iz HTML v Javascript. Tako lahko ureamo HTML datoteke tako, da nam ni treba spreminjati HTML datoteke.
 
 Prav tako lahko spremnijamo in pregledujemo lastnosti HTML objektov.
+
 \underline{Funkcije}
 \begin{description}
 	\item[document.getElementById("")] Vnesemo objekt iz HTML v Javascript v spremenljivko
