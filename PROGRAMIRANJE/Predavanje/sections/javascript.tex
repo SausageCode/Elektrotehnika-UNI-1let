@@ -27,7 +27,7 @@ Operator \textbf{console.log();} izpiše vneseno vrednost/spremenljivko v konzol
 \end{itemize}
 \underline{UPORABNO:} Konzolo se uporablja veš čas za razhroščevanje kode in pregledovanje njenega poteka. Uporaba:
 \begin{verbatim}
-console.log(a); <!-- Izpiše vrednost spremenljivke -->
+console.log(a);   <!-- Izpiše vrednost spremenljivke -->
 console.log("a"); <!-- Izpiše znak a -->
 \end{verbatim}
 
@@ -39,9 +39,7 @@ V konzoli brskalnika lahko najdemo tudi orodje za razhroščevanje(debugging). V
 
 \section{Spremenljivke}
 
-\begin{verbatim}
-var = a;
-\end{verbatim}
+{\centering\framebox{\texttt{var $a = x$;}}\par}
 Z enačajem se definira vrednost ali izraz spremenljivki na desni strani(var). Definicija se \textbf{VEDNO} konča s podpičjem.\\
 
 Operator "=" definira spremenljivko in ji priredi neko vrednost ali izraz.
@@ -129,14 +127,16 @@ Operator v programskem jeziku je simbol, ki prevajalcu ali tolmaču pove, da izv
 \end{description}
 
 \subsection{Primerjalni}
-Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
+Ti operatorji vračajo le $TRUE$ ali $FALSE$.\\
+\underline{Črke:}
+Črke primerja po abecedi, velike črke so pred malimi. Primerja se od prve do zadnje.
 
-\begin{description}[align=left,labelwidth=3cm]
+\begin{labeling}{$>, >=$}
 	\item [$>, >=$]	Večje, večje ali enako(pomembno je zaporedje znakov!!)
 	\item [$<, <=$]	Manjše, manjše ali enako
 	\item [$==$] Je enako	
 	\item [$!=$] Ni enako
-\end{description} 
+\end{labeling} 
 
 Prav tako velja tudi: \texttt{"5"~==~5 --> $TRUE$}
 
@@ -146,7 +146,7 @@ Prav tako velja tudi: \texttt{"5"~==~5 --> $TRUE$}
 
 Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
 
-\begin{labeling}{alligator}
+\begin{labeling}{$\&\&$}
 	\item [$\&\&$] Logični IN
 	\item [$||$] Logični ALI
 	\item [$!$] Negacija
@@ -156,29 +156,33 @@ Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
 
 \underline{Prednost in red izvajanja:}\
 
-\begin{description}[align=left,labelwidth=3cm]
+\begin{labeling}{Aritmetični}
 	\item [Aritmetični] --> 
 	\item [Primerjalni] -->
 	\item [Logični] -->
 	\item [Priredilni] <--
-\end{description}
+\end{labeling}
 
 \underline{Bljižnice(shorthands):}\
 
 \begin{labeling}{\texttt{x $=$ x $+$ izraz}}
-	\item [\texttt{x $=$ x $+$ izraz}] => v spremenljivko x shranimo vsoto spremenljivke asdasdasdsadasdasdasdasd
-	\item [\texttt{x $+=$ izraz}] => okrajšan zgornji stavek
-	\item[\texttt{x $-+$ izraz}] spremenljivki x odštejemo vrednost izraza
+	\item [\texttt{x $=$ x $+$ izraz}] => v spremenljivko x shranimo vsoto spremenljivke
+	\item [\texttt{x $+=$ izraz}] => okrajšan zgornji stavek ($+$ in $=$ se morata držati skupaj!)
+	\item[\texttt{x $-=$ izraz}] => spremenljivki x odštejemo vrednost izraza
 	\item [\texttt{x$++$}] => spremenljivki x se vrednost poveča za 1
-	\item[\texttt{x$--$}] spremenljivki x zmanjšamo vrednost za 1
+	\item[\texttt{x$--$}] => spremenljivki x zmanjšamo vrednost za 1
 \end{labeling}
 
 \subsection{Vejični}
 
-Ima še nižjo prioriteto, kot priredilni operator
+Ima še nižjo prioriteto, kot priredilni operator.
+Uporabljamo ga za "naštevanje". Primer:
+\texttt{var sprem1 = x, sprem2 = y, sprem3 = z;}\\
+S tem smo v eni vrstici definirali 3 različne spremenljivke, tako da smo z vejico ločili definicije spremenljivk.
 
 \subsection{Pogojni}
-\texttt{pogoj ? ce\_je\_true : ce\_je\_false}
+
+{\centering\framebox{\texttt{pogoj ? ce\_je\_true : ce\_je\_false}}\par}
 
 V prvi del pred vprašajem se vnese pogoj in nato izraz, ki se prebere, če je pogoj izpolnjen, po dvopičjem pa sledi izraz, če pogoj ni izpolnjen.
 
@@ -189,10 +193,6 @@ var y = 0;
 x > 2 ? y = 1 : y = 2;
 console.log(y);			--> konzola v tem primeru izpiše 1
 \end{verbatim}
-
-\subsection{Primerjalni}
-\underline{Črke:}
-Črke primerja po abecedi, velike črke so pred malimi. Primerja se od prve do zadnje.
 
 \section{Stavki}
 
@@ -221,24 +221,24 @@ Primer stavka:
 \pagebreak
 
 \subsection{Stavek if/else}\
-\begin{verbatim}
-if (pogoj) stavek1 else stavek2
-\end{verbatim}
+
+{\centering\framebox{\texttt{if (pogoj) stavek1 else stavek2}}\par}
+
 Po pogoju, sledi glede na rezultat pogoja \textbf{LE EN STAVEK!!} Za več kot en stavek, se uporabi zaviti oklepaj.\
 
-\begin{tikzpicture}
+{\centering\begin{tikzpicture}
 \node[cloud, node distance = 2cm](vnos){vnos};
 
 \node [decision, below of=vnos] (pogoj) {pogoj};
-\node[block, left of=pogoj, node distance = 3cm](stavek2){stavek2};
-\node[block, right of=pogoj, node distance = 3cm](stavek1){stavek1};
+\node[block, left of=pogoj, node distance = 4cm](stavek2){stavek2};
+\node[block, right of=pogoj, node distance = 4cm](stavek1){stavek1};
 \node[cloud, below of=pogoj](izhod){rezultat};
 \path [line] (pogoj) -- node {true}(stavek1);
 \path [line] (pogoj) -- node {false}(stavek2);
 \path[line](vnos) --(pogoj);
 \path [line](stavek2)|-(izhod);
 \path [line](stavek1)|-(izhod);
-\end{tikzpicture}
+\end{tikzpicture}\par}
 
 \underline{Primer stavkov:}
 Računanje idealne teže s podanim podatkom o spolu in višini. Izvozi podatek idealne teže.
@@ -266,22 +266,22 @@ Računanje idealne teže s podanim podatkom o spolu in višini. Izvozi podatek i
 
 \subsection{Stavek for}
 
-\texttt{for (start; pogoj; korak) stavek}
+{\centering\framebox{\texttt{for (start; pogoj; korak) stavek}}\par}
 
 For stavek izvaja določen stavek, dokler je pogoj uresničen. V for stavek se vnese štartni parameter. Ta se preveri v pogoju in se spreminja po koraku.
 
-\begin{tikzpicture}
+{\centering\begin{tikzpicture}
 \node[cloud](start){start};
 \node[decision, below of=start, node distance = 3cm](pogoj){pogoj};
 \node[block, below of=pogoj, node distance = 3cm](stavek){stavek};
 \node[block, below of=stavek, node distance = 3cm](korak){korak};
-\node[nothing, left of=stavek](nic){korak spremeni pogoj};
+\node[nothing, left of=stavek, node distance = 4cm](nic){korak spremeni pogoj};
 \path[line](start)--(pogoj);
 \path[line](pogoj)--(stavek);
 \path[line](stavek)--(korak);
 \path[line](korak) -| (nic);
 \path[line](nic) |- (pogoj);
-\end{tikzpicture}
+\end{tikzpicture}\par}
 
 Npr: začnemo s številom i, katerega vrednost je 0. Če hočemo stavek ponoviti 4-krat, potem bomo povečevali naš i do števila 3(štetje se začne s številom 0) s korakom i(i++). To pomeni, da vsakič ko se bo izvedel stavek(več stavkov z $\{\}$) v for stavku, se po glede na nastavljen korak spremenil pogoj za 1 več(i++). Torej je v drugem(1-tem) krogu pogoj i = 1 in tako naprej.
 
@@ -291,12 +291,15 @@ for(var i = 0; i < 4; i++) console.log("Zdaj se izvajam v " + i +"-tem krogu");
 
 \subsection{Stavek while}
 
-\texttt{while (pogoj) stavek;}
-\newpage
+{\centering\framebox{\texttt{while (pogoj) stavek;}}\par}
+
+V while stavku se stavek po pogoju ali znotraj zavitih oklepajev izvaja ves čas, dokler je pogoj izpolnjen. Ko pogoj ni več izpolnjen, potem gre program naprej.
+
+\pagebreak
 
 \subsection{Stavek do/while}
 
-\underline{\texttt{do stavek while (pogoj);}}
+{\centering\framebox{\texttt{do stavek while (pogoj);}}\par}
 
 Stavek se izvaja, ki je vnesen za operatorjem $do$, dokler je nek pogoj izpolnjen. Potem ko je pogoj v while zanki izpolnjen, se $do$ zanka zaključi.
 
@@ -305,12 +308,14 @@ Switch stavek vzame določen izraz in ga primerja drugim vrednostim. S katerokol
 \begin{verbatim}
 switch (izraz){
     case vred1: stavki1 <-- če je pravilen, se vsi izvrsijo od kle naprej
-    case vred2: stavki2
+    case vred2: stavki2 break;
     
     case vredN: stavkiN
     default: privzetiStavki <-- stavek, ki se izvrsi ce se nobeden ne
 }
 \end{verbatim}
+\framebox{\texttt{case vred2: stavki2 break;}} --> vstavimo break če želimo program končati\\ pri pogoju
+
 Primer:\\
 \texttt{izraz === vred1 --> true --> stavki1}\\
 \texttt{izraz === vred1 --> false --> izraz === vred2 ...}
@@ -325,7 +330,7 @@ V tem primeru, je Math objekt, ki ga mi vstavljamo v kodo. In "PI" je njegova la
 
 \subsection{Postopki(methods)}
 To so deli Math objekta, npr: Math.abs();
-\begin{description}[align=left, labelwidth=2cm]
+\begin{description}[align=left, , labelwidth=4.5cm]
 	\item[abs()] absolutna vrednost
 	\item[max()] največji od vnesenih(array) npr: \texttt{Math.max(array[ ])}
 	\item[pow()] potenca, npr: \texttt{Math.pow(3,2) = $3^2$ = 9}
@@ -335,20 +340,21 @@ To so deli Math objekta, npr: Math.abs();
 	\item[round()] klasično zaokroževanje
 	\item[ceil()] zaokroževane navzgor
 	\item[floor()] zaokroževanje navzdol
-	\item[sin(), cos(), tan()] kotne funkcije
+	\item[sin(x), cos(x), tan(x)] kotne funkcije $\sin(x)$, $\cos(x)$, $\tan(x)$
 \end{description}
 
 \subsection{Objektni tipi}
 
-\texttt{spr = new $[$tip-objekta$]$(parameter)}
-spr je nov objekt z imenom "spr". Z ukazom new deklariramo vrsto oz. tip objekta. Tako dobimo:\\
+{\centering\framebox{\texttt{spr = new $[$tip-objekta$]$(parameter)}}\par}
+spr je nov objekt z imenom "spr". Z ukazom new deklariramo vrsto oz. tip objekta. Tako dobimo:\
+
 \texttt{spr.lastonst() ali spr.postopek()}
 
 \pagebreak
 
 \subsubsection*{Array}
 
-\texttt{var a = new Array();}
+{\centering\framebox{\texttt{var a = new Array();}}\par}
 V oglatem oklepaju so elementi v "zbirki", katere indeks se začne z 0. Torej podatek a[0] je prvi oz. nič-ti člen v zbirki.
 V našem primeru, je Array konstruktor, saj konstruira nov objekt.
 
@@ -365,14 +371,14 @@ Primer:
 
 \subsubsection*{Date}
 
-\texttt{var danes = new Date();} S tem je spremenljivka \underline{danes} datumski objekt
+{\centering\framebox{\texttt{var danes = new Date();}}\par} S tem je spremenljivka \underline{danes} datumski objekt
 
 V konstruktor Date() lahko kot parameter vnesemo milisekunde. Tako nam izpiše ven datum in čas po vnešenih milisekundah po \underline{1. Januar 1970}, ko se je začel šteti \textbf{UNIX} čas računalnikov.
 
 Primer: Če vnesemo v Date(milisekunde) 1000, potem nam izpiše 1. Jan. 1970 00:00:01, saj je to ena sekunda po začetku štetja. Ker pa ta program poženemo na računalnikih na različnih delih sveta, nam Javascript upošteva drugačen čas, tako da v sloveniji nam prišteje 1 uro.
 
 \underline{Konstruktorji}:
-\begin{description}}
+\begin{description}
 	\item[Date()] izpiše datum in uro v določenem časovnem območju
 	\item[Date(milisekunda)] izpiše datum kot milisekunde po začetku štetja 
 	\item[Date(leto, mesec, dan)] nastavi se datum
@@ -389,13 +395,13 @@ Primer: Če vnesemo v Date(milisekunde) 1000, potem nam izpiše 1. Jan. 1970 00:
 
 \subsubsection*{String}
 
-\texttt{var besedilo = " "} To generira spremenljivko string\\
-\texttt{var besedilo = new String(" ")} To pa generira objekt String
 
-\underline{Konstruktorji:}
-\begin{description}
-	\item[String] (besedilo)
-\end{description}
+{\centering\framebox{\texttt{var besedilo = new String(" ")}}\par} To generira objekt String\
+
+\texttt{var besedilo = " "} To pa definira spremenljivko "besedilo"\
+
+\underline{Konstruktor:} String (besedilo)
+
 
 \underline{Postopki:}
 
@@ -416,7 +422,6 @@ function myFunnction(par1, par2, ...)
     //koda
     return vrednost;
 }
-
 \end{verbatim}
 
 v \texttt{function(par1, par2, ...)} so par1, par2 formalni parametri(spremenlljikve)
@@ -454,6 +459,8 @@ Najprej se izvede funkcija \texttt{crta(7);} z vnešenim parametrom, ki je defin
 
 Lahko dodamo  \texttt{return vrednost} je funkcija, ki vrne vrednost želene premenljivke.
 Tako lahko shranjujemo vrednosti funkcije v spremenljivko, da ne rabimo vstavljati dolge kode v našo glavno kodo.
+
+\pagebreak
 
 \begin{verbatim}
  var spr;
