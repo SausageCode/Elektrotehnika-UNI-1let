@@ -14,6 +14,40 @@ JavaScript je jezik, ki je integriran v neko okolje, kot je npr. HTML.
 
 Operator \textbf{console.log();} izpiše vneseno vrednost/spremenljivko v konzolo, ki je dostopna v brskalniku z ukazom Ctrl + Shift + J
 
+\subsubsection*{HTML: Tabele}
+
+Html je sicer bolj narejen za urejanje besedila, zato je za oblikovanje zadolžen $css$, za funkcionalnosti in funkcije pa javascript. Vseeno pa lahko kar v html vstavljate tabele. Pozor! <tr> je vedno pred <td> ali <th>.\\
+Za izdelavo tabele:
+
+\begin{verbatim}
+<table>
+    <tr> // vrstica - table row
+        <th> Naslov stolpca - table header </th>
+        <th> Naslov stolpca 2 </th>
+    </tr>
+    <tr>
+        <td> Vnos v vrstici - table data </td>
+        <td> Vnos v vrstici 2 </td>
+    </tr>
+</table>
+\end{verbatim}
+
+\subsubsection*{Seznami}
+
+V html lahko ustvariš tudi sezname. Ti se delijo na urejene \textbf{<ol>} oz ordered list in na neurejene \textbf{<ul>} oz. unordered list. Pri seznamih je zaporedje tudi zelo pomembno. Sepravi <ul> ali <ol> je prvi, nato pa \textbf{<li>} oz. list item. To pomeni, da naredimo seznam, katerega "Naslov se začne z <ol> ali <ul>. Nato elemente tega seznama vnašamo z <li> značkami.
+\pagebreak
+\begin{verbatim}
+<ul>
+    <li>Prvi</li>
+    <li>Drugi
+        <ol>
+            <li>Drugi.prvi</li>
+            <li>Drugi.drugi</li>
+        </ol>    
+    </li>
+</ul>
+\end{verbatim}
+
 \section{PRAVILA}
 \begin{itemize}
 	\item angleške črke
@@ -31,12 +65,12 @@ console.log(a);   <!-- Izpiše vrednost spremenljivke -->
 console.log("a"); <!-- Izpiše znak a -->
 \end{verbatim}
 
-\pagebreak
+
 
 \section{Razhroščevanje}
 
 V konzoli brskalnika lahko najdemo tudi orodje za razhroščevanje(debugging). V temu orodju se označi vrstica kode, ki jo želimo opazovati, kako se izvaja. Ob strani imamo tudi predalčnik "watch", kjer lahko nastavimo, katero spremenljivko želimo opazovati("add expression"). Nato osvežimo stran in se nam program ustavi na izbrani vrstici. Lahko najdemo ikone za ustavitev programa("\textbf{||}"), zraven pa "step" ikono. Ta nam izvede program en korak naprej. Tako lahko opazujemo, kako program deluje in kako se naše spremenljivke spreminjajo.
-
+\pagebreak
 \section{Spremenljivke}
 
 {\centering\framebox{\texttt{var $a = x$;}}\par}
@@ -101,7 +135,7 @@ Operator $+$ pričakuje enak tip spremenljivke na obeh straneh, zato pretvori nu
 	\item[42] --> "42"
 \end{description}
 
-\pagebreak
+
 
 \section{Izrazi}
 Izraz je del kode, ki razreši vrednost. Lahko vrednost dodeli spremenljivki ali pa jo ima sam.\
@@ -113,7 +147,7 @@ Na primer: Izraz \texttt{x = 7} dodeli vrednost 7 spremenljivki x.\
 Na primer: V izrazu \texttt{a + b * c} ima operator \textbf{*} prednost pred operatorjem $+$, zato program najprej zmnoži števili b in c in nato sešteje vsoto s številom~a.\
 
 Operatorji istega tipa/prednosti se pa izvajajo v vrstnem redu iz leve proti desni(\textit{associativity}).
-
+\pagebreak
 \section{Operatorji}
 
 Operator v programskem jeziku je simbol, ki prevajalcu ali tolmaču pove, da izvede specifično matematično, relacijsko ali logično delovanje in ustvari končni rezultat. Obstaja 6 tipov operatorjev:
@@ -140,7 +174,7 @@ Ti operatorji vračajo le $TRUE$ ali $FALSE$.\\
 
 Prav tako velja tudi: \texttt{"5"~==~5 --> $TRUE$}
 
-\pagebreak
+
 
 \subsection{Logični}
 
@@ -152,7 +186,7 @@ Ti operatorji vračajo le $TRUE$ ali $FALSE$.\
 	\item [$!$] Negacija
 	\item [$=$] Priredilni operator --> spremenljivki na levi strani priredi vrednost na desni strani.
 \end{labeling}
-
+\pagebreak
 
 \underline{Prednost in red izvajanja:}\
 
@@ -218,7 +252,7 @@ Primer stavka:
 }
 \end{verbatim}
 
-\pagebreak
+
 
 \subsection{Stavek if/else}\
 
@@ -262,7 +296,7 @@ Računanje idealne teže s podanim podatkom o spolu in višini. Izvozi podatek i
 </script>
 \end{verbatim}
 
-\pagebreak
+
 
 \subsection{Stavek for}
 
@@ -282,7 +316,7 @@ For stavek izvaja določen stavek, dokler je pogoj uresničen. V for stavek se v
 \path[line](korak) -| (nic);
 \path[line](nic) |- (pogoj);
 \end{tikzpicture}\par}
-
+\pagebreak
 Npr: začnemo s številom i, katerega vrednost je 0. Če hočemo stavek ponoviti 4-krat, potem bomo povečevali naš i do števila 3(štetje se začne s številom 0) s korakom i(i++). To pomeni, da vsakič ko se bo izvedel stavek(več stavkov z $\{\}$) v for stavku, se po glede na nastavljen korak spremenil pogoj za 1 več(i++). Torej je v drugem(1-tem) krogu pogoj i = 1 in tako naprej.
 
 \begin{verbatim}
@@ -295,7 +329,7 @@ for(var i = 0; i < 4; i++) console.log("Zdaj se izvajam v " + i +"-tem krogu");
 
 V while stavku se stavek po pogoju ali znotraj zavitih oklepajev izvaja ves čas, dokler je pogoj izpolnjen. Ko pogoj ni več izpolnjen, potem gre program naprej.
 
-\pagebreak
+
 
 \subsection{Stavek do/while}
 
