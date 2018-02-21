@@ -223,7 +223,8 @@ build/*
 lib/*
 bin/*
 PROGRAMIRANJE/.idea/*
-ELEKTROTEHNIKA_1/*
+ELEKTROTEHNIKA_I/*
+FIZIKA_I/*
 cmake-build-debug/*
 docs/html/*
 docs/latex/*
