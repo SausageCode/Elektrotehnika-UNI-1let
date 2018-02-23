@@ -1,3 +1,0 @@
-C:/Users/matej/Documents/Elektrotehnika-UNI-1let/PROGRAMIRANJE_II/Predavanja/cmake-build-debug/CMakeFiles/Predavanja.dir
-C:/Users/matej/Documents/Elektrotehnika-UNI-1let/PROGRAMIRANJE_II/Predavanja/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/matej/Documents/Elektrotehnika-UNI-1let/PROGRAMIRANJE_II/Predavanja/cmake-build-debug/CMakeFiles/rebuild_cache.dir
