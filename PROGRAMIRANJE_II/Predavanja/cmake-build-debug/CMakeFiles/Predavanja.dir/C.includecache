@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/matej/Documents/Elektrotehnika-UNI-1let/PROGRAMIRANJE_II/Predavanja/Pouk uvod.c
+stdio.h
+-
+

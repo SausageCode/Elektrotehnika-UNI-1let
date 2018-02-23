@@ -1,0 +1,155 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\setlength{\parindent}{0px}
+\setlength{\parskip}{10px}
+\usepackage{enumitem}
+\usepackage{blindtext}
+\usepackage{lipsum}
+\usepackage{scrextend}
+\usepackage{tikz}
+\usepackage[margin=1in]{geometry}
+\usetikzlibrary{shapes,arrows}
+\usepackage{listings}
+\usepackage{color}
+
+\title{Zapiski iz pouka Osnove programiranja II Programiranje Mikrokontrolerjev}
+\author{Matej Blagšič}
+
+\begin{document}
+
+%---------------------------------------------------za diagrame
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+minimum height=2em]
+\tikzstyle{nothing} = [draw, node distance =3cm]
+
+%-------------------------------------za programiranje text barvanje
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{lgray}{RGB}{250,250,250}
+\lstset{
+	frame=l,%single
+	language=C,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=4,
+	backgroundcolor=\color{lgray},
+	moredelim=**[is][\color{dkgreen}]{@}{@}
+}
+%---------------------------------------//
+\maketitle
+\thispagestyle{empty}
+\pagebreak
+\setcounter{page}{1}
+
+\tableofcontents
+\pagebreak
+
+
+
+\section{Osnovno}
+
+Pri temu predmetu bomo obravnavali jezik C. Za uporabo lahko preneseš okolje Codeblocks z MinGW inštalacijo ali posebej MinGW compiler in poljubno okolje(Jetbrains).\
+
+Pomembno je, da imaš predznanje iz prejšnjega polletja pri Javascriptu, saj so tipi spremenljivk, sintaksa in drugo zelo podobno, tako da v detajle o stvarih, ki so enake ne bom šel.\
+
+Vsak dokument začnemo z \framebox{\lstinline|@#include <stdio.h>@|\par} za standardne vhodne in izhodne ukaze.
+Vsaka koda se izvaja znotraj main funkcije:
+
+
+\begin{lstlisting}
+int main(){
+    printf("Hello!\n");
+    return 0;
+}
+\end{lstlisting}
+
+\textbf{Prav tako je pomembno uporabiti PODPIČJE za vsakim ukazom/vrstico!!!}
+
+Če začnemo na začetku, opazimo \texttt{\#include} ukaz. Ta se izvrši, preden se karkoli drugega. V temu primeru lahko vnesemo knjižnice. Te nam olajšajo programiranje s tem, da nam en ukaz izvede več ukazov, ki bi jih morali tipkati na roke. To datoteko/knjižnico navedemo lahko z "datoteka" navednicam. Če pa damo v <datoteka>, potem pa išče datoteke v sistemskih mapah okolja. Te datoteke so vrste \textbf{header} s končnico \textbf{.h}. V našem primeru je knjižnica za pisat in brat podatke - vhodne in izhodne podatke.\\
+To je podobno kot v javascriptu:  \lstinline|<script src="datoteka">|\ 
+\section{Podatkovni tipi}
+Si poglejmo zgled:
+\begin{lstlisting}
+int main(){
+	int a;
+	float b; //spremenljivka
+
+	printf("Vprisi prvo vrednost");
+	scanf("%d", &a);
+	printf("Vpisi drugo vrednos");
+	scanf("%f", &b);
+	printf("%d + %f = %f\n", a, b, a+b);
+	return 0;
+}
+\end{lstlisting}
+
+C je občutljiv na tip podatkov. To pomeni, da moramo vrsto podatka navesti.
+To pomeni, da se moramo sami odločiti, kakšen tip podatka bo nosila spremenljivka.\\
+Vemo, da v Javascriptu nismo rabili napisati tipa spremenljivke, le \texttt{var}.
+
+\pagebreak
+
+\subsection*{Tipi spremenljivk:}
+
+\begin{description}[align=left, labelwidth=2cm]
+	\item [int] Intager: Celoštevilski tip. Uporabimo formatno določilo \%d
+	\item [float] Float: Realna števila. Uporabimo formatno določilo \%f
+	\item [long] daljši int
+	\item [double] daljši float
+\end{description}
+
+
+
+\section{Branje podatkov}
+
+Da nam program prebere podatek, uporabimo funkcijo:
+
+{\centering\framebox{\lstinline|scanf("formatno\_dolocilo", \&spremenljivka);|}\par}
+
+Vidimo, da moramo najprej deklarirati tip podatka, ki ga pričakuje operator Scanf. Potem pa določimo naslovni operator \& in nato za njim spremenljivko, ki naj sprejme podatek.
+
+\section{Pisanje podatkov}
+
+Za pisanje podatkov uporabimo funkcijo:
+
+{\centering\framebox{\lstinline|printf("formatni\_niz", izrazi)|}\par}
+
+Pomembne so tudi ubežne sekvence. To so \texttt{\textbackslash r \textbackslash n \textbackslash t}, ki povejo, kaj se zgodi, ko se text izpiše. \texttt{\textbackslash n} naredi novo vrstico(new line) po besedilu, \texttt{\textbackslash t} je tabulator...\
+
+Tako v našem primeru, se a izpiše tam, kjer je njegov \%d in b, kjer je \%f ter vsota a+b tam, kjer je \%f(glej izsek programske kode).
+
+\section{Funkcije}
+
+Funkcije deklariramo:\
+
+{\centering\framebox{\underline{\lstinline|float|} \lstinline| imeFunkcije()\{/*telo funkcije*/	return 0;\}|}\par}
+
+Opazimo, da funkcijo deklariramo kot float oz. funkcijo, ki vrne realno število. V resnici lahko funkcije definiramo kot karkoli hočemo, glede na to, kaj naj bi vrnila.\
+
+Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v tej kodi se izvajajo vsi programi in funkcije. Tako se koda, ki je napisana tu notri, se prevede in spremeni v izvršilno kodo(executable).
+
+
+\end{document}
