@@ -13,6 +13,7 @@
 \usepackage{blindtext}
 \usepackage{lipsum}
 \usepackage{scrextend}
+\usepackage{array}
 \usepackage{tikz}
 \usepackage[margin=1in]{geometry}
 \usetikzlibrary{shapes,arrows}
@@ -75,6 +76,8 @@ Pri temu predmetu bomo obravnavali jezik C. Za uporabo lahko preneseš okolje Co
 
 Pomembno je, da imaš predznanje iz prejšnjega polletja pri Javascriptu, saj so tipi spremenljivk, sintaksa in drugo zelo podobno, tako da v detajle o stvarih, ki so enake ne bom šel.\
 
+
+
 Vsak dokument začnemo z \framebox{\lstinline|@#include <stdio.h>@|\par} za standardne vhodne in izhodne ukaze.
 Vsaka koda se izvaja znotraj main funkcije:
 
@@ -106,22 +109,48 @@ int main(){
 }
 \end{lstlisting}
 
-C je občutljiv na tip podatkov. To pomeni, da moramo vrsto podatka navesti.
+C je občutljiv na tip podatkov. Pravimo tudi, da je C statično tipiziran jezik. To pomeni, da moramo vrsto podatka navesti. 
 To pomeni, da se moramo sami odločiti, kakšen tip podatka bo nosila spremenljivka.\\
-Vemo, da v Javascriptu nismo rabili napisati tipa spremenljivke, le \texttt{var}.
+Vemo, da v Javascriptu nismo rabili napisati tipa spremenljivke, le \texttt{var}, torej je Javascript dinamično tipiziran jezik.
 
 \pagebreak
 
 \subsection*{Tipi spremenljivk:}
 
-\begin{description}[align=left, labelwidth=2cm]
-	\item [int] Intager: Celoštevilski tip. Uporabimo formatno določilo \%d
-	\item [float] Float: Realna števila. Uporabimo formatno določilo \%f
-	\item [double] Double: Double precision Float: "dvojni float"
-	\item[char] Char: 1 byte velik karakter
-\end{description}
+\begin{center}
+	\begin{tabular}[b]{|p{3cm}|p{3cm}|p{3cm}|}
+		\hline \textcolor{blue}{TIP} & \textcolor{blue}{DOLŽINA(bitov)} & \textcolor{blue}{FORMATNO DOLOČILO} \\ \hline\hline
+		\textcolor{violet}{char} & 8 & \%d \%c \\
+		\textcolor{violet}{short, int} & vsaj 16 & \%d \\
+		\textcolor{violet}{long} & vsaj 32 & \%ld \\
+		\textcolor{violet}{float} & običajno 32 & \%f \\
+		\textcolor{violet}{double} & običajno 64 & \%lf \\
+		\textcolor{violet}{void} & 0 & \\ \hline
+	\end{tabular}
+\end{center}
 
+%unsigned char, short, int, long %u / %lu
 
+V C-ju Boolov tip ne obstaja, tako da primerjalni operatorji delujejo enako, le da vračajo 0 za false in 1 za vse, kar je različno od nič. \textbf{Ne obstaja TRUE ali FALSE}.\
+
+Spoznali bomo tudi, da je pri celoštevilskem tipu pomembna omejitev območja, pri realnem tipu pa natačnost!
+
+\subsection{Celoštevilski tip (n bitov)}
+
+Obstaja nepredznačen, ki je od 0 do $2^{32}$
+
+\subsection{Realni tip (IEEE floating point)}
+
+\begin{center}
+	\begin{tabular}{|l|l|l|}
+		\hline \textcolor{blue}{p} & \textcolor{blue}{eksp. (e)} & \textcolor{blue}{mantisa (m)} \\ \hline
+		1 bit & 8 bitov & 23 bitov \\ \hline
+	\end{tabular}
+\end{center}
+
+Ta ima enojno natančnost (single precision) ali \underline{\texttt{float}} in so števila zapisana z 32 bitno velikostjo. Tako so v desetiškem sistemu števila natančna do 7,22 signifikantnih mest, sepravi 7 mest je natančnih, od 8. števila naprej pa je že vprašljivo. Torej, signifikantno pomeni pomembno, tisto, kar je natančno.\
+
+Če hočemo večjo natančnost, uporabimo \underline{\texttt{double}} oz. dvojna natačnost (double precision). Ima kapaciteto 64 bitov, torej v desetiškem do 15,95 mest natančno. Po 15. mestu je že vprašljivo natančno.
 
 \section{Branje podatkov}
 
@@ -141,6 +170,21 @@ Pomembne so tudi ubežne sekvence. To so \texttt{\textbackslash r \textbackslash
 
 Tako v našem primeru, se a izpiše tam, kjer je njegov \%d in b, kjer je \%f ter vsota a+b tam, kjer je \%f(glej izsek programske kode).
 
+\section{Operatorji}
+
+Pri C-ju so enaki operatorji, kot v JS, le da z nekimi izjemami: Operator === in !=== ne obstajata.\\
+Prav tako operator za deljenje ne zapišemo kot "/" ne deluje enako. Problem prihaja iz tipa spremenljivk. Če obsoječo spremenljivko $x$, ki je tipa \underline{int}, deljimo ali spreminjamo tako, da bi postala ta spremenljivka kateregakoli drugega tipa, kot prvotni \underline{int}, potem vrne program 0. Primer:
+
+\begin{lstlisting}
+int maint(){	
+	x = 7;
+	x = x / 8 * 8
+	
+	printf("%d", x);
+	return 0;
+}
+\end{lstlisting}
+Če pa spremenimo prvo 8 z 8.0, potem bo program jo vzel za realno število in deljil in nato nazaj množil z 8, tako se te pokrajšata in program vrne 7.
 \section{Funkcije}
 
 Funkcije deklariramo:\
@@ -151,7 +195,7 @@ Opazimo, da funkcijo deklariramo kot float oz. funkcijo, ki vrne realno število
 
 Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v tej kodi se izvajajo vsi programi in funkcije. Tako se koda, ki je napisana tu notri, se prevede in spremeni v izvršilno kodo(executable).\
 
-Whatafak
+Whatafak. 
 
 
 
