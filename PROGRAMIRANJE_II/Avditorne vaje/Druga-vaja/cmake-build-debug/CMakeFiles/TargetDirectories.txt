@@ -1,0 +1,3 @@
+C:/Users/matej/Documents/Elektrotehnika-UNI-1let/PROGRAMIRANJE_II/Avditorne vaje/Druga-vaja/cmake-build-debug/CMakeFiles/Druga_vaja.dir
+C:/Users/matej/Documents/Elektrotehnika-UNI-1let/PROGRAMIRANJE_II/Avditorne vaje/Druga-vaja/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/matej/Documents/Elektrotehnika-UNI-1let/PROGRAMIRANJE_II/Avditorne vaje/Druga-vaja/cmake-build-debug/CMakeFiles/rebuild_cache.dir

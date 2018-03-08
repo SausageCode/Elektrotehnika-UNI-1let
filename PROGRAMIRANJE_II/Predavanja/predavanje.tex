@@ -118,14 +118,16 @@ Vemo, da v Javascriptu nismo rabili napisati tipa spremenljivke, le \texttt{var}
 \subsection*{Tipi spremenljivk:}
 
 \begin{center}
-	\begin{tabular}[b]{|p{3cm}|p{3cm}|p{3cm}|}
-		\hline \textcolor{blue}{TIP} & \textcolor{blue}{DOLŽINA(bitov)} & \textcolor{blue}{FORMATNO DOLOČILO} \\ \hline\hline
-		\textcolor{violet}{char} & 8 & \%d \%c \\
-		\textcolor{violet}{short, int} & vsaj 16 & \%d \\
-		\textcolor{violet}{long} & vsaj 32 & \%ld \\
-		\textcolor{violet}{float} & običajno 32 & \%f \\
-		\textcolor{violet}{double} & običajno 64 & \%lf \\
-		\textcolor{violet}{void} & 0 & \\ \hline
+	\begin{tabular}[b]{|p{3cm}|p{3cm}|p{3cm}|p{4.5cm}|}
+		\hline \textcolor{blue}{TIP} & \textcolor{blue}{DOLŽINA(bitov)} & \textcolor{blue}{FORMATNO DOLOČILO} & \textcolor{blue}{OBMOČJE} \\ \hline\hline
+		\textcolor{violet}{char} & 8 & \%d \%c& $-128$ do $127$ \\
+		\textcolor{violet}{short, int} & 16\ 
+		
+		32  & \%d &$-65536$ do $+65535$ \ $-32768$ do $+23767$\\
+		\textcolor{violet}{long} & vsaj 32 & \%ld & $-2.1\times10^9$ do $+2.1\times10^9$\\
+		\textcolor{violet}{float} & običajno 32 & \%f & $-2.1\times10^9$ do $+2.1\times10^9$\\
+		\textcolor{violet}{double} & običajno 64 &\%lf& $-9.2\times10^{18}$ do $+9.2\times10^{18}$ \\
+		\textcolor{violet}{void} & 0 & & \\ \hline
 	\end{tabular}
 \end{center}
 
@@ -134,6 +136,8 @@ Vemo, da v Javascriptu nismo rabili napisati tipa spremenljivke, le \texttt{var}
 V C-ju Boolov tip ne obstaja, tako da primerjalni operatorji delujejo enako, le da vračajo 0 za false in 1 za vse, kar je različno od nič. \textbf{Ne obstaja TRUE ali FALSE}.\
 
 Spoznali bomo tudi, da je pri celoštevilskem tipu pomembna omejitev območja, pri realnem tipu pa natačnost!
+
+Velikokrat bomo srečali izraz \lstinline|unsigned|. ta nam območje podatkovnega tipa prestavi od 0 do 2x maksimum. Če je char od -128 dp 127, potem je unsigned char od 0 do 255;
 
 \subsection{Celoštevilski tip (n bitov)}
 
@@ -151,6 +155,42 @@ Obstaja nepredznačen, ki je od 0 do $2^{32}$
 Ta ima enojno natančnost (single precision) ali \underline{\texttt{float}} in so števila zapisana z 32 bitno velikostjo. Tako so v desetiškem sistemu števila natančna do 7,22 signifikantnih mest, sepravi 7 mest je natančnih, od 8. števila naprej pa je že vprašljivo. Torej, signifikantno pomeni pomembno, tisto, kar je natančno.\
 
 Če hočemo večjo natančnost, uporabimo \underline{\texttt{double}} oz. dvojna natačnost (double precision). Ima kapaciteto 64 bitov, torej v desetiškem do 15,95 mest natančno. Po 15. mestu je že vprašljivo natančno.
+
+\pagebreak
+
+\subsection{Modifikatorji formatna določila}
+
+\texttt{\%d} vemo, da stoji za cela števila. Če vrinemo neko število "N" -> \texttt{"\%Nd"}, potem povemo, na koliko mest se izpiše število, deluje na desno poravnavo.\\
+Če vrinemo ničlo -> \texttt{"\%0Nd"}, potem zapolne prazna mesta z ničlam.\\
+Če vrinemo "N.Mf" -> \texttt{"\%N.Mf"}, potem izpiše N mest število z M mesti za decimalno piko.
+
+\begin{lstlisting}
+int x = 15;
+float y = 3.141592;
+
+printf("%5d",x); --> Izpise _ _ _1 5
+printf("%.2f",y); --> Izpise 3.14
+printf("%05d",x); --> Izpise 00015
+\end{lstlisting} 
+
+\subsection{Znaki}
+
+Imamo več standardov znakov. Najbolj osnoven in razširjen je \texttt{ASCII} (American standard code for information Interchange). Ta zapis je 8 - biten. Lahko najdemo tabelco, ki nam pokaže kodo za vsak znak.
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{images/ascii.jpg}
+	\caption{ASCII tabela}
+	\label{fig:ascii-tabela }
+\end{figure}
+
+V C-ju je pomembno, da damo en znak v enojne navednice. S tem pomeni, da program zaznava ASCII kodo. Torej, če izpišemo \lstinline|printf("%d", '0');|, nam program izpiše 48. Pri znakih uporabimo torej spremenljivko \lstinline|char|.
+
+\subsection{Psevdonaključna števila}
+
+Ena metoda za pridobivanje naključnih števil je metoda srednjih kvadratov.
+Pri tem kvadriramo dvomestna števila. Pri tem je statistično gledano naključnost zelo podobna realni naključnosti, kot da bi metali kocke.
 
 \section{Branje podatkov}
 
@@ -195,8 +235,65 @@ Opazimo, da funkcijo deklariramo kot float oz. funkcijo, ki vrne realno število
 
 Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v tej kodi se izvajajo vsi programi in funkcije. Tako se koda, ki je napisana tu notri, se prevede in spremeni v izvršilno kodo(executable).\
 
-Whatafak. 
+Primer funkcije je iz poglavja Psevdonaključna števila. Tam smo spoznali definiranje funkcije:
+\framebox{\lstinline|int dogodek(float verjetnost);|} Vidimo, da moramo za razliko od JS definirati vrsto spremenljivke, ki gre v vhodne podatke, tj. verjetnost. Poleg tega, ker se konča z podpičjem, imenujemo ta del prototip. Nič ne naredi. Nato definiramo šele funkcijo.
 
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
+int dogodek(float verjetnost);
+int dogodek(float verjetnost){
+	if((float)rand() / RAND_MAX <= verjetnost){}
+		return 1;
+	}
+}
+
+int main(){
+
+	int x, stevec = 0;
+	srand(time(NULL));
+	for(x=0; x < 100000;x++){
+		stevec += dogodek(0.5);
+	}
+	printf("%d", stevec);
+
+	return 0;
+}
+\end{lstlisting}
+
+V funkciji je pomembno, da pretvorimo rand() v float tip spremenljivke, ker drugače gre za celoštevilsko deljenje, kar potem pomeni le 0 ali 1. Problem je, da nam potem vsakič vrne enako vrednost okoli 50 000, ker je ta random le psevdonaključna. Zato srednjo verednost definiramo z ukazom \texttt{srand}(oz seme) in vanj vnesemo čas, ki pa nikoli ni enak. Zato tako vsakič generira zares naključno število.\
+\pagebreak
+Naredimo primer na bolezni. Izračunajmo, koliko \% ljudi, ki so bolani zares, zanje test pokaže, da so res bolani.\\
+Testiramo 100 000 ljudi in vemo, da bolezen ubije 0.5\% ljudi. Prav tako vemo, da test pokaže z natančnostjo 99\%, da je oseba bolana. 1\%, da je oseba zdrava. Ampak ali je res, da je 1\% zdravih ali napačno diagnosticirano.
+
+\begin{lstlisting}
+int main(){
+
+    unsigned long i;
+	float pBolan = 0.005; //verjetnost da ubije
+	float pPozitBolan = 0.99; //resnicno bolan verjetnost
+	float pPozitZdrav = 0.01;//verjetnost da pokaze da je bolan, ceprav je zdrav
+	unsigned long pozit = 0;
+	unsigned long pozitBolan = 0;
+	
+	srand(time(NULL));
+	for(i = 0; i<100000;i++){
+		if(dogodek(pBolan)){//vemo da je bolan
+			if(dogodek(pPozitBolan)){//testiramo kako dobro izmerimo,ce je bolan
+				pozitBolan++;//dodamo ga med bolane in pozitivno testirane
+				pozit++;
+			}
+		}
+		else{//testiramo zdravega
+			if(dogodek(pPozitZdrav)){//tu se znajde zdrav in pozitivno testiran
+				pozit++;
+			}
+		}
+	}
+	printf("%f", (float)pozitBolan/pozit);// rezultat je bolni/testirane pozitivno
+}
+\end{lstlisting}
 
 \end{document}
