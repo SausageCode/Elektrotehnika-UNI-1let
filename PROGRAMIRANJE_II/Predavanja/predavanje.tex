@@ -93,7 +93,7 @@ int main(){
 
 Če začnemo na začetku, opazimo \texttt{\#include} ukaz. Ta se izvrši, preden se karkoli drugega. V temu primeru lahko vnesemo knjižnice. Te nam olajšajo programiranje s tem, da nam en ukaz izvede več ukazov, ki bi jih morali tipkati na roke. To datoteko/knjižnico navedemo lahko z "datoteka" navednicam. Če pa damo v <datoteka>, potem pa išče datoteke v sistemskih mapah okolja. Te datoteke so vrste \textbf{header} s končnico \textbf{.h}. V našem primeru je knjižnica za pisat in brat podatke - vhodne in izhodne podatke.\\
 To je podobno kot v javascriptu:  \lstinline|<script src="datoteka">|\ 
-\section{Podatkovni tipi}
+\section{Podatki}
 Si poglejmo zgled:
 \begin{lstlisting}
 int main(){
@@ -115,7 +115,25 @@ Vemo, da v Javascriptu nismo rabili napisati tipa spremenljivke, le \texttt{var}
 
 \pagebreak
 
-\subsection*{Tipi spremenljivk:}
+\subsection{Branje podatkov}
+
+Da nam program prebere podatek, uporabimo funkcijo:
+
+{\centering\framebox{\lstinline|scanf("formatno\_dolocilo", \&spremenljivka);|}\par}
+
+Vidimo, da moramo najprej deklarirati tip podatka, ki ga pričakuje operator Scanf. Potem pa določimo naslovni operator \& in nato za njim spremenljivko, ki naj sprejme podatek.
+
+\subsection{Pisanje podatkov}
+
+Za pisanje podatkov uporabimo funkcijo:
+
+{\centering\framebox{\lstinline|printf("formatni\_niz", izrazi)|}\par}
+
+Pomembne so tudi ubežne sekvence. To so \texttt{\textbackslash r \textbackslash n \textbackslash t}, ki povejo, kaj se zgodi, ko se text izpiše. \texttt{\textbackslash n} naredi novo vrstico(new line) po besedilu, \texttt{\textbackslash t} je tabulator...\
+
+Tako v našem primeru, se a izpiše tam, kjer je njegov \%d in b, kjer je \%f ter vsota a+b tam, kjer je \%f(glej izsek programske kode).
+
+\subsection*{Spremenljivke:}
 
 \begin{center}
 	\begin{tabular}[b]{|p{3cm}|p{3cm}|p{3cm}|p{4.5cm}|}
@@ -156,7 +174,6 @@ Ta ima enojno natančnost (single precision) ali \underline{\texttt{float}} in s
 
 Če hočemo večjo natančnost, uporabimo \underline{\texttt{double}} oz. dvojna natačnost (double precision). Ima kapaciteto 64 bitov, torej v desetiškem do 15,95 mest natančno. Po 15. mestu je že vprašljivo natančno.
 
-\pagebreak
 
 \subsection{Modifikatorji formatna določila}
 
@@ -180,7 +197,7 @@ Imamo več standardov znakov. Najbolj osnoven in razširjen je \texttt{ASCII} (A
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.8\linewidth]{images/ascii.jpg}
+	\includegraphics[width=0.7\linewidth]{images/ascii.jpg}
 	\caption{ASCII tabela}
 	\label{fig:ascii-tabela }
 \end{figure}
@@ -191,24 +208,6 @@ V C-ju je pomembno, da damo en znak v enojne navednice. S tem pomeni, da program
 
 Ena metoda za pridobivanje naključnih števil je metoda srednjih kvadratov.
 Pri tem kvadriramo dvomestna števila. Pri tem je statistično gledano naključnost zelo podobna realni naključnosti, kot da bi metali kocke.
-
-\section{Branje podatkov}
-
-Da nam program prebere podatek, uporabimo funkcijo:
-
-{\centering\framebox{\lstinline|scanf("formatno\_dolocilo", \&spremenljivka);|}\par}
-
-Vidimo, da moramo najprej deklarirati tip podatka, ki ga pričakuje operator Scanf. Potem pa določimo naslovni operator \& in nato za njim spremenljivko, ki naj sprejme podatek.
-
-\section{Pisanje podatkov}
-
-Za pisanje podatkov uporabimo funkcijo:
-
-{\centering\framebox{\lstinline|printf("formatni\_niz", izrazi)|}\par}
-
-Pomembne so tudi ubežne sekvence. To so \texttt{\textbackslash r \textbackslash n \textbackslash t}, ki povejo, kaj se zgodi, ko se text izpiše. \texttt{\textbackslash n} naredi novo vrstico(new line) po besedilu, \texttt{\textbackslash t} je tabulator...\
-
-Tako v našem primeru, se a izpiše tam, kjer je njegov \%d in b, kjer je \%f ter vsota a+b tam, kjer je \%f(glej izsek programske kode).
 
 \section{Operatorji}
 
@@ -231,10 +230,9 @@ Funkcije deklariramo:\
 
 {\centering\framebox{\underline{\lstinline|float|} \lstinline| imeFunkcije()\{/*telo funkcije*/	return 0;\}|}\par}
 
-Opazimo, da funkcijo deklariramo kot float oz. funkcijo, ki vrne realno število. V resnici lahko funkcije definiramo kot karkoli hočemo, glede na to, kaj naj bi vrnila.\
-
-Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v tej kodi se izvajajo vsi programi in funkcije. Tako se koda, ki je napisana tu notri, se prevede in spremeni v izvršilno kodo(executable).\
-
+Opazimo, da funkcijo deklariramo kot float oz. funkcijo, ki vrne realno število. V resnici lahko funkcije definiramo kot karkoli hočemo, glede na to, kaj naj bi vrnila.\\
+Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v tej kodi se izvajajo vsi programi in funkcije. Tako se koda, ki je napisana tu notri, se prevede in spremeni v izvršilno kodo(executable).\\
+\newpage
 Primer funkcije je iz poglavja Psevdonaključna števila. Tam smo spoznali definiranje funkcije:
 \framebox{\lstinline|int dogodek(float verjetnost);|} Vidimo, da moramo za razliko od JS definirati vrsto spremenljivke, ki gre v vhodne podatke, tj. verjetnost. Poleg tega, ker se konča z podpičjem, imenujemo ta del prototip. Nič ne naredi. Nato definiramo šele funkcijo.
 
@@ -264,10 +262,10 @@ int main(){
 \end{lstlisting}
 
 V funkciji je pomembno, da pretvorimo rand() v float tip spremenljivke, ker drugače gre za celoštevilsko deljenje, kar potem pomeni le 0 ali 1. Problem je, da nam potem vsakič vrne enako vrednost okoli 50 000, ker je ta random le psevdonaključna. Zato srednjo verednost definiramo z ukazom \texttt{srand}(oz seme) in vanj vnesemo čas, ki pa nikoli ni enak. Zato tako vsakič generira zares naključno število.\
-\pagebreak
+
 Naredimo primer na bolezni. Izračunajmo, koliko \% ljudi, ki so bolani zares, zanje test pokaže, da so res bolani.\\
 Testiramo 100 000 ljudi in vemo, da bolezen ubije 0.5\% ljudi. Prav tako vemo, da test pokaže z natančnostjo 99\%, da je oseba bolana. 1\%, da je oseba zdrava. Ampak ali je res, da je 1\% zdravih ali napačno diagnosticirano.
-
+\pagebreak
 \begin{lstlisting}
 int main(){
 
