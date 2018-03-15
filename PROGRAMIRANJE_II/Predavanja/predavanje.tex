@@ -60,6 +60,9 @@ minimum height=2em]
 	moredelim=**[is][\color{dkgreen}]{@}{@}
 }
 %---------------------------------------//
+\newcommand{\harpoon}{\overset{\rightharpoonup}}
+
+
 \maketitle
 \thispagestyle{empty}
 \pagebreak
@@ -133,7 +136,7 @@ Pomembne so tudi ubežne sekvence. To so \texttt{\textbackslash r \textbackslash
 
 Tako v našem primeru, se a izpiše tam, kjer je njegov \%d in b, kjer je \%f ter vsota a+b tam, kjer je \%f(glej izsek programske kode).
 
-\subsection*{Spremenljivke:}
+\subsection{Spremenljivke:}
 
 \begin{center}
 	\begin{tabular}[b]{|p{3cm}|p{3cm}|p{3cm}|p{4.5cm}|}
@@ -208,6 +211,33 @@ V C-ju je pomembno, da damo en znak v enojne navednice. S tem pomeni, da program
 
 Ena metoda za pridobivanje naključnih števil je metoda srednjih kvadratov.
 Pri tem kvadriramo dvomestna števila. Pri tem je statistično gledano naključnost zelo podobna realni naključnosti, kot da bi metali kocke.
+
+\subsection{Statične in dinamične spremenljivke}
+
+\textbf{Glej priloženo kodo spodaj!}\\
+V temu programu imamo funkcijo tipa void, ki kot vemo ne vrne nič, pred funkcijo main. prav tako imamo definirano spremenljivko ga, ki je zunaj kode. Ta je zato globalna in je uporabna v vseh funkcijah. Te globalne spremenljivke so \textbf{STATIČNE}. To pomeni da so te spremenljivke vedno na voljo in hranijo vrednost ves čas, kajti prostor za njih je že rezerviran v začetku.\\
+Za kontrast, vse lokalne spremenljivke so \textbf{DINAMIČNE}, razen če so definirane kot statične z ukazom \lstinline|static| pred definicijo spremenljivke(glej kodo, vrstica 6). Če poženemo kodo vidimo, kako deluje ukaz static. ker smo spremenljivko \textcolor{purple}{sa} definirali le enkrat in ji dodali vrednost 12, potem se ne definira ponovno vsakič, ko pridemo v to funkcijo \textcolor{green}{foo()} še enkrat. Zato se vrednost te spremenljivke povečuje. Za kontrast, spremenljivka \textcolor{purple}{a} se ne povečuje, saj se vsakič, ko pridemo v funkcijo \textcolor{green}{foo()} ponovno definira.\\
+Prav tako velja, da statične neinicializirane spremenljivke dobijo vrednost 0. To ne velja za dinamične, tako da če ne zapišemo začetne vrednosti spremenljivke \textcolor{purple}{a}, potem vidimo, da program meče za vrednosti \textcolor{purple}{a} kar nekaj.
+
+\begin{lstlisting}
+#include <stdio.h>
+int ga; //globalna spremenljivka
+
+void foo(){
+	int a = 12;	//lokalni spremenljivki
+	static int sa = 12; //spremenljivka je staticna
+	a++;
+	sa++;
+	ga++;
+	printf("%d, %d, %d\n", ga, a, sa);
+}
+int main(){
+	for(int i=0; i < 5; i++){
+		foo();
+	}
+	return 0;
+}	
+\end{lstlisting}
 
 \section{Operatorji}
 
@@ -293,5 +323,61 @@ int main(){
 	printf("%f", (float)pozitBolan/pozit);// rezultat je bolni/testirane pozitivno
 }
 \end{lstlisting}
+
+\section{Strukture}
+
+V C-ju, za razliko od C++ in JS ni objektov. Zato imamo strukture, ki so nekako podobna zadeva. Definiramo z :
+\begin{lstlisting}
+struct ime{
+	tip1 ime1;
+	tip2 ime2;
+	...
+};
+\end{lstlisting}
+Struct s spremenljivko ime je nov podatkovni tip. In ko definiramo komponente tega novega podatkovnega tipa, definiramo novo spremenljivko kot: {\centering\frame{\lstinline|struct ime sprem;|}}\\
+Če hočemo klicati spremenljivko, definiramo kot \lstinline|sprem.ime1;|Glej kodo spodaj za referenco:
+\pagebreak
+\begin{lstlisting}
+#include <stdio.h>
+
+struct vektor{
+float x, y;		
+};
+int main(){
+	struct vektor v1, v2;
+
+	v1.x = 1.4;	
+	v1.y = -0.7;
+
+	v2 = v1; // ustvari se cista kopija, ne samo povezava do spremenljivke, kot v JS
+	v2.x  = 13;
+	printf("%d\n", v1.x == v2.x); //testiramo, da vidimo, ali je enakost, %d, ker nam vraca 1 ali 0(boolean)
+	return 0;
+}
+\end{lstlisting}
+
+
+Primer uporabe  je sledeča koda. Napišemo program, ki nam izračuna vektorski produkt dveh vektorjev. Vektorski produkt dveh vektorjev vemo, da je nov vektor, ki je pravokoten na prvotna dva $\vec{a}$ in $\vec{b}$. Vektorski produkt lahko rešimo z determinanto 3x3 matrike vektorjev. Po definiciji sledi:\\
+
+\centering{
+$\harpoon{a} \times \harpoon{b} =
+\begin{vmatrix}
+\harpoon{i} & \harpoon{j} & \harpoon{k} \\ 
+a_x & a_y & a_z\\ 
+b_x & b_y &b_z \notag
+\end{vmatrix}=
+\begin{bmatrix}
+	a_y\cdot b_z - a_z\cdot b_y\\
+	a_z\cdot b_x - a_x\cdot b_z\\
+	a_x\cdot b_y - a_y\cdot b_x \notag
+\end{bmatrix}=
+\begin{bmatrix}
+	x\\
+	y\\
+	z \notag
+\end{bmatrix}$}
+
+
+
 
 \end{document}
