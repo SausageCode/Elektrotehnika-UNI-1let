@@ -36,8 +36,11 @@ int main(){
 		case '-':
 			printf("Razlika števil z in w je %d%+di\n", a-c, b-d);
 			break;
-		case 'x':
+		case '*':
 			printf("Produkt števil z in w je %d%+di\n", a*c-b*d, a*d+b*c);
+			break;
+		case '/':
+			printf("Kvocient stevil z in w je %.2f%+.2fi \n", (float)(a*c+b*d)/(c*c+d*d),(float)(b*c-a*d)/(c*c+d*d));
 			break;
 		default:
 			printf("Neveljaven vnos!");
