@@ -20,17 +20,24 @@ int main(){
 
 	switch(operator){
 		case '+':
-			printf("Vsota stevil z in w je %d%+di \n", a+c, b+d);
+			printf("Vsota stevil z in w je: %d%+di", a+c, b+d);
 			break;
 		case '-':
-			printf("Razlika stevil z in w je %d%+di\n", a-c, b-d);
+			printf("Razlika stevil z in w je: %d%+di", a-c, b-d);
 			break;
 		case '*':
-			printf("Produkt stevil z in w je %d%+di\n", a*c-b*d, a*d+b*c);
+			printf("Produkt stevil z in w je: %d%+di", a*c-b*d, a*d+b*c);
 			break;
 		case '/':
-			if((c*c+d*d) == 0){printf("Deljenje ni dovoljeno! Ponovno pozenem program.\n");main();}
-			printf("Kvocient stevil z in w je %.2f%+.2fi \n", (float)(a*c+b*d)/(c*c+d*d),(float)(b*c-a*d)/(c*c+d*d));
+			if((c*c+d*d) == 0){printf("Deljenje ni dovoljeno! Ponovno pozenem program.");main();}
+			printf("Kvocient stevil z in w je: %.2f%+.2fi \n", (float)(a*c+b*d)/(c*c+d*d),(float)(b*c-a*d)/(c*c+d*d));
+			break;
+		case ',': // za testerat, da vse naenkrat spise, vpisi vejico za operator
+			printf("Vsota stevil z in w je: %d%+di \n", a+c, b+d);
+			printf("Razlika stevil z in w je: %d%+di\n", a-c, b-d);
+			printf("Produkt stevil z in w je: %d%+di\n", a*c-b*d, a*d+b*c);
+			if((c*c+d*d) == 0){printf("Deljenje ni dovoljeno!");}
+			printf("Kvocient stevil z in w je: %.2f%+.2fi", (float)(a*c+b*d)/(c*c+d*d),(float)(b*c-a*d)/(c*c+d*d));
 			break;
 		default:
 			printf("Neveljaven vnos!");
