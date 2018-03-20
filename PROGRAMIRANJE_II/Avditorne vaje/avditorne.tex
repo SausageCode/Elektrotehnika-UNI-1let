@@ -54,10 +54,14 @@
 	\tableofcontents
 	\pagebreak
 %-----------------------------------Tu naprej
+\paragraph{Pomembno:}\
+Te vaje so direktno iz pouka. Koda morda ni identična od te asistena, ampak deluje enako. Prav tako je komentirana in obrazložena skupaj z navodili in opazkami za lažje razumevanje kode. Prav tako se sklicujem in že tu pozivam, da si pogledaš zapiske iz pouka, ki so kot nekakšen učbenik. Notri je snov, teorija in primeri iz pouka. Prijetno branje in učenje želim!
+\pagebreak
 
-\section{Prva vaja}
 
-\section{Druga vaja}
+\section{Vaja}
+/empty/
+\section{Vaja}
 
 \underline{Izračunaj $\int_{x_0}^{x_1}\, 2x^2-5x\, dx$. Rezultat preveri analitično.}	\
 
@@ -97,7 +101,7 @@ Pri programu nam spremenljivka dx sporoči, kako širok del območja integrira. 
 \end{axis}
 \end{tikzpicture}
 	
-\section{Tretja vaja}
+\section{Vaja}
 \subsection*{1. naloga}
 
 \underline{Napiši program, ki izpiše in izračuna faktorielo(fakulteta) nekega števila(1-20)}\
@@ -139,34 +143,42 @@ int main(){
 	return 0;
 }
 \end{lstlisting}
-	
-\section{Četrta vaja}
+
+\section{Vaja}
 \subsection*{1. naloga}
 
 \underline{Napiši funkcijo, ki sešteje dve razdalji podani v čevljih in palcjh(feet and inches)}\
+
 Vemo, da je 1 čevelj 12 palcev. To potrebujemo, da pretvorimo palce v čevlje, kajti če pri vsoti dobimo recimo 13 palcev, pretvorimo to v en čevelj in en palec.
 \pagebreak
 \begin{lstlisting}
 #include <stdio.h>
+
 struct razdalja{
 	int foot;
 	int inch;
 };
+
 struct razdalja sestevanje(struct razdalja x, struct razdalja y);
+
 int main(){
 	struct razdalja a, b, r;
 	printf("Vnesi prvo razdaljo v obliki a b	");
 	scanf("\n %d\'%d\"", &a.foot, &a.inch);
 	printf("Vnesi drugo razdaljo v obliki a b	");
 	scanf("\n %d\'%d\"", &b.foot, &b.inch);
+
 	r = sestevanje(a, b);
 	printf("%d %d\n", r.foot, r.inch);
+
 	return 0;
 }	
+
 struct razdalja sestevanje(struct razdalja x, struct razdalja y){
 	struct razdalja z;
 	z.inch = x.inch + y.inch;
 	z.foot = x.foot + y.foot;
+
 	if(z.inch >=12){
 		z.foot++;
 		z.inch -=12;
@@ -174,7 +186,8 @@ struct razdalja sestevanje(struct razdalja x, struct razdalja y){
 	return z;
 }
 \end{lstlisting}
-Vidimo, da smo definirali novo funkcijo za seštevanje, katere tip je enak izhodnemu podatku, torej novemu tipu razdalja, ki jo definiramo s struct razdalja.
+Vidimo, da smo definirali novo funkcijo za seštevanje, katere tip je enak izhodnemu podatku, torej novemu tipu razdalja, ki jo definiramo s struct razdalja. Kako se uporablja struct ukaz in funkcije, si poglej v predavanje zapiskih v 4. in 5. poglavju.
+\pagebreak
 \subsection*{2. naloga}
 \underline{Imamo program, ki nas nauči o vrstah konstant pri primerjavah.}\
 
