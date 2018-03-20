@@ -140,8 +140,54 @@ int main(){
 }
 \end{lstlisting}
 	
+\section{Četrta vaja}
+\subsection*{1. naloga}
+
+\underline{Napiši funkcijo, ki sešteje dve razdalji podani v čevljih in palcjh(feet and inches)}\
+Vemo, da je 1 čevelj 12 palcev. To potrebujemo, da pretvorimo palce v čevlje, kajti če pri vsoti dobimo recimo 13 palcev, pretvorimo to v en čevelj in en palec.
+\pagebreak
+\begin{lstlisting}
+#include <stdio.h>
+struct razdalja{
+	int foot;
+	int inch;
+};
+struct razdalja sestevanje(struct razdalja x, struct razdalja y);
+int main(){
+	struct razdalja a, b, r;
+	printf("Vnesi prvo razdaljo v obliki a b	");
+	scanf("\n %d\'%d\"", &a.foot, &a.inch);
+	printf("Vnesi drugo razdaljo v obliki a b	");
+	scanf("\n %d\'%d\"", &b.foot, &b.inch);
+	r = sestevanje(a, b);
+	printf("%d %d\n", r.foot, r.inch);
+	return 0;
+}	
+struct razdalja sestevanje(struct razdalja x, struct razdalja y){
+	struct razdalja z;
+	z.inch = x.inch + y.inch;
+	z.foot = x.foot + y.foot;
+	if(z.inch >=12){
+		z.foot++;
+		z.inch -=12;
+	}
+	return z;
+}
+\end{lstlisting}
+Vidimo, da smo definirali novo funkcijo za seštevanje, katere tip je enak izhodnemu podatku, torej novemu tipu razdalja, ki jo definiramo s struct razdalja.
+\subsection*{2. naloga}
+\underline{Imamo program, ki nas nauči o vrstah konstant pri primerjavah.}\
+
+V temu programu spoznamo, da v C-ju so vse konstante tipa \lstinline|double|. To je zelo pomembno. Poglejmo si priložen program. Hočemo primerjati x z njegovo vrednostjo. Program nam vrne nič, kot da nista iste, čeprav sta. Naš dvojni enačaj je tipa int, a konstanta 0.2, ki se primerja z x, je pa tipa double in ne float, kot smo hoteli definirati x. Zato popravimo spremenljivko x v double.	
 	
-	
-	
-	
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(){
+	double x = 0.2; //prej: float x = 0.2;
+	printf("%d\n", x == 0.2);
+	return 0;
+}
+\end{lstlisting}
+
 \end{document}
