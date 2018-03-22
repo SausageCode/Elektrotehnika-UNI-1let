@@ -239,6 +239,45 @@ int main(){
 }	
 \end{lstlisting}
 
+\subsection{Zbirka(array)}
+Pomnilnik je razdeljen na pomnilniške celice v velikosti 8 bitov na celico. Ko naslavljamo celico, je vedno naslednja celica za 1 večja od prejšne po vrstni številki. \
+
+{\centering\framebox{\lstinline|tipElementa imeZbirke[dim] = \{element1, element2, element3, ...\}|}\par}\
+V temu primeru, je "dim" dimenzija zbirke. Naslavljamo jih lahko enako, kot v javascriptu, da napišemo ime zbirke in stevilo, ki predstavlja mesto želenega elementa. Ne moremo izpisati celotne zbirke naenkrat, temveč le po en element naenkrat. Pomembno je tudi, da ena zbirka določenega tipa lahko vsebuje elemente le tega tipa, torej vsi enaki. Ne moremo mešati različnih tipov, kot v javascriptu.
+
+\subsection{Znakovni niz(string)}
+V C-ju ne ovstaja string kot samostojen tip. Ampak vemo, če poznamo zbirke in char, da je string nič drugega kot zbirka char elementov. Zato lahko definiramo string kot v prvem ali drugem okvirčku. Prvi je namreč bolj kot zbirka, a težje za vnašanje:\
+
+{\centering\framebox{\lstinline|char niz[] = {'a','b','c','d' ..... 'n'}|}}
+{\centering\framebox{\lstinline|char niz[] = "abcd....n"|}\par}
+Lahko definiramo tudi drugače, kot je zapisano v drugem okvirčku.\
+
+Poglejmo primer. Imamo program, ki nam izpiše string kot posamezne elemente zbirke txt v for zanki. For zanka je napisana malo drugače. Namesto primerjave v srednjem delu, imamo primerjavo i-tega člena zbirke txt in če je ta različna od nič oz. če obstaja, zato lahko tam napišemo ali: \texttt{txt[i] != 0} ali pa \texttt{txt[i]}, potem jo izpiše. Tako se pomika po zbirki navzgor. Na koncu vsake zbirke, je "nevidna" ničla in ko jo najde, jo več ne izpiše in se for zanka konča. Jaz sem uporabil drugo metodo.
+
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(){
+	char txt[] = "Tole izpisi";
+	for (int i = 0; txt[i]; i++){
+		printf("%c", txt[i]);
+	}
+	return 0;
+}
+\end{lstlisting}
+
+Ker se string rabi pogosto, obstaja formatno določilo \textcolor{purple}{\%s}. Tako lahko napišemo program kot kaže koda. Pomni, da ko izpišeš, uporabi le ime char array-a brez oglatih oklepajev.
+
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(){
+	char txt[] = "Tole izpisi";
+	printf("%s", txt); // <-- tu txt, ne txt[] ter formatno dolocilo %s
+	return 0;
+}
+\end{lstlisting}
+
 \section{Operatorji}
 
 Pri C-ju so enaki operatorji, kot v JS, le da z nekimi izjemami: Operator === in !=== ne obstajata.\\
@@ -256,13 +295,13 @@ int maint(){
 Če pa spremenimo prvo 8 z 8.0, potem bo program jo vzel za realno število in deljil in nato nazaj množil z 8, tako se te pokrajšata in program vrne 7.
 \section{Funkcije}
 
-Funkcije deklariramo:\
+Funkcije deklariramo tako:\
 
-{\centering\framebox{\underline{\lstinline|float|} \lstinline| imeFunkcije()\{/*telo funkcije*/	return 0;\}|}\par}
+{\centering\framebox{\underline{tip\_funkcije} \lstinline| imeFunkcije()\{/*telo funkcije*/	return 0;\}|}\par}
 
 Opazimo, da funkcijo deklariramo kot float oz. funkcijo, ki vrne realno število. V resnici lahko funkcije definiramo kot karkoli hočemo, glede na to, kaj naj bi vrnila.\\
-Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v tej kodi se izvajajo vsi programi in funkcije. Tako se koda, ki je napisana tu notri, se prevede in spremeni v izvršilno kodo(executable).\\
-\newpage
+Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v tej kodi se izvajajo vsi programi in funkcije. Tako se koda, ki je napisana tu notri, se prevede in spremeni v izvršilno kodo(executable).\
+
 Primer funkcije je iz poglavja Psevdonaključna števila. Tam smo spoznali definiranje funkcije:
 \framebox{\lstinline|int dogodek(float verjetnost);|} Vidimo, da moramo za razliko od JS definirati vrsto spremenljivke, ki gre v vhodne podatke, tj. verjetnost. Poleg tega, ker se konča z podpičjem, imenujemo ta del prototip. Nič ne naredi. Nato definiramo šele funkcijo.
 
@@ -295,7 +334,7 @@ V funkciji je pomembno, da pretvorimo rand() v float tip spremenljivke, ker drug
 
 Naredimo primer na bolezni. Izračunajmo, koliko \% ljudi, ki so bolani zares, zanje test pokaže, da so res bolani.\\
 Testiramo 100 000 ljudi in vemo, da bolezen ubije 0.5\% ljudi. Prav tako vemo, da test pokaže z natančnostjo 99\%, da je oseba bolana. 1\%, da je oseba zdrava. Ampak ali je res, da je 1\% zdravih ali napačno diagnosticirano.
-\pagebreak
+
 \begin{lstlisting}
 int main(){
 
@@ -336,7 +375,7 @@ struct ime{
 \end{lstlisting}
 Struct s spremenljivko ime je nov podatkovni tip. In ko definiramo komponente tega novega podatkovnega tipa, definiramo novo spremenljivko kot: {\centering\frame{\lstinline|struct ime sprem;|}}\\
 Če hočemo klicati spremenljivko, definiramo kot \lstinline|sprem.ime1;|Glej kodo spodaj za referenco:
-\pagebreak
+
 \begin{lstlisting}
 #include <stdio.h>
 
@@ -359,7 +398,7 @@ int main(){
 
 Primer uporabe  je sledeča koda. Napišemo program, ki nam izračuna vektorski produkt dveh vektorjev. Vektorski produkt dveh vektorjev vemo, da je nov vektor, ki je pravokoten na prvotna dva $\vec{a}$ in $\vec{b}$. Vektorski produkt lahko rešimo z determinanto 3x3 matrike vektorjev. Po definiciji sledi:\\
 
-\centering{
+{\centering
 $\harpoon{a} \times \harpoon{b} =
 \begin{vmatrix}
 \harpoon{i} & \harpoon{j} & \harpoon{k} \\ 
@@ -375,7 +414,8 @@ b_x & b_y &b_z \notag
 	x\\
 	y\\
 	z \notag
-\end{bmatrix}$}
+\end{bmatrix}$\par}
+
 
 
 
