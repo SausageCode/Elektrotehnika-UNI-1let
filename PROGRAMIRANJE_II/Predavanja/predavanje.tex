@@ -245,6 +245,31 @@ Pomnilnik je razdeljen na pomnilniške celice v velikosti 8 bitov na celico. Ko 
 {\centering\framebox{\lstinline|tipElementa imeZbirke[dim] = \{element1, element2, element3, ...\}|}\par}\
 V temu primeru, je "dim" dimenzija zbirke. Naslavljamo jih lahko enako, kot v javascriptu, da napišemo ime zbirke in stevilo, ki predstavlja mesto želenega elementa. Ne moremo izpisati celotne zbirke naenkrat, temveč le po en element naenkrat. Pomembno je tudi, da ena zbirka določenega tipa lahko vsebuje elemente le tega tipa, torej vsi enaki. Ne moremo mešati različnih tipov, kot v javascriptu.
 
+Poglejmo si zanimiv primer:
+
+\begin{lstlisting}
+#include <stdio.h>
+
+int a[] = {2, 4};
+int b[] = {1, 3};
+
+int main(){
+
+	a[2] = 42;
+	b[-1] = 42;
+
+	printf("%d, %d", a[1], b[0]);
+
+	return 0;
+}
+\end{lstlisting}
+
+V tem primeru, imamo globalna arraya a in b. Imata dva elementa, torej je njuna velikost 2. Nato pa v main funkciji elementu 2 v arrayu a in elementu -1 v arrayu b priredimo vrednost 42. In potem, ko izpišemo drugi člen arraya a in prvi člen arraya b, se nam izpišeta točno te dve števili. Zelo je čudno, saj ne mormo iti v negativno mesto arraya, drugo mesto arraya pa ne obstaja, saj pri obeh gre le 0 in 1. mesto.\
+
+Zgodi se namreč to, da se števec pri arrayu a obrne in gre šteti od začetka. Torej 0 -> 2, 1 -> 4 in nato 2 -> 2, ponovno prvo mesto. In zato nam na prvo mesto priredi vrednost 42. Pri primeru b arraya pa gre v rikverc. Gremo za eno mesto nazaj in pridemo na zadnje mesto arraya, ki je pa prej vsebovalo število 3.\
+
+Gre se za to, da za razliko javascripta, kjer je število v oglatih oklepajih pomenilo mesto v arrayu, s katerim naj program operira, v C-ju to pomeni mesto, ki je za toliko mest od začetka oddaljen. Torej če napišemo [4], potem se bo program ""sprehodil"" za 4 mesta naprej od 0-tega mesta. V tem primeru bi pri naših dveh arrayih prišli na prvo mesto. Enako velja za negativno število v oglatih oklepajih.
+
 \subsection{Znakovni niz(string)}
 V C-ju ne ovstaja string kot samostojen tip. Ampak vemo, če poznamo zbirke in char, da je string nič drugega kot zbirka char elementov. Zato lahko definiramo string kot v prvem ali drugem okvirčku. Prvi je namreč bolj kot zbirka, a težje za vnašanje:\
 
@@ -282,7 +307,7 @@ int main(){
 
 Pri C-ju so enaki operatorji, kot v JS, le da z nekimi izjemami: Operator === in !=== ne obstajata.\\
 Prav tako operator za deljenje ne zapišemo kot "/" ne deluje enako. Problem prihaja iz tipa spremenljivk. Če obsoječo spremenljivko $x$, ki je tipa \underline{int}, deljimo ali spreminjamo tako, da bi postala ta spremenljivka kateregakoli drugega tipa, kot prvotni \underline{int}, potem vrne program 0. Primer:
-
+\pagebreak
 \begin{lstlisting}
 int maint(){	
 	x = 7;
@@ -316,7 +341,6 @@ int dogodek(float verjetnost){
 		return 1;
 	}
 }
-
 int main(){
 
 	int x, stevec = 0;
