@@ -2,6 +2,7 @@
 \usepackage[slovene]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{amssymb}
@@ -19,6 +20,7 @@
 \usetikzlibrary{shapes,arrows}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{multirow}
 
 \title{Zapiski iz pouka Osnove programiranja II Programiranje Mikrokontrolerjev}
 \author{Matej Blagšič}
@@ -77,13 +79,11 @@ minimum height=2em]
 
 Pri temu predmetu bomo obravnavali jezik C. Za uporabo lahko preneseš okolje Codeblocks z MinGW inštalacijo ali posebej MinGW compiler in poljubno okolje(Jetbrains).\
 
-Pomembno je, da imaš predznanje iz prejšnjega polletja pri Javascriptu, saj so tipi spremenljivk, sintaksa in drugo zelo podobno, tako da v detajle o stvarih, ki so enake ne bom šel.\
-
-
+Pomembno je, da imaš predznanje iz prejšnjega polletja pri Javascriptu, saj so tipi spremenljivk, sintaksa in drugo zelo podobno, tako da v detajle o stvarih, ki so enake ne bom šel.
 
 Vsak dokument začnemo z \framebox{\lstinline|@#include <stdio.h>@|\par} za standardne vhodne in izhodne ukaze.
-Vsaka koda se izvaja znotraj main funkcije:
 
+Vsa koda se izvaja znotraj main funkcije:
 
 \begin{lstlisting}
 int main(){
@@ -97,7 +97,7 @@ int main(){
 Če začnemo na začetku, opazimo \texttt{\#include} ukaz. Ta se izvrši, preden se karkoli drugega. V temu primeru lahko vnesemo knjižnice. Te nam olajšajo programiranje s tem, da nam en ukaz izvede več ukazov, ki bi jih morali tipkati na roke. To datoteko/knjižnico navedemo lahko z "datoteka" navednicam. Če pa damo v <datoteka>, potem pa išče datoteke v sistemskih mapah okolja. Te datoteke so vrste \textbf{header} s končnico \textbf{.h}. V našem primeru je knjižnica za pisat in brat podatke - vhodne in izhodne podatke.\\
 To je podobno kot v javascriptu:  \lstinline|<script src="datoteka">|\ 
 \section{Podatki}
-Si poglejmo zgled:
+Poglejmo si zgled:
 \begin{lstlisting}
 int main(){
 	int a;
@@ -113,76 +113,72 @@ int main(){
 \end{lstlisting}
 
 C je občutljiv na tip podatkov. Pravimo tudi, da je C statično tipiziran jezik. To pomeni, da moramo vrsto podatka navesti. 
-To pomeni, da se moramo sami odločiti, kakšen tip podatka bo nosila spremenljivka.\\
+To pomeni, da se moramo sami odločiti, kakšen tip podatka bo nosila spremenljivka.
+
 Vemo, da v Javascriptu nismo rabili napisati tipa spremenljivke, le \texttt{var}, torej je Javascript dinamično tipiziran jezik.
 
-\pagebreak
-
 \subsection{Branje podatkov}
-
 Da nam program prebere podatek, uporabimo funkcijo:
 
-{\centering\framebox{\lstinline|scanf("formatno\_dolocilo", \&spremenljivka);|}\par}
+\begin{center}
+	\framebox{\lstinline|scanf("formatno\_dolocilo", \&spremenljivka);|}
+\end{center}
 
 Vidimo, da moramo najprej deklarirati tip podatka, ki ga pričakuje operator Scanf. Potem pa določimo naslovni operator \& in nato za njim spremenljivko, ki naj sprejme podatek.
 
 \subsection{Pisanje podatkov}
-
 Za pisanje podatkov uporabimo funkcijo:
+\begin{center}
+	\framebox{\lstinline|printf("formatni\_niz", izrazi)|}
+\end{center}
+Pomembne so tudi ubežne sekvence. To so \verb|\r \n \t|, ki povejo, kaj se zgodi, ko se text izpiše. \verb|\n| naredi novo vrstico(new line) po besedilu, \verb|\t| je tabulator...
 
-{\centering\framebox{\lstinline|printf("formatni\_niz", izrazi)|}\par}
-
-Pomembne so tudi ubežne sekvence. To so \texttt{\textbackslash r \textbackslash n \textbackslash t}, ki povejo, kaj se zgodi, ko se text izpiše. \texttt{\textbackslash n} naredi novo vrstico(new line) po besedilu, \texttt{\textbackslash t} je tabulator...\
-
-Tako v našem primeru, se a izpiše tam, kjer je njegov \%d in b, kjer je \%f ter vsota a+b tam, kjer je \%f(glej izsek programske kode).
+Tako v našem primeru, se a izpiše tam, kjer je njegov \verb|%d| in b, kjer je \verb|%f| ter vsota $a + b$ tam, kjer je \verb|%f| (glej izsek programske kode).
 
 \subsection{Spremenljivke:}
-
-\begin{center}
+\begin{table}[!htbp]
+	\centering
 	\begin{tabular}[b]{|p{3cm}|p{3cm}|p{3cm}|p{4.5cm}|}
 		\hline \textcolor{blue}{TIP} & \textcolor{blue}{DOLŽINA(bitov)} & \textcolor{blue}{FORMATNO DOLOČILO} & \textcolor{blue}{OBMOČJE} \\ \hline\hline
-		\textcolor{violet}{char} & 8 & \%d \%c& $-128$ do $127$ \\
-		\textcolor{violet}{short, int} & 16\ 
-		
-		32  & \%d &$-65536$ do $+65535$ \ $-32768$ do $+23767$\\
-		\textcolor{violet}{long} & vsaj 32 & \%ld & $-2.1\times10^9$ do $+2.1\times10^9$\\
-		\textcolor{violet}{float} & običajno 32 & \%f & $-2.1\times10^9$ do $+2.1\times10^9$\\
-		\textcolor{violet}{double} & običajno 64 &\%lf& $-9.2\times10^{18}$ do $+9.2\times10^{18}$ \\
+		\textcolor{violet}{char} & 8 & \verb|%d %c| & $-128$ do $127$ \\
+		\multirow{2}{*}{\textcolor{violet}{short, int}} & 16 & \multirow{2}{*}{\texttt{\%d}} & $-65536$ do $+65535$ \\
+		& 32 && $-32768$ do $+23767$ \\
+%		32  & \%d &$-65536$ do $+65535$ \ $-32768$ do $+23767$\\
+		\textcolor{violet}{long} & vsaj 32 & \verb|%ld| & $-2.1\times10^9$ do $+2.1\times10^9$\\
+		\textcolor{violet}{float} & običajno 32 & \verb|%f| & $-2.1\times10^9$ do $+2.1\times10^9$\\
+		\textcolor{violet}{double} & običajno 64 & \verb|%lf| & $-9.2\times10^{18}$ do $+9.2\times10^{18}$ \\
 		\textcolor{violet}{void} & 0 & & \\ \hline
 	\end{tabular}
-\end{center}
-
-%unsigned char, short, int, long %u / %lu
-
+	\caption{Tipi spremenljivk v c-ju}
+\end{table}
+%
 V C-ju Boolov tip ne obstaja, tako da primerjalni operatorji delujejo enako, le da vračajo 0 za false in 1 za vse, kar je različno od nič. \textbf{Ne obstaja TRUE ali FALSE}.\
 
 Spoznali bomo tudi, da je pri celoštevilskem tipu pomembna omejitev območja, pri realnem tipu pa natačnost!
 
-Velikokrat bomo srečali izraz \lstinline|unsigned|. ta nam območje podatkovnega tipa prestavi od 0 do 2x maksimum. Če je char od -128 dp 127, potem je unsigned char od 0 do 255;
+Velikokrat bomo srečali izraz \lstinline|unsigned|. ta nam območje podatkovnega tipa prestavi od 0 do $2\times$ maksimum. Če je char od -128 dp 127, potem je unsigned char od 0 do 255;
 
 \subsection{Celoštevilski tip (n bitov)}
-
 Obstaja nepredznačen, ki je od 0 do $2^{32}$
 
 \subsection{Realni tip (IEEE floating point)}
-
-\begin{center}
+\begin{table}[!htbp]
+	\centering
 	\begin{tabular}{|l|l|l|}
 		\hline \textcolor{blue}{p} & \textcolor{blue}{eksp. (e)} & \textcolor{blue}{mantisa (m)} \\ \hline
 		1 bit & 8 bitov & 23 bitov \\ \hline
 	\end{tabular}
-\end{center}
+\end{table}
 
-Ta ima enojno natančnost (single precision) ali \underline{\texttt{float}} in so števila zapisana z 32 bitno velikostjo. Tako so v desetiškem sistemu števila natančna do 7,22 signifikantnih mest, sepravi 7 mest je natančnih, od 8. števila naprej pa je že vprašljivo. Torej, signifikantno pomeni pomembno, tisto, kar je natančno.\
+Ta ima enojno natančnost (single precision) ali \emph{\texttt{float}} in so števila zapisana z 32 bitno velikostjo. Tako so v desetiškem sistemu števila natančna do 7,22 signifikantnih mest, sepravi 7 mest je natančnih, od 8. števila naprej pa je že vprašljivo. Torej, signifikantno pomeni pomembno, tisto, kar je natančno.\
 
-Če hočemo večjo natančnost, uporabimo \underline{\texttt{double}} oz. dvojna natačnost (double precision). Ima kapaciteto 64 bitov, torej v desetiškem do 15,95 mest natančno. Po 15. mestu je že vprašljivo natančno.
+Če hočemo večjo natančnost, uporabimo \emph{\texttt{double}} oz. dvojna natačnost (double precision). Ima kapaciteto 64 bitov, torej v desetiškem do 15,95 mest natančno. Po 15. mestu je že vprašljivo natančno.
 
 
 \subsection{Modifikatorji formatna določila}
-
-\texttt{\%d} vemo, da stoji za cela števila. Če vrinemo neko število "N" -> \texttt{"\%Nd"}, potem povemo, na koliko mest se izpiše število, deluje na desno poravnavo.\\
-Če vrinemo ničlo -> \texttt{"\%0Nd"}, potem zapolne prazna mesta z ničlam.\\
-Če vrinemo "N.Mf" -> \texttt{"\%N.Mf"}, potem izpiše N mest število z M mesti za decimalno piko.
+\verb|%d| vemo, da stoji za cela števila. Če vrinemo neko število ``N'' $\to$ \texttt{"\%Nd"}, potem povemo, na koliko mest se izpiše število, deluje na desno poravnavo.\\
+Če vrinemo ničlo $\to$ \texttt{"\%0Nd"}, potem zapolne prazna mesta z ničlam.\\
+Če vrinemo "N.Mf" $\to$ \texttt{"\%N.Mf"}, potem izpiše $N$ mest število z $M$ mesti za decimalno piko.
 
 \begin{lstlisting}
 int x = 15;
@@ -194,9 +190,7 @@ printf("%05d",x); --> Izpise 00015
 \end{lstlisting} 
 
 \subsection{Znaki}
-
-Imamo več standardov znakov. Najbolj osnoven in razširjen je \texttt{ASCII} (American standard code for information Interchange). Ta zapis je 8 - biten. Lahko najdemo tabelco, ki nam pokaže kodo za vsak znak.
-
+Imamo več standardov znakov. Najbolj osnoven in razširjen je \texttt{ASCII} (American standard code for information Interchange). Ta zapis je 8-biten. Lahko najdemo tabelco, ki nam pokaže kodo za vsak znak.
 
 \begin{figure}[h!]
 	\centering
@@ -208,15 +202,16 @@ Imamo več standardov znakov. Najbolj osnoven in razširjen je \texttt{ASCII} (A
 V C-ju je pomembno, da damo en znak v enojne navednice. S tem pomeni, da program zaznava ASCII kodo. Torej, če izpišemo \lstinline|printf("%d", '0');|, nam program izpiše 48. Pri znakih uporabimo torej spremenljivko \lstinline|char|.
 
 \subsection{Psevdonaključna števila}
-
 Ena metoda za pridobivanje naključnih števil je metoda srednjih kvadratov.
 Pri tem kvadriramo dvomestna števila. Pri tem je statistično gledano naključnost zelo podobna realni naključnosti, kot da bi metali kocke.
 
 \subsection{Statične in dinamične spremenljivke}
+\textbf{Glej priloženo kodo spodaj!}
 
-\textbf{Glej priloženo kodo spodaj!}\\
-V temu programu imamo funkcijo tipa void, ki kot vemo ne vrne nič, pred funkcijo main. prav tako imamo definirano spremenljivko ga, ki je zunaj kode. Ta je zato globalna in je uporabna v vseh funkcijah. Te globalne spremenljivke so \textbf{STATIČNE}. To pomeni da so te spremenljivke vedno na voljo in hranijo vrednost ves čas, kajti prostor za njih je že rezerviran v začetku.\\
-Za kontrast, vse lokalne spremenljivke so \textbf{DINAMIČNE}, razen če so definirane kot statične z ukazom \lstinline|static| pred definicijo spremenljivke(glej kodo, vrstica 6). Če poženemo kodo vidimo, kako deluje ukaz static. ker smo spremenljivko \textcolor{purple}{sa} definirali le enkrat in ji dodali vrednost 12, potem se ne definira ponovno vsakič, ko pridemo v to funkcijo \textcolor{green}{foo()} še enkrat. Zato se vrednost te spremenljivke povečuje. Za kontrast, spremenljivka \textcolor{purple}{a} se ne povečuje, saj se vsakič, ko pridemo v funkcijo \textcolor{green}{foo()} ponovno definira.\\
+V temu programu imamo funkcijo tipa void, ki kot vemo ne vrne nič, pred funkcijo main. prav tako imamo definirano spremenljivko ga, ki je zunaj kode. Ta je zato globalna in je uporabna v vseh funkcijah. Te globalne spremenljivke so \textbf{STATIČNE}. To pomeni da so te spremenljivke vedno na voljo in hranijo vrednost ves čas, kajti prostor za njih je že rezerviran v začetku.
+
+Za kontrast, vse lokalne spremenljivke so \textbf{DINAMIČNE}, razen če so definirane kot statične z ukazom \lstinline|static| pred definicijo spremenljivke(glej kodo, vrstica 6). Če poženemo kodo vidimo, kako deluje ukaz static. Ker smo spremenljivko \textcolor{purple}{sa} definirali le enkrat in ji dodali vrednost 12, potem se ne definira ponovno vsakič, ko pridemo v to funkcijo \textcolor{green}{foo()} še enkrat. Zato se vrednost te spremenljivke povečuje. Za kontrast, spremenljivka \textcolor{purple}{a} se ne povečuje, saj se vsakič, ko pridemo v funkcijo \textcolor{green}{foo()} ponovno definira.
+
 Prav tako velja, da statične neinicializirane spremenljivke dobijo vrednost 0. To ne velja za dinamične, tako da če ne zapišemo začetne vrednosti spremenljivke \textcolor{purple}{a}, potem vidimo, da program meče za vrednosti \textcolor{purple}{a} kar nekaj.
 
 \begin{lstlisting}
@@ -238,11 +233,13 @@ int main(){
 	return 0;
 }	
 \end{lstlisting}
-
 \subsection{Zbirka(array)}
 Pomnilnik je razdeljen na pomnilniške celice v velikosti 8 bitov na celico. Ko naslavljamo celico, je vedno naslednja celica za 1 večja od prejšne po vrstni številki. \
 
-{\centering\framebox{\lstinline|tipElementa imeZbirke[dim] = \{element1, element2, element3, ...\}|}\par}\
+\begin{center}
+	\framebox{\lstinline|tipElementa imeZbirke[dim] = \{element1, element2, element3, ...\}|}
+\end{center}
+
 V temu primeru, je "dim" dimenzija zbirke. Naslavljamo jih lahko enako, kot v javascriptu, da napišemo ime zbirke in stevilo, ki predstavlja mesto želenega elementa. Ne moremo izpisati celotne zbirke naenkrat, temveč le po en element naenkrat. Pomembno je tudi, da ena zbirka določenega tipa lahko vsebuje elemente le tega tipa, torej vsi enaki. Ne moremo mešati različnih tipov, kot v javascriptu.
 
 Poglejmo si zanimiv primer:
@@ -264,20 +261,22 @@ int main(){
 }
 \end{lstlisting}
 
-V tem primeru, imamo globalna arraya a in b. Imata dva elementa, torej je njuna velikost 2. Nato pa v main funkciji elementu 2 v arrayu a in elementu -1 v arrayu b priredimo vrednost 42. In potem, ko izpišemo drugi člen arraya a in prvi člen arraya b, se nam izpišeta točno te dve števili. Zelo je čudno, saj ne mormo iti v negativno mesto arraya, drugo mesto arraya pa ne obstaja, saj pri obeh gre le 0 in 1. mesto.\
+V tem primeru, imamo globalna arraya $a$ in $b$. Imata dva elementa, torej je njuna velikost 2. Nato pa v main funkciji elementu 2 v arrayu $a$ in elementu -1 v arrayu $b$ priredimo vrednost 42. In potem, ko izpišemo drugi člen arraya $a$ in prvi člen arraya $b$, se nam izpišeta točno te dve števili. Zelo je čudno, saj ne mormo iti v negativno mesto arraya, drugo mesto arraya pa ne obstaja, saj pri obeh gre le 0 in 1. mesto.
 
-Zgodi se namreč to, da se števec pri arrayu a obrne in gre šteti od začetka. Torej 0 -> 2, 1 -> 4 in nato 2 -> 2, ponovno prvo mesto. In zato nam na prvo mesto priredi vrednost 42. Pri primeru b arraya pa gre v rikverc. Gremo za eno mesto nazaj in pridemo na zadnje mesto arraya, ki je pa prej vsebovalo število 3.\
+Zgodi se namreč to, da se števec pri arrayu $a$ obrne in gre šteti od začetka. Torej $0 \to 2$, $1 \to 4$ in nato $2 \to 2$, ponovno prvo mesto. In zato nam na prvo mesto priredi vrednost 42. Pri primeru $b$ arraya pa gre v rikverc. Gremo za eno mesto nazaj in pridemo na zadnje mesto arraya, ki je pa prej vsebovalo število 3.
 
-Gre se za to, da za razliko javascripta, kjer je število v oglatih oklepajih pomenilo mesto v arrayu, s katerim naj program operira, v C-ju to pomeni mesto, ki je za toliko mest od začetka oddaljen. Torej če napišemo [4], potem se bo program ""sprehodil"" za 4 mesta naprej od 0-tega mesta. V tem primeru bi pri naših dveh arrayih prišli na prvo mesto. Enako velja za negativno število v oglatih oklepajih.
+Gre se za to, da za razliko javascripta, kjer je število v oglatih oklepajih pomenilo mesto v arrayu, s katerim naj program operira, v C-ju to pomeni mesto, ki je za toliko mest od začetka oddaljen. Torej če napišemo [4], potem se bo program ,,sprehodil'' za 4 mesta naprej od 0-tega mesta. V tem primeru bi pri naših dveh arrayih prišli na prvo mesto. Enako velja za negativno število v oglatih oklepajih.
 
 \subsection{Znakovni niz(string)}
-V C-ju ne ovstaja string kot samostojen tip. Ampak vemo, če poznamo zbirke in char, da je string nič drugega kot zbirka char elementov. Zato lahko definiramo string kot v prvem ali drugem okvirčku. Prvi je namreč bolj kot zbirka, a težje za vnašanje:\
+V C-ju ne ovstaja string kot samostojen tip. Ampak vemo, če poznamo zbirke in char, da je string nič drugega kot zbirka char elementov. Zato lahko definiramo string kot v prvem ali drugem okvirčku. Prvi je namreč bolj kot zbirka, a težje za vnašanje:
+\begin{center}
+	\framebox{\lstinline|char niz[] = {'a','b','c','d' ..... 'n'}|}
+	\framebox{\lstinline|char niz[] = "abcd....n"|}
+\end{center}
 
-{\centering\framebox{\lstinline|char niz[] = {'a','b','c','d' ..... 'n'}|}}
-{\centering\framebox{\lstinline|char niz[] = "abcd....n"|}\par}
-Lahko definiramo tudi drugače, kot je zapisano v drugem okvirčku.\
+Lahko definiramo tudi drugače, kot je zapisano v drugem okvirčku.
 
-Poglejmo primer. Imamo program, ki nam izpiše string kot posamezne elemente zbirke txt v for zanki. For zanka je napisana malo drugače. Namesto primerjave v srednjem delu, imamo primerjavo i-tega člena zbirke txt in če je ta različna od nič oz. če obstaja, zato lahko tam napišemo ali: \texttt{txt[i] != 0} ali pa \texttt{txt[i]}, potem jo izpiše. Tako se pomika po zbirki navzgor. Na koncu vsake zbirke, je "nevidna" ničla in ko jo najde, jo več ne izpiše in se for zanka konča. Jaz sem uporabil drugo metodo.
+Poglejmo primer. Imamo program, ki nam izpiše string kot posamezne elemente zbirke txt v for zanki. For zanka je napisana malo drugače. Namesto primerjave v srednjem delu, imamo primerjavo $i$-tega člena zbirke txt in če je ta različna od nič oz. če obstaja, zato lahko tam napišemo ali: \texttt{txt[i] != 0} ali pa \texttt{txt[i]}, potem jo izpiše. Tako se pomika po zbirki navzgor. Na koncu vsake zbirke, je "nevidna" ničla in ko jo najde, jo več ne izpiše in se for zanka konča. Jaz sem uporabil drugo metodo.
 
 \begin{lstlisting}
 #include <stdio.h>
@@ -304,10 +303,8 @@ int main(){
 \end{lstlisting}
 
 \section{Operatorji}
-
 Pri C-ju so enaki operatorji, kot v JS, le da z nekimi izjemami: Operator === in !=== ne obstajata.\\
-Prav tako operator za deljenje ne zapišemo kot "/" ne deluje enako. Problem prihaja iz tipa spremenljivk. Če obsoječo spremenljivko $x$, ki je tipa \underline{int}, deljimo ali spreminjamo tako, da bi postala ta spremenljivka kateregakoli drugega tipa, kot prvotni \underline{int}, potem vrne program 0. Primer:
-\pagebreak
+Prav tako operator za deljenje ne zapišemo kot ``/'' ne deluje enako. Problem prihaja iz tipa spremenljivk. Če obsoječo spremenljivko $x$, ki je tipa \underline{int}, deljimo ali spreminjamo tako, da bi postala ta spremenljivka kateregakoli drugega tipa, kot prvotni \underline{int}, potem vrne program 0. Primer:
 \begin{lstlisting}
 int maint(){	
 	x = 7;
@@ -318,14 +315,17 @@ int maint(){
 }
 \end{lstlisting}
 Če pa spremenimo prvo 8 z 8.0, potem bo program jo vzel za realno število in deljil in nato nazaj množil z 8, tako se te pokrajšata in program vrne 7.
+
 \section{Funkcije}
+Funkcije deklariramo tako:
 
-Funkcije deklariramo tako:\
+\begin{center}
+	\framebox{\underline{tip\_funkcije} \lstinline| imeFunkcije()\{/*telo funkcije*/	return 0;\}|}
+\end{center}
 
-{\centering\framebox{\underline{tip\_funkcije} \lstinline| imeFunkcije()\{/*telo funkcije*/	return 0;\}|}\par}
+Opazimo, da funkcijo deklariramo kot float oz. funkcijo, ki vrne realno število. V resnici lahko funkcije definiramo kot karkoli hočemo, glede na to, kaj naj bi vrnila.
 
-Opazimo, da funkcijo deklariramo kot float oz. funkcijo, ki vrne realno število. V resnici lahko funkcije definiramo kot karkoli hočemo, glede na to, kaj naj bi vrnila.\\
-Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v tej kodi se izvajajo vsi programi in funkcije. Tako se koda, ki je napisana tu notri, se prevede in spremeni v izvršilno kodo(executable).\
+Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v tej kodi se izvajajo vsi programi in funkcije. Tako se koda, ki je napisana tu notri, se prevede in spremeni v izvršilno kodo(executable).
 
 Primer funkcije je iz poglavja Psevdonaključna števila. Tam smo spoznali definiranje funkcije:
 \framebox{\lstinline|int dogodek(float verjetnost);|} Vidimo, da moramo za razliko od JS definirati vrsto spremenljivke, ki gre v vhodne podatke, tj. verjetnost. Poleg tega, ker se konča z podpičjem, imenujemo ta del prototip. Nič ne naredi. Nato definiramo šele funkcijo.
@@ -354,9 +354,10 @@ int main(){
 }
 \end{lstlisting}
 
-V funkciji je pomembno, da pretvorimo rand() v float tip spremenljivke, ker drugače gre za celoštevilsko deljenje, kar potem pomeni le 0 ali 1. Problem je, da nam potem vsakič vrne enako vrednost okoli 50 000, ker je ta random le psevdonaključna. Zato srednjo verednost definiramo z ukazom \texttt{srand}(oz seme) in vanj vnesemo čas, ki pa nikoli ni enak. Zato tako vsakič generira zares naključno število.\
+V funkciji je pomembno, da pretvorimo rand() v float tip spremenljivke, ker drugače gre za celoštevilsko deljenje, kar potem pomeni le 0 ali 1. Problem je, da nam potem vsakič vrne enako vrednost okoli 50 000, ker je ta random le psevdonaključna. Zato srednjo verednost definiramo z ukazom \texttt{srand}(oz seme) in vanj vnesemo čas, ki pa nikoli ni enak. Zato tako vsakič generira zares naključno število.
 
-Naredimo primer na bolezni. Izračunajmo, koliko \% ljudi, ki so bolani zares, zanje test pokaže, da so res bolani.\\
+Naredimo primer na bolezni. Izračunajmo, koliko \% ljudi, ki so bolani zares, zanje test pokaže, da so res bolani.
+
 Testiramo 100 000 ljudi in vemo, da bolezen ubije 0.5\% ljudi. Prav tako vemo, da test pokaže z natančnostjo 99\%, da je oseba bolana. 1\%, da je oseba zdrava. Ampak ali je res, da je 1\% zdravih ali napačno diagnosticirano.
 
 \begin{lstlisting}
@@ -397,51 +398,50 @@ struct ime{
 	...
 };
 \end{lstlisting}
-Struct s spremenljivko ime je nov podatkovni tip. In ko definiramo komponente tega novega podatkovnega tipa, definiramo novo spremenljivko kot: {\centering\frame{\lstinline|struct ime sprem;|}}\\
-Če hočemo klicati spremenljivko, definiramo kot \lstinline|sprem.ime1;|Glej kodo spodaj za referenco:
+Struct s spremenljivko ime je nov podatkovni tip. In ko definiramo komponente tega novega podatkovnega tipa, definiramo novo spremenljivko kot:
+\framebox{\lstinline|struct ime sprem;|}
+
+Če hočemo klicati spremenljivko, definiramo kot \lstinline|sprem.ime1;| Glej kodo spodaj za referenco:
 
 \begin{lstlisting}
 #include <stdio.h>
 
-struct vektor{
-float x, y;		
+struct vektor {
+	float x, y;		
 };
-int main(){
+
+int main() {
 	struct vektor v1, v2;
 
 	v1.x = 1.4;	
 	v1.y = -0.7;
 
-	v2 = v1; // ustvari se cista kopija, ne samo povezava do spremenljivke, kot v JS
-	v2.x  = 13;
-	printf("%d\n", v1.x == v2.x); //testiramo, da vidimo, ali je enakost, %d, ker nam vraca 1 ali 0(boolean)
+	v2 = v1;  // ustvari se cista kopija, ne samo povezava do spremenljivke, kot v JS
+	v2.x = 13;
+	printf("%d\n", v1.x == v2.x);  // testiramo, da vidimo, ali je enakost, %d, ker nam vraca 1 ali 0(boolean)
+	
 	return 0;
 }
 \end{lstlisting}
 
-
-Primer uporabe  je sledeča koda. Napišemo program, ki nam izračuna vektorski produkt dveh vektorjev. Vektorski produkt dveh vektorjev vemo, da je nov vektor, ki je pravokoten na prvotna dva $\vec{a}$ in $\vec{b}$. Vektorski produkt lahko rešimo z determinanto 3x3 matrike vektorjev. Po definiciji sledi:\\
-
-{\centering
-$\harpoon{a} \times \harpoon{b} =
+Primer uporabe  je sledeča koda. Napišemo program, ki nam izračuna vektorski produkt dveh vektorjev. Vektorski produkt dveh vektorjev vemo, da je nov vektor, ki je pravokoten na prvotna dva $\vec{a}$ in $\vec{b}$. Vektorski produkt lahko rešimo z determinanto $3 \times 3$ matrike vektorjev. Po definiciji sledi:
+\begin{equation*}
+\vec{a} \times \vec{b} = 
 \begin{vmatrix}
-\harpoon{i} & \harpoon{j} & \harpoon{k} \\ 
+\vec{i} & \vec{j} & \vec{k} \\
 a_x & a_y & a_z\\ 
 b_x & b_y &b_z \notag
-\end{vmatrix}=
+\end{vmatrix} = 
 \begin{bmatrix}
-	a_y\cdot b_z - a_z\cdot b_y\\
-	a_z\cdot b_x - a_x\cdot b_z\\
-	a_x\cdot b_y - a_y\cdot b_x \notag
-\end{bmatrix}=
+a_y\cdot b_z - a_z\cdot b_y \\
+a_z\cdot b_x - a_x\cdot b_z \\
+a_x\cdot b_y - a_y\cdot b_x
+\end{bmatrix} = 
 \begin{bmatrix}
-	x\\
-	y\\
-	z \notag
-\end{bmatrix}$\par}
-
-
-
-
+x \\ 
+y \\ 
+z
+\end{bmatrix}
+\end{equation*}
 
 \end{document}

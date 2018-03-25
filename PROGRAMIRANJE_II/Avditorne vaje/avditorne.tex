@@ -15,6 +15,9 @@
 \pgfplotsset{width=7cm, compat=1.10}
 \usepgfplotslibrary{fillbetween}
 
+\usepackage{etoolbox}
+\patchcmd{\abstractname}{Povzetek}{Pomembno}{}{}
+
 \title{Avditorne vaje za Programiranje II}
 \author{Matej Blagšič}
 
@@ -54,10 +57,11 @@
 	\tableofcontents
 	\pagebreak
 %-----------------------------------Tu naprej
-\paragraph{Pomembno:}\
-Te vaje so direktno iz pouka. Koda morda ni identična od te asistena, ampak deluje enako. Prav tako je komentirana in obrazložena skupaj z navodili in opazkami za lažje razumevanje kode. Prav tako se sklicujem in že tu pozivam, da si pogledaš zapiske iz pouka, ki so kot nekakšen učbenik. Notri je snov, teorija in primeri iz pouka. Prijetno branje in učenje želim!
-\pagebreak
 
+\begin{center}
+\textbf{Pomembno}
+\end{center}
+Te vaje so direktno iz pouka. Koda morda ni identična od te asistena, ampak deluje enako. Prav tako je komentirana in obrazložena skupaj z navodili in opazkami za lažje razumevanje kode. Prav tako se sklicujem in že tu pozivam, da si pogledaš zapiske iz pouka, ki so kot nekakšen učbenik. Notri je snov, teorija in primeri iz pouka. Prijetno branje in učenje želim!
 
 \section{Vaja}
 /empty/
@@ -88,18 +92,20 @@ int main(){
 \end{lstlisting}
 Pri programu nam spremenljivka dx sporoči, kako širok del območja integrira. Manjša, kot je cifra, bolj natančno izračuna. x0 in x1 sta spodnja in zgornja meja integracije, x pa je spremenjivka, ki jo premikamo po intervalu za dx razdaljo in seštevamo pravokotnike.
 	
-\begin{tikzpicture}
-\begin{axis}[axis lines=left,xmin=-4,xmax=5,ymin=-4,ymax=40,ytick={0}, yticklabel={$0$},xtick={-3,4},xticklabels={$a$,$b$},title={$Integracija\, funckije\, na\, obmocju\, od\,a\, do\, b$}]
-
-\addplot[dotted]{0};
-\addplot+[mark=none, dotted, color=black] coordinates {(-3, -2)(-3,40)};
-\addplot+[mark=none, dotted, color=black] coordinates {(4, -2)(4,40)};
-\addplot[domain=-3:4,ybar, samples=20, pattern = north east lines, pattern color=blue]{2*x*x-5*x}\closedcycle;
-\addplot[color = red]{2*x*x-5*x};
-\legend{,,,$ 2\frac{b^3}3-5\frac{a^2}2$, $2x^2-5x$}
-
-\end{axis}
-\end{tikzpicture}
+\begin{figure}[!htbp]
+	\centering
+	\caption{Integracije funkcije na intervalu $[a, b]$}
+	\begin{tikzpicture}
+	\begin{axis}[axis lines=left,xmin=-4,xmax=5,ymin=-4,ymax=40,ytick={0}, yticklabel={$0$},xtick={-3,4},xticklabels={$a$,$b$}]
+		\addplot[dotted]{0};
+		\addplot+[mark=none, dotted, color=black] coordinates {(-3, -2)(-3,40)};
+		\addplot+[mark=none, dotted, color=black] coordinates {(4, -2)(4,40)};
+		\addplot[domain=-3:4, ybar, samples=13, pattern = north east lines, pattern color=blue]{2*x*x-5*x};
+		\addplot[color = red]{2*x*x-5*x};
+		\legend{,,,$ 2\frac{b^3}3-5\frac{a^2}2$, $2x^2-5x$}
+	\end{axis}
+	\end{tikzpicture}
+\end{figure}
 	
 \section{Vaja}
 \subsection*{1. naloga}
