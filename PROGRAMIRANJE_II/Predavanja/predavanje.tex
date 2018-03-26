@@ -223,6 +223,8 @@ Za kontrast, vse lokalne spremenljivke so \textbf{DINAMIČNE}, razen če so defi
 
 Prav tako velja, da statične neinicializirane spremenljivke dobijo vrednost 0. To ne velja za dinamične, tako da če ne zapišemo začetne vrednosti spremenljivke \textcolor{purple}{a}, potem vidimo, da program meče za vrednosti \textcolor{purple}{a} kar nekaj.
 
+\pagebreak
+
 \begin{lstlisting}
 #include <stdio.h>
 int ga; //globalna spremenljivka
@@ -338,7 +340,6 @@ Prav tako operator za deljenje ne zapišemo kot ``/'' ne deluje enako. Problem p
 int maint(){	
 	x = 7;
 	x = x / 8 * 8
-	
 	printf("%d", x);
 	return 0;
 }
@@ -395,7 +396,7 @@ int main(){
     unsigned long i;
 	float pBolan = 0.005; //verjetnost da ubije
 	float pPozitBolan = 0.99; //resnicno bolan verjetnost
-	float pPozitZdrav = 0.01;//verjetnost da pokaze da je bolan, ceprav je zdrav
+	float pPozitZdrav = 0.01;//verjetnost da je bolan, ceprav je zdrav
 	unsigned long pozit = 0;
 	unsigned long pozitBolan = 0;
 	
