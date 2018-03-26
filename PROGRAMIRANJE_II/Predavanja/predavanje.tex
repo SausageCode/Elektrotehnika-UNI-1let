@@ -3,7 +3,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -21,6 +20,16 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{multirow}
+\usepackage[
+colorlinks=true,
+linkcolor=black,
+anchorcolor=black,
+citecolor=black,
+filecolor=black,
+menucolor=black,
+runcolor=black,
+urlcolor=black
+]{hyperref}
 
 \title{Zapiski iz pouka Osnove programiranja II Programiranje Mikrokontrolerjev}
 \author{Matej Blagšič}
@@ -240,7 +249,7 @@ Pomnilnik je razdeljen na pomnilniške celice v velikosti 8 bitov na celico. Ko 
 	\framebox{\lstinline|tipElementa imeZbirke[dim] = \{element1, element2, element3, ...\}|}
 \end{center}
 
-V temu primeru, je "dim" dimenzija zbirke. Naslavljamo jih lahko enako, kot v javascriptu, da napišemo ime zbirke in stevilo, ki predstavlja mesto želenega elementa. Ne moremo izpisati celotne zbirke naenkrat, temveč le po en element naenkrat. Pomembno je tudi, da ena zbirka določenega tipa lahko vsebuje elemente le tega tipa, torej vsi enaki. Ne moremo mešati različnih tipov, kot v javascriptu.
+V temu primeru, je ,,dim'' dimenzija zbirke. Naslavljamo jih lahko enako, kot v javascriptu, to je, da napišemo ime zbirke in "stevilo, ki predstavlja mesto želenega elementa. Ne moremo izpisati celotne zbirke naenkrat, temveč le po en element naenkrat. Pomembno je tudi, da ena zbirka določenega tipa lahko vsebuje elemente le tega tipa, torej vsi enaki. Ne moremo mešati različnih tipov, kot v javascriptu.
 
 Poglejmo si zanimiv primer:
 
@@ -263,10 +272,30 @@ int main(){
 
 V tem primeru, imamo globalna arraya $a$ in $b$. Imata dva elementa, torej je njuna velikost 2. Nato pa v main funkciji elementu 2 v arrayu $a$ in elementu -1 v arrayu $b$ priredimo vrednost 42. In potem, ko izpišemo drugi člen arraya $a$ in prvi člen arraya $b$, se nam izpišeta točno te dve števili. Zelo je čudno, saj ne mormo iti v negativno mesto arraya, drugo mesto arraya pa ne obstaja, saj pri obeh gre le 0 in 1. mesto.
 
-Zgodi se namreč to, da se števec pri arrayu $a$ obrne in gre šteti od začetka. Torej $0 \to 2$, $1 \to 4$ in nato $2 \to 2$, ponovno prvo mesto. In zato nam na prvo mesto priredi vrednost 42. Pri primeru $b$ arraya pa gre v rikverc. Gremo za eno mesto nazaj in pridemo na zadnje mesto arraya, ki je pa prej vsebovalo število 3.
+"Zal na predavanjih "se nismo (niste) obdelali kazalcev. Zakaj se to zgodi pojasnijo kazalci. Spremenljivki $a$ in $b$ sta v resnici kazalca na za"cetek seznamov, ki sta jima prirejena. $a$ torej ka"ze na prvi element v seznamu in ko kli"cemo \lstinline|a[0]| v resnici zahtevamo element, ki se nahaja na mestu, na katerega ka"ze a, plus 0. Torej element na za"cetku seznama. Ko kli"cemo \lstinline|a[1]| tako zahtevamo element, ki se nahaja na mestu na katerega ka"ze $a$ plus 1. Torej naslednji element. Ve"c o kazalcih in seznamih si lahko prebere"s  \href{https://github.com/DzinVision/c-uvod}{\texttt{na tej povezavi}}.
 
-Gre se za to, da za razliko javascripta, kjer je število v oglatih oklepajih pomenilo mesto v arrayu, s katerim naj program operira, v C-ju to pomeni mesto, ki je za toliko mest od začetka oddaljen. Torej če napišemo [4], potem se bo program ,,sprehodil'' za 4 mesta naprej od 0-tega mesta. V tem primeru bi pri naših dveh arrayih prišli na prvo mesto. Enako velja za negativno število v oglatih oklepajih.
+Seznama  \lstinline|a| in \lstinline|b| pa imata v tem primeru "se eno lastnost -- deklarirana sta en za drugim ter vsebujeta zelo malo elemntov. Zaradi tega se seznam \lstinline|b| na RAM-u nahaja takoj za seznamom \lstinline|a|. Ko pokli"cemo \lstinline|a[2]| gremo v resnici na prvi element v seznamu \texttt{b}, ko pokli"cemo \lstinline|b[-1]|, pa gremo v resnici na zadnji element seznama \texttt{a}. Ko kasneje izpi"semo zadnji element seznama \texttt{a} in prvi element seznama \texttt{b}, se izpi"seti to"cno te "stevili. 
 
+Ker v obeh primerih nastavimo "stevilo v seznamu na 42, lahko dobimo la"zen ob"cutek, da se v vrstici \lstinline|a[2]| "stevec obrne in gremo nazaj na prvo mesto v seznamu \texttt{a}, v vrstici \lstinline|b[-1]|, pa da gre "stevec od zadaj in pi"semo na zadnje mesto v seznamu \texttt{b}. Da se to v resnici ne zgodi, lahko preverimo na zelo preprost na"cin -- vsakemu seznamu nastavimo druga"cno "stevilo. Poglejmo si naslednjo kodo.
+
+\begin{lstlisting}
+#include <stdio.h>
+
+int a[] = {2, 4};
+int b[] = {1, 3};
+
+int main(){
+	a[2] = 42;
+	b[-1] = 69;
+
+	printf("%d, %d", a[1], b[0]);
+
+	return 0;
+}
+\end{lstlisting}
+
+Ta program bo sedaj izpisal \texttt{69 42}, torej smo res z \lstinline|b[-1]| nastavili zadnji element v \texttt{a}, z \lstinline|a[2]|, pa smo nastavili prvi element v \texttt{b}.
+%
 \subsection{Znakovni niz(string)}
 V C-ju ne ovstaja string kot samostojen tip. Ampak vemo, če poznamo zbirke in char, da je string nič drugega kot zbirka char elementov. Zato lahko definiramo string kot v prvem ali drugem okvirčku. Prvi je namreč bolj kot zbirka, a težje za vnašanje:
 \begin{center}
