@@ -51,8 +51,6 @@
 	\thispagestyle{empty}
 	\pagebreak
 	\setcounter{page}{1}
-	\tableofcontents
-	\pagebreak
 %-----------------------------------Tu naprej
 
 \begin{center}
@@ -60,9 +58,9 @@
 \end{center}
 Te vaje so direktno iz pouka. Koda morda ni identična od te asistena, ampak deluje enako. Prav tako je komentirana in obrazložena skupaj z navodili in opazkami za lažje razumevanje kode. Prav tako se sklicujem in že tu pozivam, da si pogledaš zapiske iz pouka, ki so kot nekakšen učbenik. Notri je snov, teorija in primeri iz pouka. Prijetno branje in učenje želim!
 
-\section{Vaja}
+\section*{1. vaja}
 /empty/
-\section{Vaja}
+\section*{2. vaja}
 
 \underline{Izračunaj $\int_{x_0}^{x_1}\, 2x^2-5x\, dx$. Rezultat preveri analitično.}	\
 
@@ -104,7 +102,7 @@ Pri programu nam spremenljivka dx sporoči, kako širok del območja integrira. 
 	\end{tikzpicture}
 \end{figure}
 	
-\section{Vaja}
+\section*{3. vaja}
 \subsection*{1. naloga}
 
 \underline{Napiši program, ki izpiše in izračuna faktorielo(fakulteta) nekega števila(1-20)}\
@@ -150,13 +148,13 @@ int main(){
 }
 \end{lstlisting}
 
-\section{Vaja}
+\section*{4. vaja}
 \subsection*{1. naloga}
 
 \underline{Napiši funkcijo, ki sešteje dve razdalji podani v čevljih in palcjh(feet and inches)}\
 
 Vemo, da je 1 čevelj 12 palcev. To potrebujemo, da pretvorimo palce v čevlje, kajti če pri vsoti dobimo recimo 13 palcev, pretvorimo to v en čevelj in en palec.
-\pagebreak
+
 \begin{lstlisting}
 #include <stdio.h>
 
@@ -164,27 +162,21 @@ struct razdalja{
 	int foot;
 	int inch;
 };
-
 struct razdalja sestevanje(struct razdalja x, struct razdalja y);
-
 int main(){
 	struct razdalja a, b, r;
 	printf("Vnesi prvo razdaljo v obliki a b	");
 	scanf("\n %d\'%d\"", &a.foot, &a.inch);
 	printf("Vnesi drugo razdaljo v obliki a b	");
 	scanf("\n %d\'%d\"", &b.foot, &b.inch);
-
 	r = sestevanje(a, b);
 	printf("%d %d\n", r.foot, r.inch);
-
 	return 0;
 }	
-
 struct razdalja sestevanje(struct razdalja x, struct razdalja y){
 	struct razdalja z;
 	z.inch = x.inch + y.inch;
 	z.foot = x.foot + y.foot;
-
 	if(z.inch >=12){
 		z.foot++;
 		z.inch -=12;
@@ -208,5 +200,124 @@ int main(){
 	return 0;
 }
 \end{lstlisting}
+
+\section*{5. vaja}
+\subsection*{1. naloga}
+
+\underline{Opazi napake v main funkciji danega programa:}
+\begin{lstlisting}
+#include <stdio.h>
+
+int test1(float a, float b);
+void test2(double x);
+float test3(int x):
+int main(){
+	int z;float x;
+	z = test1(1.1, 0.4);//ok(opozorilo, pretvorba double v float)
+	z = test1(2, 3);//ok(pretvorba int v float)
+	test1(x, x);//ok
+	z = test2(42);//napaka, test2 ne more dobit vrednosti, je void
+	x = test3(z, 12);//napaka, prevec parametrov
+	z = test3(13);//napaka, funkcija vrne float
+	return 0;
+}
+\end{lstlisting}
+Pomembno je, da se opazi, da v prvi vrstici, se v funkcijjo test1 vnašajo številke, ki so tipa double. Zato je pomembno, da vemo, da program pretvori iz double v float. Napaka je v 4. vrstici, kjer v funkcijo, ki vrne nič(tipa void), vnašamo podatek. Prav tako je napaka v naslednji vrstici, kjer vnašamo celo število v funkcijo, ki pa vrne float.
+
+\subsection*{2. naloga}
+
+\underline{Napiši funkcijo, ki vrne 10 naključnih števil}
+
+Tu spoznamo funkcijo \lstinline|rand()|, ki vrne naključno 16-bitno število. Obstaja tudi funkcija \lstinline|srand(0)| oz. random seed, ki nam vnese neko seme, ki vpliva na naključnost random funkcije.
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+	srand(0);
+	int i;
+	for(i = 0; i<10; i++){
+		printf("%d\n", rand());
+	}
+	return 0;
+}
+\end{lstlisting}
+
+Če zaženemo to kodo lahko opazimo, da ne glede na to kokrat zaženemo program ali ga compailamo, nam vrne enaka števila, kar ni ravno naključno. Zato moramo spreminjati vrednost v funckiji \lstinline|srand(vrednost)|
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int main(){
+	time_t t; //poimenujemo spremenljivko za cas
+	srand((unsigned) time(&t));//prej je bilo tole --> srand(0);
+	for(int i = 0; i<10; i++){
+		printf("%d\n", rand());
+	}
+	return 0;
+}
+\end{lstlisting}
+
+\subsection*{3. naloga}
+	
+\underline{Napiši program, ki naključno sortira zbirko učencev}
+
+v temu programu potrebujemo metodo urejanja z mehurčki(bubble sort).\
+Ta deluje tako, da primerjamo po dve števili med seboj. Če je prvo večje od drugega, potem ju zamenja. Tako gre program skozi celotni seznam. Ponovo ta postopek, dokler niso razvrščeni vsi elementi.
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+#define DIM 500
+
+struct ucenec {
+	int visina;
+	int starost;
+	float teza;
+	char spol;
+	char ime[20];
+	char priimek[20];
+};
+struct ucenec ekipa[DIM];
+int main (){
+
+	int i, j, urejeno, stPrimerjav=0;
+	struct ucenec tmp;
+	srand(26);
+	
+	for (i = 0; i < DIM; i++){ekipa[i].visina = 110 + rand()%21;}
+	for (i = 0; i < DIM; i++){
+		stPrimerjav=0;
+		for (j = 0; j < DIM-1; j++){
+			if (ekipa[j+1].visina < ekipa[j].visina){
+				tmp = ekipa[j+1];
+				ekipa[j+1] = ekipa[j];
+				ekipa[j] = tmp;
+				stPrimerjav=1;
+			}
+		}
+		if (stPrimerjav == 0){break;}	
+	}
+	return 0;
+}
+\end{lstlisting}
+
+Da razložimo kodo. Na začetku se opazi nekaj novega za nas. Imamo funkcijo \framebox{\lstinline|#define DIM 500|}. Ta funkcija nam izrazu ""DIM" priredi vrednost 500. Torej vsakič, ko napišemo DIM nam vpiše 500. To ni spremenljivka!\
+
+Nato definiramo novo strukturo z imenom učenec. Ta ima vse podatke posameznega učenca. Mi se bomo osredotočili na višino. Tako definiramo zbirko z imenom ekipa tipa ucenec. Ta ima velikost DIM, torej ustvarimo zbirko 500 ucencev, katere zbirka se imenuje ekipa.\
+
+Preidemo v main funkcjo in si nastavimo spremenljivke za for zanki ter spremenljivki urejeno in stPrimerjav. Uporabo teh bom razložil kasneje. Definiramo novo spremenljivko tipa ucenec z imenom tmp. Ta predstavlja ""začasnega učenca". Ta se bo uporabljal, ko bomo premikali ucence po vrstnem redu in bomo morali enega shraniti v nek začasni prostor, da se bodo lahko ucenci v zbirki ekipa prestavili. Več o tem kasneje.\
+
+Prva for zanka nam kreira naključne višine za vsakega od učencev v ekipi. Sprehodimo se od prvega do zadnjega in vsakemu priredimo vrednost višine od 110 do 130 naključno. To pa naredimo tako, da deljimo naključno število z 21 in pogledamo njegov ostanek. To nam naredi operator \%. Ta ostanek je vedno od 0 do 20, tako da ravno prav in zato je ostanek pri deljenju z 21 za števila od 0 do 20 in ne deljenje z 20!\
+
+Ko ima vsak učenec višino, gremo v dvojni for stavek. Prvi for stavek bo največ DIM-krat izvedel primerjavo in zamenjavo mest učencev v zbirki. Drugi for stavek pa primerja in prestavlja učence po zbirki.\\
+Deluje tako, da se pojavi if stavek, ki primerja trenutno višino učenca[i] ter višino od naslednjika ucenec[i+1]. Če je drugi manjši, ju mora zamenjati. To pa naredi tako, da vzame najprej vrednosti od ucenec[i+1] in jih skopira v začasnega učenca tmp, na mesto ucenec[i+1] skopira vrednosti od ucenec[i] in nato na mesto ucenec[i] skopira vrednosti iz tmp oz. prejšni ucenec[i+1].\
+
+Tako potuje ta ""val" po celotni zbirki in premeša po dva in dva elementa, kjer je to potrebno. Prav tako, vsakič ko premeša dva člena, postavi spremenljivko stPrimerjav na 1. Ta spremenljivka nam pove, ali je bila skozi en prehod skozi zbirko narejena primerjava in zamenjava dveh členov. To potrebujemo zato, da na koncu prve for zanke preverimo, če je bila narejena kakšna primerjava v temu i-tem preletu zbirke. Vidimo tudi, da se ta spremenljivka na začetku te for zanke tudi resetira na 0. Torej ostane 0, če se if stavek v drugi for zanki sploh ne izvede. V tem primeru koda izstopi iz for zanke. Na koncu lahko postavimo kako for zanko, ki nam izpiše od 0 do DIM višine vseh učencev in lahko vidimo, da so po vrsti.
+
+
+
 
 \end{document}
