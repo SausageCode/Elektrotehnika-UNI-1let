@@ -337,13 +337,25 @@ int main(){
 
 Kazalce sem omenil že pri zbirkah in da so ti razlog, da se zbirke obnašajo tako, kot se. Rekli smo, da je spremenljivka a[] zares kazalec na začetek zbirke in s številom v oklepajih povemo na katero mesto stran od kazalca naj beremo. Vrednost kazalca je torej pomnilniški naslov.\
 
-Kazalec lahko definiramo kot: \framebox{\lstinline|int *p;|}. S tem definiramo, da je p kazalec in hrani le naslov v pomnilniku. s sledečim ukazom mu povemo, naj kaže na premenljivko:  \framebox{\lstinline|p = &x;|}. če želimo na mesto te spremenljivke, na katero kaže prirediti vrednost, potem izpišemo: \framebox{\lstinline|*p = 42|}. Sedaj, če izpišemo vrednost spremenljivke x, nam vrne vrednost 42.\
+Kazalec lahko definiramo kot: \framebox{\lstinline|tip *p;|}. S tem definiramo, da je p kazalec in hrani le naslov v pomnilniku. s sledečim ukazom mu povemo, naj kaže na premenljivko:  \framebox{\lstinline|p = &x;|}. če želimo na mesto te spremenljivke, na katero kaže prirediti vrednost, potem izpišemo: \framebox{\lstinline|*p = 42|}. Sedaj, če izpišemo vrednost spremenljivke x, nam vrne vrednost 42. Tip kazalca mora biti enak tipu spremenljivke, na katero kaže!\
 
-Kaj je torej ta zvezdica. To je operator indirekcije, ki dobi naslov podatka in gre direktnon na ta naslov. Torej zgoraj v zadnjem okvirču torej pomeni, da z operacijo *p ne operiram s p-jem, teveč s podatkom, kamor kaže p, torej na spremenljivko x.
+Kaj je torej ta zvezdica. To je operator indirekcije, ki dobi naslov podatka in gre direktnon na ta naslov. Torej zgoraj v zadnjem okvirču torej pomeni, da z operacijo *p ne operiram s p-jem, teveč s podatkom, kamor kaže p, torej na spremenljivko x. Zato zgoraj v okvirčkih vidimo, da ko izvedemo ukaz \lstinline|*p = 42|, nam program manipulira s prostorom, kjer se nahaja spremenljivka x, na katero kaže kazalec p.
 
-...
+Torej ukazi ki jih imamo na voljo so prikazani v tabeli primera kode:
 
-\pagebreak
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{ | l | l | l |}
+		\hline
+		\textcolor{blue}{operacija}  & \textcolor{blue}{opis} & \textcolor{blue}{vrne}\\ \hline
+		\lstinline|int| \textcolor{dkgreen}{\lstinline|sprem|} \lstinline| = 20;|& v spremenljivko sprem shrani vrednost 20 & \\
+		\lstinline|int *|\textcolor{orange}{\lstinline|p|}\lstinline|;| 		 & ustvari kazalec p & \\
+		\textcolor{orange}{\lstinline|p|}\lstinline| = &|\textcolor{dkgreen}{\lstinline|sprem|}\lstinline|;| & shrani naslov spremenljivke v kazalec p &\\
+		\lstinline|printf("%x", &|\textcolor{dkgreen}{\lstinline|sprem|}\lstinline|);| & izpiše naslov spremenljivke sprem & \texttt{6af36e8c}\\
+		\lstinline|printf("%x", |\textcolor{orange}{\lstinline|p|}\lstinline|);|			 & izpiše vrednost p / naslov mesta, kamor kaže & \texttt{6af36e8c}\\ 
+		\lstinline|printf("%d", *|\textcolor{orange}{\lstinline|p|}\lstinline|);|& izpiše vrednost mesta, kamor kaže p / sprem & \texttt{20} \\ \hline
+	\end{tabular}
+\end{table}
 
 Primer:
 \begin{lstlisting}
@@ -374,19 +386,6 @@ int main(){
 
 V temu primeru izpišemo vrednost elementa, ki se nahaja na naslovu za 2 stran od naslova zb. Torej lahko naslavljamo kot: \lstinline|&zb[0] = zb|. Torej, če napišemo zb, s tem kažemo na naslov, kjer se začne zbirka. Z zvezdico beremo podatek, iz tega naslova. Torej velja tudi \lstinline|*zb = zb[0]|\ 
 
-Tudi dober primer je sledeč:
-\begin{lstlisting}
-#include <stdio.h>
-
-int main(){
-	char a[] = "neki";
-	char b[] = "neki";
-	printf("%d\n", a == b);
-	return 0;
-}
-\end{lstlisting}
-
-V temu programu primerjamo a in b. Program vrnne 0, saj ni pravilno. Tu primerjamo naslove, in seveda naslova od a in b sta različna, saj sta različni spremenljivki, a slučajno z enako vsebino. Primerjanje vsebine bi potrebovalo * ter primerjanje zbirk po komponentah. Kako se celotno zbirko primerja, bomo spoznali kasneje.
 \pagebreak
 
 Primer menjave vrednosti elementov.
