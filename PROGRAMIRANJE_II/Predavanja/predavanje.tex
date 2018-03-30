@@ -333,6 +333,84 @@ int main(){
 }
 \end{lstlisting}
 
+\subsection{Kazalci}
+
+Kazalce sem omenil že pri zbirkah in da so ti razlog, da se zbirke obnašajo tako, kot se. Rekli smo, da je spremenljivka a[] zares kazalec na začetek zbirke in s številom v oklepajih povemo na katero mesto stran od kazalca naj beremo. Vrednost kazalca je torej pomnilniški naslov.\
+
+Kazalec lahko definiramo kot: \framebox{\lstinline|int *p;|}. S tem definiramo, da je p kazalec in hrani le naslov v pomnilniku. s sledečim ukazom mu povemo, naj kaže na premenljivko:  \framebox{\lstinline|p = &x;|}. če želimo na mesto te spremenljivke, na katero kaže prirediti vrednost, potem izpišemo: \framebox{\lstinline|*p = 42|}. Sedaj, če izpišemo vrednost spremenljivke x, nam vrne vrednost 42.\
+
+Kaj je torej ta zvezdica. To je operator indirekcije, ki dobi naslov podatka in gre direktnon na ta naslov. Torej zgoraj v zadnjem okvirču torej pomeni, da z operacijo *p ne operiram s p-jem, teveč s podatkom, kamor kaže p, torej na spremenljivko x.
+
+...
+
+\pagebreak
+
+Primer:
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(){
+	int zb[5];
+	int *p1, *p2;
+	p1 = &zb[1];
+	p2 = &zb[3];
+	printf("%d", p2-p1); 
+	return 0;
+}
+\end{lstlisting}
+
+Sledeča koda najprej naredi zbirko 5-ih elementov. Nato ustvarimo dva kazalca z imeni p1 in p2. Ta nastavimo, da kažeta p1 na 2. člen zbirke ter p2 na 4. člen zbirke. Nato odštejemo kazalca med seboj, in nam program vrne 2, torej razliko mest med njima.
+
+Drug primer:
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(){
+	int zb[5] = {11, 22, 33, 44, 55};
+	printf("%d", *(zb+2));
+	return 0;
+}
+\end{lstlisting}
+
+V temu primeru izpišemo vrednost elementa, ki se nahaja na naslovu za 2 stran od naslova zb. Torej lahko naslavljamo kot: \lstinline|&zb[0] = zb|. Torej, če napišemo zb, s tem kažemo na naslov, kjer se začne zbirka. Z zvezdico beremo podatek, iz tega naslova. Torej velja tudi \lstinline|*zb = zb[0]|\ 
+
+Tudi dober primer je sledeč:
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(){
+	char a[] = "neki";
+	char b[] = "neki";
+	printf("%d\n", a == b);
+	return 0;
+}
+\end{lstlisting}
+
+V temu programu primerjamo a in b. Program vrnne 0, saj ni pravilno. Tu primerjamo naslove, in seveda naslova od a in b sta različna, saj sta različni spremenljivki, a slučajno z enako vsebino. Primerjanje vsebine bi potrebovalo * ter primerjanje zbirk po komponentah. Kako se celotno zbirko primerja, bomo spoznali kasneje.
+\pagebreak
+
+Primer menjave vrednosti elementov.
+\begin{lstlisting}
+#include <stdio.h>
+
+void menjaj(int *a, int *b){
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+int main(){
+	int x = 10, y = 20;
+	menjaj(&x, &y);
+	printf("%d, %d", x, y);
+	return 0;
+}
+\end{lstlisting}
+
+Če želimo zamenjati vrednosti dveh spremenljivk, moramo najprej eno odložiti na začasno mesto, drugo preslikati na njeno mesti in skopirati vrednost iz začasnega mesta na prvotno mesto druge. S tem moramo upravljati z globalnimi spremenjivkami ..... Lahko pa s kazalci. Rečemo, da sta v void funkciji, ki nič ne vrne, kažeta elementa a in b na x in y vhodna podatka. tako operiramo z originalnimi podatki v main funkciji, ne da bi potrebovali funkcijo, ki bi vračala podatke ali jih pisala...
+
+
+
 \section{Operatorji}
 Pri C-ju so enaki operatorji, kot v JS, le da z nekimi izjemami: Operator === in !=== ne obstajata.\\
 Prav tako operator za deljenje ne zapišemo kot ``/'' ne deluje enako. Problem prihaja iz tipa spremenljivk. Če obsoječo spremenljivko $x$, ki je tipa \underline{int}, deljimo ali spreminjamo tako, da bi postala ta spremenljivka kateregakoli drugega tipa, kot prvotni \underline{int}, potem vrne program 0. Primer:
@@ -346,6 +424,7 @@ int maint(){
 \end{lstlisting}
 Če pa spremenimo prvo 8 z 8.0, potem bo program jo vzel za realno število in deljil in nato nazaj množil z 8, tako se te pokrajšata in program vrne 7.
 
+\pagebreak
 \section{Funkcije}
 Funkcije deklariramo tako:
 
