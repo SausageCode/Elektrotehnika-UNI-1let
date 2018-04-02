@@ -1,8 +1,8 @@
 #include <stdio.h>
 //definiramo nov tip spremenljivke - vektor, ki vsebuje dve komponenti
 struct vektor{
-	int x;
-	int y;
+	double x;
+	double y;
 };
 //naredimo "prototipe" funkcij, da program ve, da obstajajo, saj se nahajajo po main() funkciji, za lepošto preglednost te
 void konjugiranje(struct vektor a, struct vektor b);
@@ -48,37 +48,37 @@ int main(){
 //funkcije, ki se klicejo v switch stavku glede na izbiro uporabnika
 void konjugiranje(struct vektor a, struct vektor b){
 	printf("Vnesi stevilo za konjugiranje v obliki a+bi\t");
-	scanf("\n %d%di", &a.x, &a.y);
-	printf("Konjugirano stevilo je:\t\t\t\t%d%+di\n", a.x, a.y*(-1));
+	scanf("\n %lf%lfi", &a.x, &a.y);
+	printf("Konjugirano stevilo je:\t\t\t\t%lf%+lfi\n", a.x, a.y*(-1));
 }
 void sestevanje(struct vektor a, struct vektor b){
 	printf("Vnesi prvo kompleksno stevilo z v obliki a+bi\t");
-	scanf("\n %d%d", &a.x, &a.y);
+	scanf("\n %lf%lfi", &a.x, &a.y);
 	printf("Vnesi drugo kompleksno stevilo w v obliki c+di\t");
-	scanf("\n %d%d", &b.x, &b.y);
-	printf("Vsota stevil z in w je:\t\t\t\t%d%+di\n", a.x+b.x, a.y+b.y);
+	scanf("\n %lf%lfi", &b.x, &b.y);
+	printf("Vsota stevil z in w je:\t\t\t\t%lf%+lfi\n", a.x+b.x, a.y+b.y);
 }
 void odstevanje(struct vektor a, struct vektor b){
 	printf("Vnesi prvo kompleksno stevilo z v obliki a+bi\t");
-	scanf("\n %d%d", &a.x, &a.y);
+	scanf("\n %lf%lfi", &a.x, &a.y);
 	printf("Vnesi drugo kompleksno stevilo w v obliki c+di\t");
-	scanf("\n %d%d", &b.x, &b.y);
-	printf("Razlika stevil z in w je:\t\t\t%d%+di\n", a.x-b.x, a.y-b.y);
+	scanf("\n %lf%lfi", &b.x, &b.y);
+	printf("Razlika stevil z in w je:\t\t\t%lf%+lfi\n", a.x-b.x, a.y-b.y);
 }
 void mnozenje(struct vektor a, struct vektor b){
 	printf("Vnesi prvo kompleksno stevilo z v obliki a+bi\t");
-	scanf("\n %d%d", &a.x, &a.y);
+	scanf("\n %lf%lfi", &a.x, &a.y);
 	printf("Vnesi drugo kompleksno stevilo w v obliki c+di\t");
-	scanf("\n %d%d", &b.x, &b.y);
-	printf("Produkt stevil z in w je:\t\t\t%d%+di\n", a.x*b.x-a.y*b.y, a.x*b.y+a.y*b.x);
+	scanf("\n %lf%lfi", &b.x, &b.y);
+	printf("Produkt stevil z in w je:\t\t\t%lf%+lfi\n", a.x*b.x-a.y*b.y, a.x*b.y+a.y*b.x);
 }
 void deljenje(struct vektor a, struct vektor b){
 	printf("Vnesi prvo kompleksno stevilo z v obliki a+bi\t");
-	scanf("\n %d%d", &a.x, &a.y);
+	scanf("\n %lf%lfi", &a.x, &a.y);
 	printf("Vnesi drugo kompleksno stevilo w v obliki c+di\t");
-	scanf("\n %d%d", &b.x, &b.y);
+	scanf("\n %lf%lfi", &b.x, &b.y);
 	if((b.x*b.x+b.y*b.y) != 0){
-		printf("Kvocient stevil z in w je:\t\t\t%.2f%+.2fi \n",(float)(a.x*b.x+a.y*b.y)/(b.x*b.x+b.y*b.y),(float)(a.y*b.x-a.x*b.y)/(b.x*b.x+b.y*b.y));
+		printf("Kvocient stevil z in w je:\t\t\t%.2lf%+.2lfi \n",(float)(a.x*b.x+a.y*b.y)/(b.x*b.x+b.y*b.y),(float)(a.y*b.x-a.x*b.y)/(b.x*b.x+b.y*b.y));
 	}
 	else{
 		printf("Deljenje z nic NI dovoljeno!");

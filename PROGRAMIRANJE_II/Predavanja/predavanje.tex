@@ -20,6 +20,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{multirow}
+\usepackage{caption}
 \usepackage[
 colorlinks=true,
 linkcolor=black,
@@ -51,16 +52,21 @@ minimum height=2em]
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \definecolor{lgray}{RGB}{250,250,250}
+
+\renewcommand\lstlistingname{Program}
+\renewcommand\lstlistlistingname{Program}
+\def\lstlistingautorefname{Alg.}
+
 \lstset{
 	frame=l,%single
-	language=C,
+	language=[ANSI]C,
 	aboveskip=3mm,
 	belowskip=3mm,
 	showstringspaces=false,
 	columns=flexible,
 	basicstyle={\small\ttfamily},
 	numbers=none,
-	numberstyle=\tiny\color{gray},
+	numberstyle=\tiny\color{red},
 	keywordstyle=\color{blue},
 	commentstyle=\color{dkgreen},
 	stringstyle=\color{mauve},
@@ -68,9 +74,34 @@ minimum height=2em]
 	breakatwhitespace=true,
 	tabsize=4,
 	backgroundcolor=\color{lgray},
-	moredelim=**[is][\color{dkgreen}]{@}{@}
+	moredelim=**[is][\color{dkgreen}]{@}{@},
 }
+
+\lstdefinestyle{customc}{
+	belowcaptionskip=0.5\baselineskip,
+	breaklines=true,
+	xleftmargin=\parindent,
+	language=C,
+	showstringspaces=false,
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\bfseries\color{green!40!black},
+	commentstyle=\itshape\color{purple!40!black},
+	identifierstyle=\color{blue},
+	stringstyle=\color{orange},
+}
+
+\lstdefinestyle{customasm}{
+	belowcaptionskip=0.5\baselineskip,
+	xleftmargin=\parindent,
+	language=C,
+	basicstyle=\footnotesize\ttfamily,
+	commentstyle=\itshape\color{purple!40!black},
+}
+
+\lstset{escapechar=@,style=customc}
+
 %---------------------------------------//
+
 \newcommand{\harpoon}{\overset{\rightharpoonup}}
 
 
@@ -107,7 +138,7 @@ int main(){
 To je podobno kot v javascriptu:  \lstinline|<script src="datoteka">|\ 
 \section{Podatki}
 Poglejmo si zgled:
-\begin{lstlisting}
+\begin{lstlisting}[caption = Branje in pisanje podatkov]
 int main(){
 	int a;
 	float b; //spremenljivka
@@ -225,7 +256,7 @@ Prav tako velja, da statične neinicializirane spremenljivke dobijo vrednost 0. 
 
 \pagebreak
 
-\begin{lstlisting}
+\begin{lstlisting}[caption = Statične in dinamične spremenljivke]
 #include <stdio.h>
 int ga; //globalna spremenljivka
 
@@ -274,13 +305,13 @@ int main(){
 
 V tem primeru, imamo globalna arraya $a$ in $b$. Imata dva elementa, torej je njuna velikost 2. Nato pa v main funkciji elementu 2 v arrayu $a$ in elementu -1 v arrayu $b$ priredimo vrednost 42. In potem, ko izpišemo drugi člen arraya $a$ in prvi člen arraya $b$, se nam izpišeta točno te dve števili. Zelo je čudno, saj ne mormo iti v negativno mesto arraya, drugo mesto arraya pa ne obstaja, saj pri obeh gre le 0 in 1. mesto.
 
-"Zal na predavanjih "se nismo (niste) obdelali kazalcev. Zakaj se to zgodi pojasnijo kazalci. Spremenljivki $a$ in $b$ sta v resnici kazalca na za"cetek seznamov, ki sta jima prirejena. $a$ torej ka"ze na prvi element v seznamu in ko kli"cemo \lstinline|a[0]| v resnici zahtevamo element, ki se nahaja na mestu, na katerega ka"ze a, plus 0. Torej element na za"cetku seznama. Ko kli"cemo \lstinline|a[1]| tako zahtevamo element, ki se nahaja na mestu na katerega ka"ze $a$ plus 1. Torej naslednji element. Ve"c o kazalcih in seznamih si lahko prebere"s  \href{https://github.com/DzinVision/c-uvod}{\texttt{na tej povezavi}}.
+"Zal na predavanjih "se nismo obdelali kazalcev. Zakaj se to zgodi pojasnijo kazalci v naslednjem poglavju. Spremenljivki $a$ in $b$ sta v resnici kazalca na za"cetek seznamov, ki sta jima prirejena. $a$ torej ka"ze na prvi element v seznamu in ko kli"cemo \lstinline|a[0]| v resnici zahtevamo element, ki se nahaja na mestu, na katerega ka"ze a, plus 0. Torej element na za"cetku seznama. Ko kli"cemo \lstinline|a[1]| tako zahtevamo element, ki se nahaja na mestu na katerega ka"ze $a$ plus 1. Torej naslednji element. Ve"c o kazalcih in seznamih si lahko prebere"s  \href{https://github.com/DzinVision/c-uvod}{\texttt{na tej povezavi}}.
 
 Seznama  \lstinline|a| in \lstinline|b| pa imata v tem primeru "se eno lastnost -- deklarirana sta en za drugim ter vsebujeta zelo malo elemntov. Zaradi tega se seznam \lstinline|b| na RAM-u nahaja takoj za seznamom \lstinline|a|. Ko pokli"cemo \lstinline|a[2]| gremo v resnici na prvi element v seznamu \texttt{b}, ko pokli"cemo \lstinline|b[-1]|, pa gremo v resnici na zadnji element seznama \texttt{a}. Ko kasneje izpi"semo zadnji element seznama \texttt{a} in prvi element seznama \texttt{b}, se izpi"seti to"cno te "stevili. 
 
 Ker v obeh primerih nastavimo "stevilo v seznamu na 42, lahko dobimo la"zen ob"cutek, da se v vrstici \lstinline|a[2]| "stevec obrne in gremo nazaj na prvo mesto v seznamu \texttt{a}, v vrstici \lstinline|b[-1]|, pa da gre "stevec od zadaj in pi"semo na zadnje mesto v seznamu \texttt{b}. Da se to v resnici ne zgodi, lahko preverimo na zelo preprost na"cin -- vsakemu seznamu nastavimo druga"cno "stevilo. Poglejmo si naslednjo kodo.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption = Zbirke primer]
 #include <stdio.h>
 
 int a[] = {2, 4};
@@ -307,9 +338,9 @@ V C-ju ne ovstaja string kot samostojen tip. Ampak vemo, če poznamo zbirke in c
 
 Lahko definiramo tudi drugače, kot je zapisano v drugem okvirčku.
 
-Poglejmo primer. Imamo program, ki nam izpiše string kot posamezne elemente zbirke txt v for zanki. For zanka je napisana malo drugače. Namesto primerjave v srednjem delu, imamo primerjavo $i$-tega člena zbirke txt in če je ta različna od nič oz. če obstaja, zato lahko tam napišemo ali: \texttt{txt[i] != 0} ali pa \texttt{txt[i]}, potem jo izpiše. Tako se pomika po zbirki navzgor. Na koncu vsake zbirke, je "nevidna" ničla in ko jo najde, jo več ne izpiše in se for zanka konča. Jaz sem uporabil drugo metodo.
+Poglejmo primer. Imamo program, ki nam izpiše string kot posamezne elemente zbirke txt v for zanki. For zanka je napisana malo (niste) drugače. Namesto primerjave v srednjem delu, imamo primerjavo $i$-tega člena zbirke txt in če je (niste) ta različna od nič oz. če obstaja, zato lahko tam napišemo ali: \texttt{txt[i] != 0} ali pa \texttt{txt[i]}, potem jo izpiše. Tako se pomika po zbirki navzgor. Na koncu vsake zbirke, je "nevidna" ničla in ko jo najde, jo več ne izpiše in se for zanka konča. Jaz sem uporabil drugo metodo.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption = Znakovni niz: navajanje 1]
 #include <stdio.h>
 
 int main(){
@@ -323,7 +354,7 @@ int main(){
 
 Ker se string rabi pogosto, obstaja formatno določilo \textcolor{purple}{\%s}. Tako lahko napišemo program kot kaže koda. Pomni, da ko izpišeš, uporabi le ime char array-a brez oglatih oklepajev.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption = Znakovni niz: navajanje 2]
 #include <stdio.h>
 
 int main(){
@@ -357,8 +388,7 @@ Torej ukazi ki jih imamo na voljo so prikazani v tabeli primera kode:
 	\end{tabular}
 \end{table}
 
-Primer:
-\begin{lstlisting}
+\begin{lstlisting}[caption = Kazalci: Mesta v zbirki]
 #include <stdio.h>
 
 int main(){
@@ -373,8 +403,7 @@ int main(){
 
 Sledeča koda najprej naredi zbirko 5-ih elementov. Nato ustvarimo dva kazalca z imeni p1 in p2. Ta nastavimo, da kažeta p1 na 2. člen zbirke ter p2 na 4. člen zbirke. Nato odštejemo kazalca med seboj, in nam program vrne 2, torej razliko mest med njima.
 
-Drug primer:
-\begin{lstlisting}
+\begin{lstlisting}[caption = Kazalci: Izpis podatkov s kazalci in zbirke]
 #include <stdio.h>
 
 int main(){
@@ -388,8 +417,7 @@ V temu primeru izpišemo vrednost elementa, ki se nahaja na naslovu za 2 stran o
 
 \pagebreak
 
-Primer menjave vrednosti elementov.
-\begin{lstlisting}
+\begin{lstlisting}[caption = Menjava vrednosti elementov s kazalci]
 #include <stdio.h>
 
 void menjaj(int *a, int *b){
@@ -438,26 +466,29 @@ Prav tako vidimo, da glavna zanka, v kateri se koda izvaja, je \texttt{main}. v 
 Primer funkcije je iz poglavja Psevdonaključna števila. Tam smo spoznali definiranje funkcije:
 \framebox{\lstinline|int dogodek(float verjetnost);|} Vidimo, da moramo za razliko od JS definirati vrsto spremenljivke, ki gre v vhodne podatke, tj. verjetnost. Poleg tega, ker se konča z podpičjem, imenujemo ta del prototip. Nič ne naredi. Nato definiramo šele funkcijo.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption = Naključnost s funkcijo srand in brez]
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-int dogodek(float verjetnost);
 int dogodek(float verjetnost){
-	if((float)rand() / RAND_MAX <= verjetnost){}
+	if((float)rand() / RAND_MAX <= verjetnost){
 		return 1;
 	}
+	return 0;
 }
+
 int main(){
 
 	int x, stevec = 0;
+	
 	srand(time(NULL));
+	
 	for(x=0; x < 100000;x++){
-		stevec += dogodek(0.5);
+	stevec += dogodek(0.5);
 	}
 	printf("%d", stevec);
-
+	
 	return 0;
 }
 \end{lstlisting}
@@ -468,10 +499,21 @@ Naredimo primer na bolezni. Izračunajmo, koliko \% ljudi, ki so bolani zares, z
 
 Testiramo 100 000 ljudi in vemo, da bolezen ubije 0.5\% ljudi. Prav tako vemo, da test pokaže z natančnostjo 99\%, da je oseba bolana. 1\%, da je oseba zdrava. Ampak ali je res, da je 1\% zdravih ali napačno diagnosticirano.
 
-\begin{lstlisting}
-int main(){
+\begin{lstlisting}[caption = Primer naključnosti z bolanimi ljudmi]
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-    unsigned long i;
+int dogodek(float verjetnost){
+	if((float)rand() / RAND_MAX <= verjetnost){
+		return 1;
+	}
+	return 0;
+}
+
+int main(){
+	
+	unsigned long i;
 	float pBolan = 0.005; //verjetnost da ubije
 	float pPozitBolan = 0.99; //resnicno bolan verjetnost
 	float pPozitZdrav = 0.01;//verjetnost da je bolan, ceprav je zdrav
@@ -479,6 +521,7 @@ int main(){
 	unsigned long pozitBolan = 0;
 	
 	srand(time(NULL));
+	
 	for(i = 0; i<100000;i++){
 		if(dogodek(pBolan)){//vemo da je bolan
 			if(dogodek(pPozitBolan)){//testiramo kako dobro izmerimo,ce je bolan
@@ -492,9 +535,13 @@ int main(){
 			}
 		}
 	}
+	
 	printf("%f", (float)pozitBolan/pozit);// rezultat je bolni/testirane pozitivno
+	return 0;
 }
 \end{lstlisting}
+
+\pagebreak
 
 \section{Strukture}
 
@@ -511,7 +558,7 @@ Struct s spremenljivko ime je nov podatkovni tip. In ko definiramo komponente te
 
 Če hočemo klicati spremenljivko, definiramo kot \lstinline|sprem.ime1;| Glej kodo spodaj za referenco:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption = Kopiranje struktur]
 #include <stdio.h>
 
 struct vektor {
@@ -525,7 +572,7 @@ int main() {
 	v1.y = -0.7;
 
 	v2 = v1;  // ustvari se cista kopija, ne samo povezava do spremenljivke, kot v JS
-	v2.x = 13;
+	v2.x = 13; // ce odstranimo vrstico, potem nam program vrne 1, drugace 0
 	printf("%d\n", v1.x == v2.x);  // testiramo, da vidimo, ali je enakost, %d, ker nam vraca 1 ali 0(boolean)
 	
 	return 0;
@@ -551,5 +598,116 @@ y \\
 z
 \end{bmatrix}
 \end{equation*}
+
+\pagebreak
+
+\begin{lstlisting}[caption = Strukture: vektorski produkt]
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+struct vektor{
+	int x, y, z;
+};
+
+int main(){
+	
+	srand(time(NULL));
+	
+	struct vektor v1, v2, r;
+	
+	v1.x = random()%11;
+	v1.y = random()%11;
+	v1.z = random()%11;
+	
+	v2.x = random()%10;
+	v2.y = random()%10;
+	v2.z = random()%10;
+	
+	r.x = v1.y*v2.z - v1.z*v2.y;
+	r.y = v1.z*v2.x - v1.x*v2.z;
+	r.z = v1.x*v2.y - v1.y*v2.x;
+	
+	printf("Nov vektor je: (%d, %d, %d)\n", r.x, r.y, r.z);
+	
+	return 0;
+}
+\end{lstlisting}
+
+Program nam torej reši vektorski produkt dveh naključno izbranih vektorjev. Uporablja se struktura za vektorje, naključna funkcija \lstinline|random()| ter formula za vektorski produkt.
+
+\subsection{Podrobnejša razlaga struktur}
+
+Slišal sem, da nekateri ne razumejo principa delovanja struktur, zato sem dodal sledečo razlago, ki naj bi pomagala k razumevanju. Dele razlage bom obarval za lažje sledenje razlagi.\
+
+Za to kar bomo potrebovali si lahko predstavljate strukturo kot mašina za izdelovanje svojih vrst spremenljivk. Pomislite na vse tipe spremenljivk, ki so v preglednici, torej \lstinline|int, short, char, long, float| ... Vse te vrste spremenljivk imajo svoja pravila delovanja, uporabe prostora v pomnilniku ipd. Enako struktura. Definiramo svoj tip spremenljivke in z njim naprej upravljamo. Dajmo najprej za začetek definirati naš nov tip spremenljivke.
+
+\begin{lstlisting}
+struct tip{
+};
+\end{lstlisting}
+
+S to "\ zanko "\ oz ukazom smo naredili novo spremenljivko z imenom \lstinline|tip|. Sedaj so lastnosti/komponente te spremenljivke še nedefinirane, zato ji podajmo lastnosti:
+
+\begin{lstlisting}
+struct tip{
+	int vred1;
+	int vred2;
+};
+\end{lstlisting}
+
+Kaj smo torej naredili. Tipu spremenljivke \lstinline|tip| smo dodali dvoje vrednosti z imeni \lstinline|vred1| in \lstinline|vred2|. Ti sta tipa \lstinline|int| ampak pri razlagi to nima veze.\\
+Torej, ustvarili smo tip spremenljivke, ki ima dvoje vrednosti. Kako sedaj kreiramo dejansko spremenljivko tega tipa \lstinline|tip|?
+
+\begin{lstlisting}
+struct tip spremenljivka; // kreacija nove spremenljivke
+tip spremenljivka;			 // deluje tako, ce bi bila TIP uveden
+/* enak nacin definiranja nove spremenljivke,kot ze poznamo: */
+int spremenljivka;
+\end{lstlisting}
+
+V zgornji kodi smo sedaj ustvarili novo spremenljivko tipa \lstinline|tip|. To si lahko predstavljamo kot evivalent drugi vrstici, če odmislimo ukaz \lstinline|struct|. \framebox{\lstinline|tip| je " enak " \lstinline|int|}
+
+Sedaj želimo dostopati do podatkov naše spremenljivke. Ker smo naredili spremenljivko, ki ima več vrednosti, moramo do teh dostopati sledeče:
+
+\begin{lstlisting}
+spremenljivka.vred1 = 10;
+spremenljivka.vred2 = 20;
+\end{lstlisting}
+
+V zgornji kodi smo priredili spremenljivki določene vrednosti. A ker ima naša spremenljivka, ki je tipa \lstinline|tip| več vrednosti, moramo te naslavljati posamično. Zato uporabimo piko in za njo ime vrednosti, na katero naslavljamo. Tako v kodi priredimo vrednost 10 \lstinline|vred1| ter vrednost 20 \lstinline|vred2|. Sedaj ima naša spremenljivka \lstinline|spremenljivka| dodeljene določene vrednosti svojim komponentam. Če želimo izpisati vsebino spremenljivke \lstinline|spremenljivka|, deluje enako:
+
+\begin{lstlisting}
+printf("%d %d", spremenljivka.vred1, spremenljivka.vred2);
+\end{lstlisting}
+
+Enako, kot pri prirejanju vrednosti, moramo pri izpisovanju naslavljati posamične komponente/vrednosti naše spremenljivke tipa \lstinline|tip| po komponentah.\
+
+Sedaj, zakaj bi hoteli imeti neke svoje vrste spremenljivke? Potreba pride iz neke enostavnosti in čistoče kode. Primer pride iz baz podatkov. Tam imam n oseb in vsaka ima več karakteristik; ime, priimek, spol, starost, teža ipd. In da se ognemo vsem teh spremenljivkah za n oseb, kjer bi imeli n spremenljivk za imena, priimke ..., naredimo "skupino" oz kategorijo z imenom OSEBA, ki vsebuje vse te podkategorije/lastnosti in nato lahko recimo sortiramo osebe po teh komponentah. To smo delali pri avditornih vajah, zato si lahko pogledaš primer tam.\
+
+Celoten postopek, ki bi ga uporabil je:
+
+\begin{lstlisting}
+#include <stdio.h>
+
+struct tip{ 	//definiramo nov tip spremenljivke z imenom TIP 
+	int vred1;
+	int vred2;
+};
+
+int main(){
+	
+	struct tip spremenljivka; // definiramo novo spremenljivko tipa TIP
+	
+	spremenljivka.vred1 = 10; // priredimo vrednosti komponentam spremenljivke
+	spremenljivka.vred2 = 20;
+	
+	printf("%d, %d", spremenljivka.vred1, spremenljivka.vred2); // izpis komponent
+	//izpise: 10, 20
+
+	return 0;
+}
+\end{lstlisting}
+
 
 \end{document}
