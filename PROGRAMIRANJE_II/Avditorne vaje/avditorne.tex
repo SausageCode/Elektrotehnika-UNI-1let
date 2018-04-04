@@ -5,18 +5,21 @@
 \setlength{\parindent}{0px}
 \setlength{\parskip}{10px}
 %standard
-
+\usepackage{hyperref}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{amssymb}
+\usepackage{framed}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{lipsum}
 \usetikzlibrary{patterns}
 \pgfplotsset{width=7cm, compat=1.10}
 \usepgfplotslibrary{fillbetween}
 
 \title{Avditorne vaje za Programiranje II}
 \author{Matej Blagšič}
+
 
 \begin{document}
 %--------------------------------------------
@@ -48,7 +51,6 @@
 	\lstdefinestyle{customc}{
 		belowcaptionskip=1\baselineskip,
 		breaklines=true,
-		frame=L,
 		xleftmargin=\parindent,
 		language=C,
 		showstringspaces=false,
@@ -61,7 +63,6 @@
 	
 	\lstdefinestyle{customasm}{
 		belowcaptionskip=1\baselineskip,
-		frame=L,
 		xleftmargin=\parindent,
 		language=C,
 		basicstyle=\footnotesize\ttfamily,
@@ -286,6 +287,7 @@ int main(){
 \end{lstlisting}
 
 \subsection*{3. naloga}
+\label{sec:5.3}
 	
 \underline{Napiši program, ki naključno sortira zbirko učencev}
 
@@ -305,7 +307,9 @@ struct ucenec {
 	char ime[20];
 	char priimek[20];
 };
+
 struct ucenec ekipa[DIM];
+
 int main (){
 
 	int i, j, urejeno, stPrimerjav=0;
@@ -325,6 +329,7 @@ int main (){
 		}
 		if (stPrimerjav == 0){break;}	
 	}
+
 	return 0;
 }
 \end{lstlisting}
@@ -341,6 +346,118 @@ Ko ima vsak učenec višino, gremo v dvojni for stavek. Prvi for stavek bo najve
 Deluje tako, da se pojavi if stavek, ki primerja trenutno višino učenca[i] ter višino od naslednjika ucenec[i+1]. Če je drugi manjši, ju mora zamenjati. To pa naredi tako, da vzame najprej vrednosti od ucenec[i+1] in jih skopira v začasnega učenca tmp, na mesto ucenec[i+1] skopira vrednosti od ucenec[i] in nato na mesto ucenec[i] skopira vrednosti iz tmp oz. prejšni ucenec[i+1].\
 
 Tako potuje ta ""val" po celotni zbirki in premeša po dva in dva elementa, kjer je to potrebno. Prav tako, vsakič ko premeša dva člena, postavi spremenljivko stPrimerjav na 1. Ta spremenljivka nam pove, ali je bila skozi en prehod skozi zbirko narejena primerjava in zamenjava dveh členov. To potrebujemo zato, da na koncu prve for zanke preverimo, če je bila narejena kakšna primerjava v temu i-tem preletu zbirke. Vidimo tudi, da se ta spremenljivka na začetku te for zanke tudi resetira na 0. Torej ostane 0, če se if stavek v drugi for zanki sploh ne izvede. V tem primeru koda izstopi iz for zanke. Na koncu lahko postavimo kako for zanko, ki nam izpiše od 0 do DIM višine vseh učencev in lahko vidimo, da so po vrsti.
+
+\section*{6. vaja}
+
+\subsection*{1. naloga}
+
+Prva naloga je zadnja naloga pri prejšni vaji, tako da si lahko pogledaš \hyperref[sec:5.3]{tu}.
+
+\subsection*{2. naloga}
+
+Druga naloga je bolj nadgradnja prve naloge. Sicer problem je, da več kot ima oseba podatkov in več kot je teh oseb, dlje traja sortiranje. Zato bomo rešili zadevo s kazalci. Poglej si snov v zapiskih o kazalcih. Več o tem naslednjič.
+
+\fbox{
+\begin{minipage}{\textwidth}
+Slečo kodo sem spisal sam doma. Izgleda da deluje, a ni preverjeno s strani asistenta, tako da vzamite kodo in razlago s kančkom soli!
+\end{minipage}}
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define DIM 20
+
+struct ucenec {//nova struktura
+	int id;
+	int visina;
+	int starost;
+	float teza;
+	char spol;
+	char ime[20];
+	char priimek[20];
+};
+
+int main(){
+
+	int stevec;//spremenljivke
+	srand(time(NULL));
+	struct ucenec ekipa[DIM]
+	struct ucenec *t[DIM], *tmp;
+	
+	for (int i = 0; i < DIM; i++){//izdelava zbirk
+		ekipa[i].visina = 110 + rand()%21;
+		ekipa[i].id = i;
+		t[i] = &ekipa[i];//naslavljamo i-ti kazalec na i-ti struktni clen
+	}
+	
+	
+	for (int i = 0; i < DIM; ++i){//premetavanje zbirke t
+		stevec = 0;
+		for (int j = 0; j < DIM-1; j++){
+			if((*t[j+1]).visina < (*t[j]).visina){//ali je drugi mansi
+				tmp = t[j+1];
+				t[j+1] = t[j];
+				t[j] = tmp;
+				stevec = 1;
+			}
+		}
+		if(stevec == 0){//ce nismo premetavali, potem je urejeno
+			break;
+		}
+	}
+	
+	for (int i = 0; i < DIM; ++i){//izpis elementov
+		printf("%d \t %d\n", t[i]->visina, t[i]->id); //izpisi clene
+	}
+	
+	return 0;
+}
+\end{lstlisting}
+
+Koda je malo dolga, a zato bolje pregledna. Na prvi pogled je enaka, kot pri prejšni nalogi. Razlika je le, da tu se vse primerjanje in izpisovanje dela s kazalci. Pa začnimo kar z main funkcijo.\
+
+Na začetku je vse enako razen dela: \framebox[1.01\width]{
+
+	\lstinline|struct ucenec *|\textcolor{orange}{\texttt{t}}\texttt{[DIM] *}\textcolor{blue}{\texttt{tmp}};}.
+
+Namenoma sem dal v svojo vrstico, saj tu definiramo kazalce; glej zvezdico pred spremenljivko! Kazalec \textcolor{orange}{\texttt{t}} je zbirka, ki bo kazala na elemnte v zbirki ekipa. \textcolor{blue}{\texttt{tmp}} je kazalec, ki bo začasno držal naslove, ko se bojo prestavljali v zbirki \textcolor{orange}{\texttt{t}}. Se pravi je ta koda čisto enaka kot prej, le da uporabljamo kazalce, ki imajo še neka svoja pravila, drugače postopek je pa enak.\
+
+Pride prva \lstinline|for| zanka. V tej zgeneriramo naključne vrednosti za višino vsak element v zbirki ekipa. Prav tako vsakemu priredimo zaporeden \textcolor{purple}{\texttt{id}}. To sem dodal, da bomo kasneje videli, da so se naslovi zares premešali. Nato naslovimo kazalec \textcolor{orange}{\texttt{t}} na vsak člen v zbirki ekipa. To naredimo enako, kot smo se naučili, le da tu uporabimo še oglate oklepaje, saj moramo to narediti za i-ti člen v zbirki posebej.\
+
+Sedaj pridemo do glavne for zanke, ki nam torej premetava našo zbirko kazalcev \textcolor{orange}{\texttt{t}}.\
+
+{\centering
+\framebox[1.2\width]{\lstinline|*t[j+1]).visina < (*t[j]).visina|}
+\framebox[1.2\width]{\lstinline|t[j+1]->visina < t[j]->visina|}\par
+}
+
+Zgornja dva okvirčka sta ekvivalenta. V kodi se sicer nahaja levi. To je pogoj v \lstinline|if| stavku, ki sprašuje po tem ali je člen \texttt{j+1} manjši od člena \texttt{i} ali ne. To je pogoj, da se ta dva člena zamenja.\
+
+Zakaj to deluje tako kot deluje? No je malo drugače, ker imamo zbirko, ki je še tipa struct. Ni panike. Najprej povozimo kazalec oz. zahtevamo vrednost, kjer se nahaja podatek v zbirki, na katero kaže kazalec \textcolor{orange}{\texttt{t}} z zvezdico. In iz tega elementa zahtevamo ven podatek visina, kajti vsak podatek v zbirki, na katero kaže kazalec \textcolor{orange}{\texttt{t}}. To je ekvivalentno drugemu okvirčku. Tam nekako s puščico želimo pridobiti podatek iz strukture, na katero kaže kazalec \textcolor{orange}{\texttt{t}}, z imenom visina.\
+
+Če je ta pogoj pravilen, moramo člena zamenjati. Ampak ker se hočemo ogniti prestavljanju elementov zbirke ekipa okoli, bomo uporabljali le kazalce. 
+
+\fbox{
+\begin{minipage}{7em}
+	\lstinline|tmp = t[j+1];|\\
+	\lstinline|t[j+1] = t[j];|\\
+	\lstinline|t[j] = tmp;|\\
+	\lstinline|stevec = 1;|
+\end{minipage}}
+\begin{minipage}{0.75\textwidth}
+Levo je koda v \lstinline|if| stavku. Najprej skopiramo naslov manjšega člena v začasni \textcolor{blue}{\texttt{tmp}}. Nato skopiramo naslov, ki je bil prej za člen j v mesto j+1. Nato nazaj na mesto j skopiramo naslov iz \textcolor{blue}{\texttt{tmp}}.
+\end{minipage}
+
+
+
+Na koncu imamo printanje sedaj urejene zbirke kazalcev \textcolor{orange}{\texttt{t}}. Tako, kot smo prej spoznali, lahko z ukazom \framebox{\lstinline|t[i]->visina|} zahtevamo podatek višina iz mesta, kamor kaže i-ti kazalec \textcolor{orange}{\texttt{t}}.
+
+
+
+
+
 
 
 
