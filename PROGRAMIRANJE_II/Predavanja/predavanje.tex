@@ -5,6 +5,7 @@
 \usepackage{lmodern}
 \usepackage{graphicx}
 \usepackage{amssymb}
+
 \usepackage{amsmath}
 \usepackage{mathtools}
 \setlength{\parindent}{0px}
@@ -113,9 +114,9 @@ minimum height=2em]
 \tableofcontents
 \pagebreak
 
+\section{Programiranje v C}
 
-
-\section{Osnovno}
+\subsection{Osnovno}
 
 Pri temu predmetu bomo obravnavali jezik C. Za uporabo lahko preneseš okolje Codeblocks z MinGW inštalacijo ali posebej MinGW compiler in poljubno okolje(Jetbrains).\
 
@@ -136,7 +137,7 @@ int main(){
 
 Če začnemo na začetku, opazimo \texttt{\#include} ukaz. Ta se izvrši, preden se karkoli drugega. V temu primeru lahko vnesemo knjižnice. Te nam olajšajo programiranje s tem, da nam en ukaz izvede več ukazov, ki bi jih morali tipkati na roke. To datoteko/knjižnico navedemo lahko z "datoteka" navednicam. Če pa damo v <datoteka>, potem pa išče datoteke v sistemskih mapah okolja. Te datoteke so vrste \textbf{header} s končnico \textbf{.h}. V našem primeru je knjižnica za pisat in brat podatke - vhodne in izhodne podatke.\\
 To je podobno kot v javascriptu:  \lstinline|<script src="datoteka">|\ 
-\section{Podatki}
+\subsection{Podatki}
 Poglejmo si zgled:
 \begin{lstlisting}[caption = Branje in pisanje podatkov]
 int main(){
@@ -157,7 +158,7 @@ To pomeni, da se moramo sami odločiti, kakšen tip podatka bo nosila spremenlji
 
 Vemo, da v Javascriptu nismo rabili napisati tipa spremenljivke, le \texttt{var}, torej je Javascript dinamično tipiziran jezik.
 
-\subsection{Branje podatkov}
+\subsubsection{Branje podatkov}
 Da nam program prebere podatek, uporabimo funkcijo:
 
 \begin{center}
@@ -166,7 +167,9 @@ Da nam program prebere podatek, uporabimo funkcijo:
 
 Vidimo, da moramo najprej deklarirati tip podatka, ki ga pričakuje operator Scanf. Potem pa določimo naslovni operator \& in nato za njim spremenljivko, ki naj sprejme podatek.
 
-\subsection{Pisanje podatkov}
+Še eno " pravilo scanf funkcije. Funkcija dejansko vrne število. To kar vrne je odvisno od "uspeška" funkcije. Vrne lahko 2, če so bili vhodni podatki pravi. Vrne 1, če je bil en podatek mal napačen. Vrne 0, če je bil en podatek čisto napačen.
+
+\subsubsection{Pisanje podatkov}
 Za pisanje podatkov uporabimo funkcijo:
 \begin{center}
 	\framebox{\lstinline|printf("formatni\_niz", izrazi)|}
@@ -175,7 +178,7 @@ Pomembne so tudi ubežne sekvence. To so \verb|\r \n \t|, ki povejo, kaj se zgod
 
 Tako v našem primeru, se a izpiše tam, kjer je njegov \verb|%d| in b, kjer je \verb|%f| ter vsota $a + b$ tam, kjer je \verb|%f| (glej izsek programske kode).
 
-\subsection{Spremenljivke:}
+\subsubsection{Spremenljivke:}
 \begin{table}[!htbp]
 	\centering
 	\begin{tabular}[b]{|p{3cm}|p{3cm}|p{3cm}|p{4.5cm}|}
@@ -198,10 +201,10 @@ Spoznali bomo tudi, da je pri celoštevilskem tipu pomembna omejitev območja, p
 
 Velikokrat bomo srečali izraz \lstinline|unsigned|. ta nam območje podatkovnega tipa prestavi od 0 do $2\times$ maksimum. Če je char od -128 dp 127, potem je unsigned char od 0 do 255;
 
-\subsection{Celoštevilski tip (n bitov)}
+\subsubsection{Celoštevilski tip (n bitov)}
 Obstaja nepredznačen, ki je od 0 do $2^{32}$
 
-\subsection{Realni tip (IEEE floating point)}
+\subsubsection{Realni tip (IEEE floating point)}
 \begin{table}[!htbp]
 	\centering
 	\begin{tabular}{|l|l|l|}
@@ -215,7 +218,7 @@ Ta ima enojno natančnost (single precision) ali \emph{\texttt{float}} in so št
 Če hočemo večjo natančnost, uporabimo \emph{\texttt{double}} oz. dvojna natačnost (double precision). Ima kapaciteto 64 bitov, torej v desetiškem do 15,95 mest natančno. Po 15. mestu je že vprašljivo natančno.
 
 
-\subsection{Modifikatorji formatna določila}
+\subsubsection{Modifikatorji formatna določila}
 \verb|%d| vemo, da stoji za cela števila. Če vrinemo neko število ``N'' $\to$ \texttt{"\%Nd"}, potem povemo, na koliko mest se izpiše število, deluje na desno poravnavo.\\
 Če vrinemo ničlo $\to$ \texttt{"\%0Nd"}, potem zapolne prazna mesta z ničlam.\\
 Če vrinemo "N.Mf" $\to$ \texttt{"\%N.Mf"}, potem izpiše $N$ mest število z $M$ mesti za decimalno piko.
@@ -229,7 +232,7 @@ printf("%.2f",y); --> Izpise 3.14
 printf("%05d",x); --> Izpise 00015
 \end{lstlisting} 
 
-\subsection{Znaki}
+\subsubsection{Znaki}
 Imamo več standardov znakov. Najbolj osnoven in razširjen je \texttt{ASCII} (American standard code for information Interchange). Ta zapis je 8-biten. Lahko najdemo tabelco, ki nam pokaže kodo za vsak znak.
 
 \begin{figure}[h!]
@@ -241,11 +244,11 @@ Imamo več standardov znakov. Najbolj osnoven in razširjen je \texttt{ASCII} (A
 
 V C-ju je pomembno, da damo en znak v enojne navednice. S tem pomeni, da program zaznava ASCII kodo. Torej, če izpišemo \lstinline|printf("%d", '0');|, nam program izpiše 48. Pri znakih uporabimo torej spremenljivko \lstinline|char|.
 
-\subsection{Psevdonaključna števila}
+\subsubsection{Psevdonaključna števila}
 Ena metoda za pridobivanje naključnih števil je metoda srednjih kvadratov.
 Pri tem kvadriramo dvomestna števila. Pri tem je statistično gledano naključnost zelo podobna realni naključnosti, kot da bi metali kocke.
 
-\subsection{Statične in dinamične spremenljivke}
+\subsubsection{Statične in dinamične spremenljivke}
 \textbf{Glej priloženo kodo spodaj!}
 
 V temu programu imamo funkcijo tipa void, ki kot vemo ne vrne nič, pred funkcijo main. prav tako imamo definirano spremenljivko ga, ki je zunaj kode. Ta je zato globalna in je uporabna v vseh funkcijah. Te globalne spremenljivke so \textbf{STATIČNE}. To pomeni da so te spremenljivke vedno na voljo in hranijo vrednost ves čas, kajti prostor za njih je že rezerviran v začetku.
@@ -275,7 +278,7 @@ int main(){
 	return 0;
 }	
 \end{lstlisting}
-\subsection{Zbirka(array)}
+\subsubsection{Zbirka(array)}
 Pomnilnik je razdeljen na pomnilniške celice v velikosti 8 bitov na celico. Ko naslavljamo celico, je vedno naslednja celica za 1 večja od prejšne po vrstni številki. \
 
 \begin{center}
@@ -329,7 +332,7 @@ int main(){
 
 Ta program bo sedaj izpisal \texttt{69 42}, torej smo res z \lstinline|b[-1]| nastavili zadnji element v \texttt{a}, z \lstinline|a[2]|, pa smo nastavili prvi element v \texttt{b}.
 %
-\subsection{Znakovni niz(string)}
+\subsubsection{Znakovni niz(string)}
 V C-ju ne ovstaja string kot samostojen tip. Ampak vemo, če poznamo zbirke in char, da je string nič drugega kot zbirka char elementov. Zato lahko definiramo string kot v prvem ali drugem okvirčku. Prvi je namreč bolj kot zbirka, a težje za vnašanje:
 \begin{center}
 	\framebox{\lstinline|char niz[] = {'a','b','c','d' ..... 'n'}|}
@@ -364,7 +367,7 @@ int main(){
 }
 \end{lstlisting}
 
-\subsection{Kazalci}
+\subsubsection{Kazalci}
 
 Kazalce sem omenil že pri zbirkah in da so ti razlog, da se zbirke obnašajo tako, kot se. Rekli smo, da je spremenljivka a[] zares kazalec na začetek zbirke in s številom v oklepajih povemo na katero mesto stran od kazalca naj beremo. Vrednost kazalca je torej pomnilniški naslov.\
 
@@ -437,8 +440,74 @@ int main(){
 Če želimo zamenjati vrednosti dveh spremenljivk, moramo najprej eno odložiti na začasno mesto, drugo preslikati na njeno mesti in skopirati vrednost iz začasnega mesta na prvotno mesto druge. S tem moramo upravljati z globalnimi spremenjivkami ..... Lahko pa s kazalci. Rečemo, da sta v void funkciji, ki nič ne vrne, kažeta elementa a in b na x in y vhodna podatka. tako operiramo z originalnimi podatki v main funkciji, ne da bi potrebovali funkcijo, ki bi vračala podatke ali jih pisala...
 
 
+\begin{lstlisting}[caption=Izpis stringa s kazalci]
+#include <stdio.h>
 
-\section{Operatorji}
+int main (){
+	char a[] = "neki";
+	printf("%s",a+2);
+	return 0;
+}
+\end{lstlisting}
+
+Zgornja koda nam izpiše del stringa, ki je od 2. člena naprej. Torej nam izpiše \texttt{"ki"}.
+
+
+\begin{lstlisting}[caption=Izpis stringa in upravljanje s stringi]
+#include <stdio.h>
+
+void vVelikeCrke(char *s){
+for (int i = 0; s[i]; ++i){
+	if(s[i] >= 'a' && s[i] <= 'z'){
+		s[i] += 'A' - 'a';
+		}
+	}
+}
+
+int main (){
+
+	char a[] = "neki Cudnga 123$";
+	
+	vVelikeCrke(a);
+	printf("%s",a);
+	return 0;
+}
+\end{lstlisting}
+
+Ta koda nam pretvori vse črke v stringu na velike. Opazimo enko naslavljene, ko izpisujemo string.
+
+Naslednji primer nam pride prav pri avditorni vaji oz. pri bubble sort, kjer je neučinkovito prestavljati celotne strukture, temveč le kazalce. (poglej si strukture \hyperref[strukture]{\textcolor{dkgreen}{tu}})
+
+\begin{lstlisting}[caption=Strukture in kazalci]
+#include <stdio.h>
+
+struct oseba{	
+	char ime[30];
+	int starost;
+};
+
+int main (){
+	
+	struct oseba os1, os2 = {"Joze", 42};
+	struct oseba *p1, *p2, *tmp;
+	
+	p1 = &os1;
+	p2 = &os2;
+	
+	printf("%d\n", p2->starost);//(*p2).starost
+	
+	tmp = p1;
+	p1 = p2;
+	p2 = tmp;
+	
+	printf("%s\n", p1->ime);
+	return 0;
+}
+\end{lstlisting}
+
+Imamo operator \framebox{\lstinline|p1 -> ime|}, ki nam zahteva element ime iz strukture, na katero kaže kazalec p1. Poglej si v zapiskih avditornih vaj za razlago v poglavju 6, 2. naloga.
+
+\subsection{Operatorji}
 Pri C-ju so enaki operatorji, kot v JS, le da z nekimi izjemami: Operator === in !=== ne obstajata.\\
 Prav tako operator za deljenje ne zapišemo kot ``/'' ne deluje enako. Problem prihaja iz tipa spremenljivk. Če obsoječo spremenljivko $x$, ki je tipa \underline{int}, deljimo ali spreminjamo tako, da bi postala ta spremenljivka kateregakoli drugega tipa, kot prvotni \underline{int}, potem vrne program 0. Primer:
 \begin{lstlisting}
@@ -452,7 +521,7 @@ int maint(){
 Če pa spremenimo prvo 8 z 8.0, potem bo program jo vzel za realno število in deljil in nato nazaj množil z 8, tako se te pokrajšata in program vrne 7.
 
 \pagebreak
-\section{Funkcije}
+\subsection{Funkcije}
 Funkcije deklariramo tako:
 
 \begin{center}
@@ -543,7 +612,7 @@ int main(){
 
 \pagebreak
 
-\section{Strukture}
+\subsection{Strukture}\label{strukture}
 
 V C-ju, za razliko od C++ in JS ni objektov. Zato imamo strukture, ki so nekako podobna zadeva. Definiramo z :
 \begin{lstlisting}
@@ -636,7 +705,7 @@ int main(){
 
 Program nam torej reši vektorski produkt dveh naključno izbranih vektorjev. Uporablja se struktura za vektorje, naključna funkcija \lstinline|random()| ter formula za vektorski produkt.
 
-\subsection{Podrobnejša razlaga struktur}
+\subsubsection{Podrobnejša razlaga struktur}
 
 Slišal sem, da nekateri ne razumejo principa delovanja struktur, zato sem dodal sledečo razlago, ki naj bi pomagala k razumevanju. Dele razlage bom obarval za lažje sledenje razlagi.\
 
@@ -709,5 +778,40 @@ int main(){
 }
 \end{lstlisting}
 
+\pagebreak
+
+\section{Mikrokrmilniki}
+
+\paragraph{Uvod}Sedaj bom ozačeli s programiranjem mikrokrmilnikov. Sedaj bo lahko naša koda naredila kaj drugega, kot samo izpisovanje podatkov na ekran.\
+
+Kako Arduino deluje se mi po pravici ne da pisati na dolgo in široko, zato ti proporočam, da odpreš Youtube in vpišeš Arduino tutorial in si pogledaš toliko videjev, dokler ti oči ne padejo iz jamic. Ko bomo delali vezja in programe, bom seveda zraven razlagal, zakaj dogaja to, kar dogaja, zraven, ampak je vseeno dobro, da si pogledaš celotno zadevo.\
+
+\subsection{Osnovno}
+Sledeč del je zasnova za vsak program. Ker vemo, da se program začne od zgoraj, se prvo izvede zanka \textcolor{orange}{setup}. To je zanka, ki se izvede le 1x. Ko se ukazi znotraj \textcolor{orange}{setup} izvedejo, gre program na \textcolor{purple}{loop}. Ta se izvaja v zanki, zato se imenuje loop. To pomeni, da bo mikrokontrler ves čas izvajal kodo, ki se nahaja v  \textcolor{purple}{loop} zanki.
+\begin{lstlisting}
+void setup(){
+}
+
+void loop(){
+}
+\end{lstlisting}
+
+Imamo za začetek simpel program. Želimo blinkati vgrajeno LED.
+
+\begin{lstlisting}
+void setup(){
+	pinMode(LED_BUILTIN, OUTPUT)
+}
+void loop(){
+	digitalWrite(LED; BUILTIN, HIGH)
+	delay(1000);
+	digitalWrite(LED; BUILTIN, LOW)
+	delay(1000);
+}
+\end{lstlisting}
+
+Imamo v setup funkciji definicijo \textcolor{dkgreen}{\texttt{pinMode(LED\_BUILTIN, HIGH)}} Ta funkcija, sprejme za prvi vhodni podatek številko pin-a oz. nogice, katero želimo manipulirati. Drugi pogoj pove ali se bo ta uporabljal kot izhodni ali vhodni. Tako definiramo, da je izhodni in želimo, da to deluje za digitalni pin 13, ki je tudi isti pin, na katerega je priklopljena LED.\
+
+Nato gremo na loop, kjer z ukazom \textcolor{dkgreen}{\texttt{(LED\_BUILTIN, HIGH)}} manipuliramo pin, da ga dvigne na visoko napetost, HIGH ali 1. Tako se LED prižge. Potem zahtevamo LOW ali 0, da se ugasne.
 
 \end{document}
