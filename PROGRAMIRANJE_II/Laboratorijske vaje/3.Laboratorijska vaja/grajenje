@@ -1,0 +1,12 @@
+Če hočeš sam zgraditi main funkcijo preko terminala, če ne uporabljaš code blocks, naredi takole:
+Najprej zgeneriramo objekte *ime.o*:
+
+gcc -c bitmap.c
+gcc -c main.c
+
+Sedaj imamo dva objektna fajla za linker, da ju bo našel med generiranjem programa. Sedaj ga naredimo:
+
+gcc -o *ime_programa* bitmap.o main.o -lm
+
+-lm je pomembno da linker ve, da dodajamo math.h funkcijo ki se samodejno ne vključi.
+Imamo sedaj main program. Če imaš windows, poženi main.exe oziroma linux poženi ./main

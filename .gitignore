@@ -227,6 +227,7 @@ PROGRAMIRANJE_II/Predavanja/cmake-build-debug/*
 PROGRAMIRANJE_II/Predavanja/.idea/*
 *CMakeLists.txt
 ELEKTROTEHNIKA_I/*
+MATEMATIKA_II/*
 FIZIKA_I/*
 cmake-build-debug/*
 docs/html/*

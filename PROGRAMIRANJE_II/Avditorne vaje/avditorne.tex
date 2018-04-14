@@ -420,7 +420,7 @@ Koda je malo dolga, a zato bolje pregledna. Na prvi pogled je enaka, kot pri pre
 
 Na začetku je vse enako razen dela: \framebox[1.01\width]{
 
-	\lstinline|struct ucenec *|\textcolor{orange}{\texttt{t}}\texttt{[DIM] *}\textcolor{blue}{\texttt{tmp}};}.
+	\lstinline|struct ucenec *|\textcolor{orange}{\texttt{t}}\texttt{[DIM], *}\textcolor{blue}{\texttt{tmp}};}.
 
 Namenoma sem dal v svojo vrstico, saj tu definiramo kazalce; glej zvezdico pred spremenljivko! Kazalec \textcolor{orange}{\texttt{t}} je zbirka, ki bo kazala na elemnte v zbirki ekipa. \textcolor{blue}{\texttt{tmp}} je kazalec, ki bo začasno držal naslove, ko se bojo prestavljali v zbirki \textcolor{orange}{\texttt{t}}. Se pravi je ta koda čisto enaka kot prej, le da uporabljamo kazalce, ki imajo še neka svoja pravila, drugače postopek je pa enak.\
 
@@ -454,10 +454,46 @@ Levo je koda v \lstinline|if| stavku. Najprej skopiramo naslov manjšega člena 
 
 Na koncu imamo printanje sedaj urejene zbirke kazalcev \textcolor{orange}{\texttt{t}}. Tako, kot smo prej spoznali, lahko z ukazom \framebox{\lstinline|t[i]->visina|} zahtevamo podatek višina iz mesta, kamor kaže i-ti kazalec \textcolor{orange}{\texttt{t}}.
 
+\pagebreak
+
+\section*{7. vaja}
+
+\subsection*{1. naloga}
+
+\underline{Napiši funkcijo, ki obrne vrstni red elementov celoštevilske zbirke, podane kot parameter.}
+
+\begin{lstlisting}
+#include <stdio.h>
+
+void reverse(int *zb, int n){//podajamo pointer, ki kaze na zbirko
+	int tmp;
+	for (int i = 0; i < n/2; i++){
+		tmp = zb[i];
+		zb[i] = zb[n-i-1];
+		zb[n-i-1] = tmp;
+	}
+}
+
+int main (){
+	
+	
+	int zb[] = {11, 22, 33, 44, 55};
+	int n = 5;
+	
+	reverse(zb, n);
+	
+	for (int i = 0; i < n; ++i){//izpisimo novo zbirko
+		printf("%d\n", zb[i]);
+	}
+	
+	return 0;
+}
+\end{lstlisting}
 
 
-
-
+\subsection*{Priprava na laboratorijsko vajo}
+\underline{Naredili bomo program, ki bo risal Juliajeve množice.}
+Navodila so priložena kot pdf dokument.
 
 
 
