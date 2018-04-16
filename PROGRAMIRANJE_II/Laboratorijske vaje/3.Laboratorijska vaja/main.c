@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include "bitmap.h"
 #include <math.h>
-#define DIM 1000
+#include <time.h>
+#define DIM 1000 // veliost stranice
 
 struct kompleks{
         double x;
@@ -16,20 +17,25 @@ unsigned char slika[DIM][DIM];
 
 int main() {
 
+	srand(time(NULL));
 	struct kompleks z;
 	struct kompleks c;
 	int x, y;
-	c.x = 0.31;//preset
-	c.y = 0.50;
+	//spodnji odsek generira random koncnico za ime izvozene slike, da se slike med seboj ne prerisujejo, ce se delajo z istim imenom
+	char ime[15] = "fraktal_  .bmp";
+	ime[8] = rand()%100;
+	printf("%c\n", ime[8]);
+	//enako bi lahko random nastavke za generiranje slike naredili z random izbiro iz seznama razlicnih znanih nastavkov za lepe vzorce
+	c.x = -0.6;//preset
+	c.y = 0.43;
 
 	for (x = 0, z.x = -1.7; x < DIM; x++, z.x += 3.4/(DIM-1)){
-
 		for (y = 0, z.y = -1.7; y < DIM; y++, z.y += 3.4/(DIM-1)){
 			slika[x][y] = dolociBarvo(z, c);
 		}
 	}
 
-	shraniBMP(slika, DIM, DIM, "fraktal.bmp");
+	shraniBMP(slika, DIM, DIM, ime);
 
 	return 0;
 }
@@ -57,5 +63,5 @@ int dolociBarvo(struct kompleks u, struct kompleks c){//u je nas z, ampak je lok
 		vel = sqrt(u.x*u.x+u.y*u.y);
 		if(vel > 2) break;//ce nam pobegne radij vektorja cez 2, koncaj
 	}
-	return barva;
+	return 255-barva;
 }
