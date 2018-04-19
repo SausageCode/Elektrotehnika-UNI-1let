@@ -7,6 +7,7 @@
 %standard
 \usepackage{hyperref}
 \usepackage{listings}
+\usepackage{multirow}
 \usepackage{color}
 \usepackage{amssymb}
 \usepackage{framed}
@@ -354,7 +355,7 @@ Tako potuje ta ""val" po celotni zbirki in premeša po dva in dva elementa, kjer
 Prva naloga je zadnja naloga pri prejšni vaji, tako da si lahko pogledaš \hyperref[sec:5.3]{tu}.
 
 \subsection*{2. naloga}
-
+\label{sortbuble}
 Druga naloga je bolj nadgradnja prve naloge. Sicer problem je, da več kot ima oseba podatkov in več kot je teh oseb, dlje traja sortiranje. Zato bomo rešili zadevo s kazalci. Poglej si snov v zapiskih o kazalcih. Več o tem naslednjič.
 
 \fbox{
@@ -495,7 +496,24 @@ int main (){
 \underline{Naredili bomo program, ki bo risal Juliajeve množice.}
 Navodila so priložena kot pdf dokument.
 
+\section*{8. vaja}
 
+\emph{Šele danes smo prišli do bubble sort s pointerji. Imaš \hyperref[sortbuble]{tu}.}
+
+
+\subsection*{1. naloga}
+
+\underline{Napiši program, ki prebere nekaj celih števil in jih shrani v datoteko.}
+
+Najprej primer, kako upravljati z datotekami:
+\begin{table}[!h]
+	\begin{tabular}{|l|l|}
+		\lstinline|FILE *fp;|&ustvari pointer na zacetek datoteke\\
+		\lstinline|fp = fopen("datoteka.txt", "wt");|&pointer kaze na datoteko, v katero lahko pise tekst\\
+		\lstinline|fprintf(fp, "\%d", n);|&v datoteko s pointerjem fp pise vrsto spremenljivke d in ime te spremenljivke\\
+		\lstinline|fclose(fp);|&zapre datoteko\\
+	\end{tabular}
+\end{table}
 
 
 \end{document}

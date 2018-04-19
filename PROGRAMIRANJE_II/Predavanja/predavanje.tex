@@ -5,7 +5,6 @@
 \usepackage{lmodern}
 \usepackage{graphicx}
 \usepackage{amssymb}
-
 \usepackage{amsmath}
 \usepackage{mathtools}
 \setlength{\parindent}{0px}
@@ -16,6 +15,10 @@
 \usepackage{scrextend}
 \usepackage{array}
 \usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns}
+\pgfplotsset{width=7cm, compat=1.10}
+\usepgfplotslibrary{fillbetween}
 \usepackage[margin=1in]{geometry}
 \usetikzlibrary{shapes,arrows}
 \usepackage{listings}
@@ -243,6 +246,37 @@ Imamo več standardov znakov. Najbolj osnoven in razširjen je \texttt{ASCII} (A
 \end{figure}
 
 V C-ju je pomembno, da damo en znak v enojne navednice. S tem pomeni, da program zaznava ASCII kodo. Torej, če izpišemo \lstinline|printf("%d", '0');|, nam program izpiše 48. Pri znakih uporabimo torej spremenljivko \lstinline|char|.
+
+\begin{lstlisting}
+int main(){
+char x = 130;
+char y = -126;
+if(x==y) printf("%s", "enako");
+return 0;
+}
+\end{lstlisting}
+Koda nam izpiše da je enkao, ampak te dve števili nista enaki. Zakaj potem program reče, da je enako. *ljudje ki so se ukvarjali z neksončnostjo so pristali v inštitucijah*\\
+To prihaja zaradi prevelikih števil oz. overflow. Char je 8-bitna spremenljivka, torej vrednosti od -127 do 127 ali 0 - 255. Če zahtevamo število unsigned char recimo 260, to število znotraj char ne obstaja. Zato števec se obrne in gre nazaj na 4.\
+
+Če želimo v c napisati število v 16-iškem(HEX) sistemu, se orientiramo po tabelci iz binarnega v 16-iški sistem:
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|l|}
+		\hline BINARNO &DECIMALNO &HEX & BINARNO &DECIMALNO &HEX\\
+		\hline 0001 & 1&0x1& 1010 & 10&0xa\\
+		\hline 0010 & 2&0x2& 1011 & 11&0xb\\
+		\hline 0011 & 3&0x3& 1100 & 12&0xc\\
+		\hline 0100 & 4&0x4& 1101 & 13&0xd\\
+		\hline 0101 & 5&0x5& 1110 & 14&0xe\\
+		\hline 0110 & 6&0x6& 1111 & 15&0xf\\
+		\hline 0111 & 7&0x7&&&\\
+		\hline 1000 & 8&0x8&&&\\
+		\hline 1001 & 9&0x9&&&\\  \hline
+	\end{tabular}
+\end{table}
+
+
 
 \subsubsection{Psevdonaključna števila}
 Ena metoda za pridobivanje naključnih števil je metoda srednjih kvadratov.
@@ -778,13 +812,20 @@ int main(){
 }
 \end{lstlisting}
 
-\pagebreak
+
 
 \section{Mikrokrmilniki}
 
 \paragraph{Uvod}Sedaj bom ozačeli s programiranjem mikrokrmilnikov. Sedaj bo lahko naša koda naredila kaj drugega, kot samo izpisovanje podatkov na ekran.\
 
 Kako Arduino deluje se mi po pravici ne da pisati na dolgo in široko, zato ti proporočam, da odpreš Youtube in vpišeš Arduino tutorial in si pogledaš toliko videjev, dokler ti oči ne padejo iz jamic. Ko bomo delali vezja in programe, bom seveda zraven razlagal, zakaj dogaja to, kar dogaja, zraven, ampak je vseeno dobro, da si pogledaš celotno zadevo.\
+
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/uno.png}
+	\caption{Arduino Uno diagram pin-ov}
+	\label{fig:Arduino Uno diagram pin-ov}
+\end{figure}
 
 \subsection{Osnovno}
 Sledeč del je zasnova za vsak program. Ker vemo, da se program začne od zgoraj, se prvo izvede zanka \textcolor{orange}{setup}. To je zanka, ki se izvede le 1x. Ko se ukazi znotraj \textcolor{orange}{setup} izvedejo, gre program na \textcolor{purple}{loop}. Ta se izvaja v zanki, zato se imenuje loop. To pomeni, da bo mikrokontrler ves čas izvajal kodo, ki se nahaja v  \textcolor{purple}{loop} zanki.
@@ -813,5 +854,38 @@ void loop(){
 Imamo v setup funkciji definicijo \textcolor{dkgreen}{\texttt{pinMode(LED\_BUILTIN, HIGH)}} Ta funkcija, sprejme za prvi vhodni podatek številko pin-a oz. nogice, katero želimo manipulirati. Drugi pogoj pove ali se bo ta uporabljal kot izhodni ali vhodni. Tako definiramo, da je izhodni in želimo, da to deluje za digitalni pin 13, ki je tudi isti pin, na katerega je priklopljena LED.\
 
 Nato gremo na loop, kjer z ukazom \textcolor{dkgreen}{\texttt{(LED\_BUILTIN, HIGH)}} manipuliramo pin, da ga dvigne na visoko napetost, HIGH ali 1. Tako se LED prižge. Potem zahtevamo LOW ali 0, da se ugasne.
+-------------------------------------
+ 
+\subsection{Analogno-digitalni pretvornik (ADC)}
 
+V mikrokontrolerju je enota, ki pretvarja analogne napetosti v število, ki ga lahko preberemo. Z drugimi besedami, pretvarjamo iz analognega sveta v digitalnega. Tako delujejo multimetri/voltmetri, ki nam pokažejo s številkami napetost. Ker je analogni signal zvezen, je neskončno točk med dvema. Digitalni svet je pa omejen z neko resolucijo. ADC v Arduino je načeloma 10-biten, tako da prikaže v določenemu območju 1024 različnih vrednosti.\\
+
+Torej, če ADC meri od 0V do 5V območja, potem je med 0V in 5V 1024 stopnic oz nivojev, ki jih lahko odčitamo. Če izračunamo, to pride  okoli 4.9mV resolucije.\\
+
+Omenil sem območje. Arduino mora vedeti, od kje do kje meri teh 1024 vrednosti. Standardni napetosti v mikrokrmilnikih so 5V in 3.3V. Naš Arduino Uno deluje na 5V, Arduino Due(pri pouku) pa 3.3V. Torej sedaj nastavimo referenčno napetost oz. napetost, do katere ADC meri glede na 0V. Torej, če izberemo referenčno napetost na 5V, imamo torej resolucijo na 10-bitnem ADC 4.9mV. Če pa izberemo to referenčno napetost na 3.3V je potem resolucija okoli 3.2mV. Tako je naš digitalni voltmeter natančen na 2 decimalni mesti, 3. mesto pa se spremnija na vsake 3.2mV.\\
+
+Našo natančnost lahko tako povečamo z zmanjšanjem merilnega območja oz. referenčne napetosti, ali pa z bolj natančnim ADC pretvornikom z več nivoji, kot zunanji 12-bitni ali več.\
+
+Poleg natančnosti merjenja ADC-ja je pomembna tudi frekvenca vzorčenja. Če imamo recimo sinusno spreminjajočo napetost in nam arduino meri napetost z enako frekvenco, kot jo ima signal, potem se lahko zgodi, da se vzorči napetost ravno, ko je sinus enak 0. Tako nam lahko arduino napačno izmeri, da signala sploh ni samo zaradi prepočasnega vzorčenja. Da se temu izognemo, moramo vzorčiti hitreje, kot se vhodni signal spreminja.
+
+\begin{figure}[!htbp]
+	\centering
+	\caption{Vzorčenje sinusa}
+	\begin{tikzpicture}
+	\begin{axis}[axis lines=left,xmin=-1,xmax=2*pi+0.5,ymin=0,ymax=2,ytick={0}, xtick={0},trig format plots=rad]
+	\addplot[color = red, samples=500]{sin(x*1.6)+1};
+	\addplot [only marks] table {
+	-1		0
+	0		1
+	0.98	2
+	1.98	1
+	2.95	0
+	3.95	1
+	4.98 	2
+	
+	};
+	\end{axis}
+	\end{tikzpicture}
+\end{figure}
+ 
 \end{document}

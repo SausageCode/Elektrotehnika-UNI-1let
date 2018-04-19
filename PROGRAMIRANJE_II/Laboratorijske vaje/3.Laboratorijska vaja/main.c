@@ -24,7 +24,7 @@ int main() {
 	//spodnji odsek generira random koncnico za ime izvozene slike, da se slike med seboj ne prerisujejo, ce se delajo z istim imenom
 	char ime[15] = "fraktal_  .bmp";
 	ime[8] = rand()%100;
-	printf("%c\n", ime[8]);
+	printf("%s\n", ime);
 	//enako bi lahko random nastavke za generiranje slike naredili z random izbiro iz seznama razlicnih znanih nastavkov za lepe vzorce
 	c.x = -0.6;//preset
 	c.y = 0.43;
